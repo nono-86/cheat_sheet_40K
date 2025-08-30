@@ -341,7 +341,16 @@ def build_phase_board(faction_helpers, matched_units, strats):
         items.extend(strat_map.get(key, []))
 
 
-        html_box = f"<div class='box'><div class='phase'>{html.escape(label)}</div><ul>{''.join(items) if items else "<li class='small'>—</li>"}</ul></div>"
+        alt_item   = "<li class='small'>&mdash;</li>"   # ← ASCII safe (— devient &mdash;)
+        items_html = "".join(items) if items else alt_item
+
+        html_box = (
+            "<div class='box'><div class='phase'>"
+            + html.escape(label)
+            + "</div><ul>"
+            + items_html
+            + "</ul></div>"
+        )
         (colA if idx < 3 else colB).append(html_box)
 
     return f"""
