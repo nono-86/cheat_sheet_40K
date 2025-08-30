@@ -284,11 +284,6 @@ with tab_input:
             export_text = txt_file.read().decode("utf-8", errors="ignore")
             st.info("Texte rempli depuis le fichier uploadé.")
 
-    # if st.button("Générer la cheat sheet", type="primary", use_container_width=True, disabled=not (corpus and export_text.strip())):
-    #     st.session_state["export_text"] = export_text
-    #     st.session_state["corpus"] = corpus
-    #     st.switch_page("app.py")  # reste sur la page mais force le rafraîchissement
-    # ... dans le handler du bouton "Générer"
     if st.button("Générer la fiche"):
         # Chemin local : on sauve dans un temp file
         uploaded_path = save_uploaded_file(txt_file)      # <-- VOILÀ LE PATH
