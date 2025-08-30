@@ -294,7 +294,7 @@ with tab_input:
         if DEFAULT_YAML_DIR.exists():
             corpus = load_yaml_dir(DEFAULT_YAML_DIR)
             st.success(
-                f"{len(corpus['units'])} unités chargées depuis `{DEFAULT_YAML_DIR.name}/`. \n \
+                f"{len(corpus['units'])} unités chargées depuis `{DEFAULT_YAML_DIR.name}/`. <br/> \
                 {len(corpus['units'])} stratagèmes chargés depuis `{DEFAULT_YAML_DIR.name}/`."
             )
         else:
@@ -310,7 +310,7 @@ with tab_input:
         if uploads:
             corpus = load_yaml_files(uploads)
             st.success(
-                f"{len(corpus['units'])} unités chargées via upload. \n \
+                f"{len(corpus['units'])} unités chargées via upload. <br/> \
                        {len(corpus['stratagems'])} stratagèmes chargés via upload."
             )
 
