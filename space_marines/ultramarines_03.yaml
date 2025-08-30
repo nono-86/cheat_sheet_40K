@@ -1,0 +1,692 @@
+schema_version: 1
+
+phases:
+  order: [command, movement, shooting, charge, fight, end]
+  steps:
+    command:   [start, battleshock, abilities, end]
+    movement:  [start, normal, advance, fallback, end]
+    shooting:  [start, select_targets, resolve, end]
+    charge:    [start, declare, overwatch_window, move, heroic, end]
+    fight:     [start, pile_in, make_attacks, consolidate, end]
+    end:       [score, cleanup]
+
+faction_helpers:
+  turn_start:
+    - "Déclarer/mettre à jour les effets de détachement/faction (ex: doctrine/cible prioritaire)."
+  generic_reminders:
+    command:
+      - "Gagner CP ; tests d’ébranlement (Battleshock) < 1/2 effectif ; poser auras/buffs."
+    movement:
+      - "Mesurer menaces (overwatch/contre-charge), garder couvert/lignes de vue."
+    shooting:
+      - "Choisir cibles intelligemment (split fire seulement si utile)."
+    charge:
+      - "Penser multi-charge ; garder 1 CP pour relance critique."
+    fight:
+      - "Activer dans le bon ordre ; Pile-in/Consolidate pour voler OC."
+    end:
+      - "Compter OC ; scorer primaires/secondaires ; valider actions."
+
+units:
+  - name: "Impulsor"
+    role: "Dedicated Transport"
+    keywords: ["Adeptus Astartes","Ultramarines","Vehicle","Transport"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Assault Vehicle/Fire Points", text: "Projette infanterie ; passagers peuvent tirer/agir selon config." }
+        - { name: "Shield Dome", text: "Invu améliorée ; tanking de taxi." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: ["Angle-toi pour débarquer sur objo T2."], advance: ["Pousse pour pression tout en gardant couvert."], fallback: [], end: [] }
+        shooting: { start: [], select_targets: [], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: ["Bloquer lignes/screen ; poser l’OC des passagers sur l’objo."], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["projection d’infanterie","prise d’objo"]
+
+  - name: "Razorback"
+    role: "Dedicated Transport"
+    keywords: ["Adeptus Astartes","Ultramarines","Vehicle","Transport"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Fire Support", text: "Taxi + appui feu ; idéal pour repositionner une escouade de tir." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: ["Taxi + appui ; garder LdV safe."], advance: ["Projeter une escouade vers le mid."], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Arroser infanterie moyenne ; garder angles."], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["taxi/appui feu"]
+
+  - name: "Rhino"
+    role: "Dedicated Transport"
+    keywords: ["Adeptus Astartes","Ultramarines","Vehicle","Transport"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Armoured Transport", text: "Écran mobile/taxi robuste." }
+        - { name: "Smoke Launchers", text: "-1 pour être touché après usage." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: [], advance: ["Pousser ; claquer Smoke si exposé."], fallback: ["Se désengager pour reprojeter des passagers."], end: [] }
+        shooting: { start: [], select_targets: [], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: ["Contester un point en fin de round."], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["écran mobile","prise de terrain"]
+
+  - name: "Drop Pod"
+    role: "Dedicated Transport"
+    keywords: ["Adeptus Astartes","Ultramarines","Vehicle","Transport","Drop Pod"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Drop Pod Assault", text: "Arrive T1 depuis réserves ; débarquement immédiat." }
+        - { name: "Combat Debarkation", text: "Passagers peuvent agir après débarquement (selon fiche)." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: ["Placer pour menacer l'arrière et ouvrir des angles sûrs."], normal: [], advance: [], fallback: [], end: [] }
+        shooting: { start: ["Synchroniser avec alpha strike d’infanterie."], select_targets: [], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["alpha strike","prise de position"]
+
+  - name: "Hammerfall Bunker"
+    role: "Fortification"
+    keywords: ["Adeptus Astartes","Ultramarines","Fortification","Vehicle"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Cremator/Defence Array", text: "Tirs 360° ; punit l’infanterie nombreuse et les FeP." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: ["Choisir une ligne de tir couvrant objo/home."], normal: [], advance: [], fallback: [], end: [] }
+        shooting: { start: ["Overwatch fréquent ; garde une lane dégagée."], select_targets: ["Viser unités à découvert ou venant d'arriver des réserves."], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: ["Ancrer l’arrière et protéger une zone."], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["déni de zone","anti-écran"]
+
+  - name: "Aggressor Squad"
+    role: "Infantry"
+    keywords: ["Adeptus Astartes","Ultramarines","Infantry","Gravis"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Firestorms", text: "Volume de tir court/moyen ; anti-écran." }
+        - { name: "Relentless Advance", text: "Projette pression en restant groupé." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: [], advance: ["Avancer en couvert avec appui d’un perso."], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Écrans/infanterie en couvert ; volume de touches."], resolve: [], end: [] }
+        charge: { start: [], declare: ["Charge courte pour finir une unité entamée."], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies:
+        - { with: "Apothecary Biologis / Captain in Gravis Armour", when: "any", text: "Buff de létalité/durabilité sur le pack." }
+      targets: ["anti-écran","zone denial"]
+
+  - name: "Assault Intercessors with Jump Packs"
+    role: "Infantry"
+    keywords: ["Adeptus Astartes","Ultramarines","Infantry","Jump Pack"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Strike from Above", text: "Projection rapide ; charge menaçante." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: [], advance: ["Utiliser le terrain pour préparer une multi-charge."], fallback: [], end: [] }
+        shooting: { start: [], select_targets: [], resolve: [], end: [] }
+        charge: { start: [], declare: ["Frapper au tour d’initiative ; penser consolidation pour voler OC."], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: ["Claquer relances/buffs au bon moment."], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["alpha locale","prise d’angle"]
+
+  - name: "Ballistus Dreadnought"
+    role: "Vehicle"
+    keywords: ["Adeptus Astartes","Ultramarines","Vehicle","Walker","Dreadnought"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Ballistus Weapons", text: "Antichar longue portée ; rester hors CàC." }
+        - { name: "Wisdom of the Ancients", text: "Buff ponctuel aux alliés proches." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: ["Fond/mid avec LdV ; éviter le CàC."], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Priorité véhicules/monstres ; profiter d’Oath."], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["anti-char longue portée"]
+
+  - name: "Bladeguard Veteran Squad"
+    role: "Infantry"
+    keywords: ["Adeptus Astartes","Ultramarines","Infantry","Bladeguard"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Storm Shields", text: "Tanking au centre." }
+        - { name: "Honoured Champions", text: "Très fort contre élites." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: ["Pousser en couvert vers milieu ; escorter un perso (Chaplain/Ancient)."], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: [], resolve: [], end: [] }
+        charge: { start: [], declare: ["Engager sur objo contesté ; boucliers pour tanker l’intervention."], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: ["Choisir ordre d’activation pour sécuriser."], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["tenue d’objo contesté","anti-élite"]
+
+  - name: "Brutalis Dreadnought"
+    role: "Vehicle"
+    keywords: ["Adeptus Astartes","Ultramarines","Vehicle","Walker","Dreadnought"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Brutalis Talons", text: "Profil sweep/strike selon cible." }
+        - { name: "Rampage", text: "Très dangereux en multi-engagement." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: [], advance: ["Menacer avec av/charge via strat/bonus ; se cacher avant saut."], fallback: [], end: [] }
+        shooting: { start: [], select_targets: [], resolve: [], end: [] }
+        charge: { start: [], declare: ["Cibler unité isolée ; multi-engage si lanes OK."], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: ["Sweep vs hordes, strike vs élites ; consolider pour voler OC."], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["anti-élite CàC","briseur de ligne"]
+
+  - name: "Centurion Assault Squad"
+    role: "Infantry"
+    keywords: ["Adeptus Astartes","Ultramarines","Infantry","Centurion"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Siege Drills", text: "Très bon contre couverts/fortif." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: ["Avancer prudemment ; portée courte."], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Démolition et cibles lourdes à courte portée."], resolve: [], end: [] }
+        charge: { start: [], declare: ["Frapper là où le tanking tient le point ensuite."], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["siège urbain","anti-élite proximité"]
+
+  - name: "Centurion Devastator Squad"
+    role: "Infantry"
+    keywords: ["Adeptus Astartes","Ultramarines","Infantry","Centurion"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Grav/Las/Hvy Bolter", text: "Feu soutenu lourd à moyenne portée." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: ["Peu mobile ; verrouiller une lane de tir."], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Cibler monstres/véhicules ; gérer angles et portée."], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["anti-char/monstre à moyenne portée"]
+
+  - name: "Company Heroes"
+    role: "Infantry"
+    keywords: ["Adeptus Astartes","Ultramarines","Infantry","Company Heroes"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Command Squad", text: "Garde du corps pour Captain/CM ; partage de buffs." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: ["Garde du corps pour CAPTAIN/CHAPTER MASTER ; rester à 3\"."], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: [], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: ["Contre-attaque locale si on approche du Warlord."], consolidate: [], end: [] }
+        end: { score: ["Tanker pour tenir un objo avec le perso."], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["bodyguard","tenue de point"]
+
+  - name: "Desolation Squad"
+    role: "Infantry"
+    keywords: ["Adeptus Astartes","Ultramarines","Infantry","Desolation"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Superfrag/Superkrak", text: "Polyvalent anti-horde/anti-élite ; tir indirect possible via strat." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: ["Idéal en fond de table ; rester Stationary pour bonus."], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Frag vs hordes/écran ; Krak vs cibles lourdes."], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["appui feu longue portée","anti-horde/anti-élite"]
+
+  - name: "Devastator Squad"
+    role: "Infantry"
+    keywords: ["Adeptus Astartes","Ultramarines","Infantry","Devastator"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Signum", text: "Buff de CT/+1 touche à un modèle." }
+        - { name: "Armourium Cherub", text: "Burst de tir au moment clé." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command:
+          start: []
+          battleshock: []
+          abilities: ["Annoncer la cible du Signum ; déclencher le Cherub au bon moment."]
+          end: []
+        movement: { start: [], normal: ["Rester immobile et en couvert ; angles clairs."], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Prioriser menaces véhicule/monstre ; répartir armes selon cibles."], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["anti-char classique"]
+
+  - name: "Dreadnought"
+    role: "Vehicle"
+    keywords: ["Adeptus Astartes","Ultramarines","Vehicle","Walker","Dreadnought"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Wisdom of the Ancients", text: "Buff ponctuel aux alliés." }
+        - { name: "Flexible Loadouts", text: "Polyvalent tir/contre-charge selon équipement." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: ["Angle pour lignes de tir ; éviter trades défavorables."], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Cibler élite/véhicule selon loadout."], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: ["Peut finir une unité moyenne ; attention anti-char CàC adverse."], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["flex tir/contre-charge"]
+
+  - name: "Eliminator Squad"
+    role: "Infantry"
+    keywords: ["Adeptus Astartes","Ultramarines","Infantry","Phobos","Infiltrators","Stealth"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Marksman", text: "Snipe de persos de support ; reposition après tir." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: ["Déploiement avancé ; jouer angles et reposition."], normal: [], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Persos de support ; clear objectif loin."], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: ["Tenir un objo secondaire discret."], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["anti-personnage léger","contrôle de zone"]
+
+  - name: "Eradicator Squad"
+    role: "Infantry"
+    keywords: ["Adeptus Astartes","Ultramarines","Infantry","Gravis"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Melta Expertise", text: "Antichar/multi-PV à courte portée." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: ["Se placer à portée de fusion ; éviter écrans."], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Véhicules/monstres ; viser la cible d’Oath."], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies:
+        - { with: "Captain in Gravis / Apothecary Biologis", when: "any", text: "Fiabilise touches/blessures ; +létalité." }
+      targets: ["anti-char/multi-PV"]
+
+  - name: "Firestrike Servo-turrets"
+    role: "Artillery"
+    keywords: ["Adeptus Astartes","Ultramarines","Artillery","Vehicle"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Static Battery", text: "Déploiement défensif ; bon contre véhicules." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: ["Couvre zone d’atterrissage/objo ; terrain dégagé."], normal: [], advance: [], fallback: [], end: [] }
+        shooting: { start: ["Utiliser strats à bas coût chaque tour ; tir de sentinelle possible."], select_targets: [], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["anti-véhicule longue portée","zone denial"]
+
+  - name: "Gladiator Lancer"
+    role: "Vehicle"
+    keywords: ["Adeptus Astartes","Ultramarines","Vehicle","Tank","Gladiator"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Accelerator Lascannon", text: "Anti-char longue portée ; fiabiliser un jet clé." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: ["Rester à 36-48\" ; conserver couvert léger."], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Prioriser blindés lourds ; garder des CP pour relances."], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["anti-char longue portée"]
+
+  - name: "Gladiator Reaper"
+    role: "Vehicle"
+    keywords: ["Adeptus Astartes","Ultramarines","Vehicle","Tank","Gladiator"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Twin Heavy Onslaught", text: "Anti-horde / anti-élite légère à haute cadence." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: ["Verrouille une lane ; évite les angles d’anti-char."], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Infanterie nombreuse / élite légère."], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["anti-horde soutenu"]
+
+  - name: "Gladiator Valiant"
+    role: "Vehicle"
+    keywords: ["Adeptus Astartes","Ultramarines","Vehicle","Tank","Gladiator"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Storm Spear/Heavy weapons", text: "Polyvalent lourd vs élite/char à moyenne portée." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: [], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Cibles multi-PV ; s’aligner avec Oath."], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["polyvalent lourd"]
+
+  - name: "Infernus Squad"
+    role: "Infantry"
+    keywords: ["Adeptus Astartes","Ultramarines","Infantry","Primaris","Infernus"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Pyrecaster", text: "Flamers auto-hits ; anti-écran/OC faible." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: ["Prise d’angle courte ; écran avancé."], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Hordes/écrans ; forcer tests Battleshock."], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["anti-écran","déni de zone courte"]
+
+  - name: "Incursor Squad"
+    role: "Infantry"
+    keywords: ["Adeptus Astartes","Ultramarines","Infantry","Phobos","Infiltrators"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Omni-scramblers", text: "Anti-FEP + tir léger ; jeu de mission." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: ["Déploiement avancé ; couper lanes d’infiltration ennemies."], normal: [], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Cibles légères/écran."], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: ["Actions/scanner/secondaires."], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["mission/écran avancé"]
+
+  - name: "Infiltrator Squad"
+    role: "Infantry"
+    keywords: ["Adeptus Astartes","Ultramarines","Infantry","Phobos","Infiltrators"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Helix Adept", text: "Petit heal ; déni de FEP 12\"." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: ["Occuper objo avancé ; zones anti-FEP."], normal: [], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: [], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: ["Tenir secondaire ; étirer anti-FEP pour protéger le cœur."], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["anti-FEP","mission"]
+
+  - name: "Outrider Squad"
+    role: "Mounted"
+    keywords: ["Adeptus Astartes","Ultramarines","Mounted","Bikers"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "Swift Attack", text: "Contournement rapide ; écran mobile." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: [], advance: ["Prendre un flanc ; menacer angle de tir rapide."], fallback: [], end: [] }
+        shooting: { start: [], select_targets: [], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: ["Contester un objo en fin de round."], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["harcèlement mobile"]
+
+  - name: "Invader ATV"
+    role: "Mounted"
+    keywords: ["Adeptus Astartes","Ultramarines","Mounted","Vehicle"]
+    base: { M: "??", T: "??", Sv: "??", W: "??", Ld: "??", OC: "??", Inv: null, FnP: null }
+    weapons: { ranged: [], melee: [] }
+    abilities:
+      faction: "Space Marines"
+      detachment: "Gladius Task Force"
+      unit:
+        - { name: "ATV Support", text: "Soutien mobile saturant ; encaisse un peu." }
+      leader: { can_join: [] }
+    play_tips:
+      per_turn: { 1: [], 2: [], 3: [] }
+      phases:
+        command: { start: [], battleshock: [], abilities: [], end: [] }
+        movement: { start: [], normal: ["Rester en duo avec Outriders ; appui saturant."], advance: [], fallback: [], end: [] }
+        shooting: { start: [], select_targets: ["Infanterie moyenne / légère."], resolve: [], end: [] }
+        charge: { start: [], declare: [], overwatch_window: [], move: [], heroic: [], end: [] }
+        fight: { start: [], pile_in: [], make_attacks: [], consolidate: [], end: [] }
+        end: { score: [], cleanup: [] }
+      stratagems: []
+      synergies: []
+      targets: ["appui mobile"]
