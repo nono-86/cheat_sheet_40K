@@ -28,7 +28,6 @@ faction_helpers:
       - "Compter OC ; scorer primaires/secondaires ; valider actions."
 
 units:
-
   - name: "Ancient"
     role: "Character"
     keywords: ["Adeptus Astartes","Ultramarines","Infantry","Character","Ancient"]
