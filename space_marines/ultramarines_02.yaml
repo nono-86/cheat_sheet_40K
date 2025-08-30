@@ -1,8 +1,3 @@
-# =========================
-# PIPELINE 40K — YAML (V10)
-# =========================
-# PART 2 — Characters & Battleline (suite)
-
 units:
   - name: "Captain in Phobos Armour"
     role: "Character"
