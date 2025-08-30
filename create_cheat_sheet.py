@@ -174,13 +174,33 @@ def parse_export_txt(path: str):
             army["format_points"] = int(fm.group(2))
 
     # Unités
-    for l in lines:
+    for i, l in enumerate(lines):
         s = l.strip()
         if not s:
             continue
         if SECTION_RE.match(s):
-            current_section = s
+            current_section = s.strip().upper()
             continue
+
+        # ignorer explicitement quelques lignes d'en-tête
+        if i == 0:  # première ligne = titre "test (995 points)" -> pas une unité
+            continue
+        if FORMAT_RE.match(s):  # "Incursion (1000 points)" -> format, pas une unité
+            continue
+        if s in {
+            "Space Marines",
+            "Ultramarines",
+            "Gladius Task Force",
+            "Anvil Siege Force",
+            "Ironstorm Spearhead",
+            "Firestorm Assault Force",
+            "Stormlance Task Force",
+            "Vanguard Spearhead",
+            "1st Company Task Force",
+            "Librarius Conclave",
+        }:
+            continue
+
         m = UNIT_LINE_RE.match(s)
         if m:
             name = m.group(1).strip()
