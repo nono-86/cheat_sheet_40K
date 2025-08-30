@@ -1,0 +1,86 @@
+test (995 points)
+
+Space Marines
+Ultramarines
+Incursion (1000 points)
+Gladius Task Force
+
+
+CHARACTERS
+
+Captain with Jump Pack (75 points)
+  • 1x Astartes chainsword
+    1x Heavy bolt pistol
+
+Chaplain (60 points)
+  • Warlord
+  • 1x Absolvor bolt pistol
+    1x Crozius arcanum
+
+Lieutenant in Phobos Armour (55 points)
+  • 1x Bolt Pistol
+    1x Master-crafted bolt carbine
+    1x Paired combat blades
+
+
+BATTLELINE
+
+Intercessor Squad (80 points)
+  • 1x Intercessor Sergeant
+    • 1x Bolt pistol
+      1x Bolt rifle
+      1x Close combat weapon
+  • 4x Intercessor
+    • 4x Bolt pistol
+      4x Bolt rifle
+      4x Close combat weapon
+
+Intercessor Squad (80 points)
+  • 1x Intercessor Sergeant
+    • 1x Bolt pistol
+      1x Bolt rifle
+      1x Close combat weapon
+  • 4x Intercessor
+    • 4x Bolt pistol
+      4x Bolt rifle
+      4x Close combat weapon
+
+
+OTHER DATASHEETS
+
+Assault Intercessors with Jump Packs (90 points)
+  • 1x Assault Intercessor Sergeant with Jump Pack
+    • 1x Astartes chainsword
+      1x Heavy bolt pistol
+  • 4x Assault Intercessors with Jump Packs
+    • 4x Astartes chainsword
+      4x Heavy bolt pistol
+
+Ballistus Dreadnought (140 points)
+  • 1x Armoured feet
+    1x Ballistus lascannon
+    1x Ballistus missile launcher
+    1x Twin storm bolter
+
+Bladeguard Veteran Squad (80 points)
+  • 1x Bladeguard Veteran Sergeant
+    • 1x Heavy bolt pistol
+      1x Master-crafted power weapon
+  • 2x Bladeguard Veteran
+    • 2x Heavy bolt pistol
+      2x Master-crafted power weapon
+
+Stormtalon Gunship (165 points)
+  • 1x Armoured hull
+    1x Skyhammer missile launcher
+    1x Twin assault cannon
+
+Terminator Squad (170 points)
+  • 1x Terminator Sergeant
+    • 1x Power fist
+      1x Storm bolter
+  • 4x Terminator
+    • 4x Power fist
+      4x Storm bolter
+
+Exported with App Version: v1.40.0 (93), Data Version: v674

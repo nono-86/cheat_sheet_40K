@@ -1,0 +1,1382 @@
+schema_version: 1
+phases:
+  order:
+  - command
+  - movement
+  - shooting
+  - charge
+  - fight
+  - end
+  steps:
+    command:
+    - start
+    - battleshock
+    - abilities
+    - end
+    movement:
+    - start
+    - normal
+    - advance
+    - fallback
+    - end
+    shooting:
+    - start
+    - select_targets
+    - resolve
+    - end
+    charge:
+    - start
+    - declare
+    - overwatch_window
+    - move
+    - heroic
+    - end
+    fight:
+    - start
+    - pile_in
+    - make_attacks
+    - consolidate
+    - end
+    end:
+    - score
+    - cleanup
+faction_helpers:
+  turn_start:
+  - 'Déclarer/mettre à jour les effets de détachement/faction (ex: doctrine/cible
+    prioritaire).'
+  generic_reminders:
+    command:
+    - Gagner CP ; tests d’ébranlement (Battleshock) < 1/2 effectif ; poser auras/buffs.
+    movement:
+    - Mesurer menaces (overwatch/contre-charge), garder couvert/lignes de vue.
+    shooting:
+    - Choisir cibles intelligemment (split fire seulement si utile).
+    charge:
+    - Penser multi-charge ; garder 1 CP pour relance critique.
+    fight:
+    - Activer dans le bon ordre ; Pile-in/Consolidate pour voler OC.
+    end:
+    - Compter OC ; scorer primaires/secondaires ; valider actions.
+units:
+- name: Redemptor Dreadnought
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Walker
+  - Dreadnought
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Macro Plasma/Onslaught
+      text: Polyvalent ; anti-élite/anti-char selon loadout.
+    - name: Wisdom of the Ancients
+      text: Buff ponctuel aux alliés (fiabilise une phase).
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Positionner en couvert léger ; éviter le CàC non souhaité.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Cibler élites/véhicules ; aligner avec Oath.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks:
+        - Peut achever une unité moyenne.
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - polyvalent lourd
+- name: Ironclad Dreadnought
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Walker
+  - Dreadnought
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Siege Specialist
+      text: Très fort au CàC sur véhicules/fortifs.
+    - name: Adamantine Hull
+      text: Tanking élevé ; bon pour tenir un point contesté.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance:
+        - Avancer en couverts ; préparer la charge.
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Choisir une cible isolée ou un char.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks:
+        - Profil anti-véhicule prioritaire ; consolider sur objo.
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - anti-char CàC
+    - prise de point
+- name: Invictor Tactical Warsuit
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Walker
+  - Invictor
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Concealed Positions
+      text: Déploiement avancé ; pression T1.
+    - name: Versatile Loadout
+      text: Polyvalent tir court/moyen.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start:
+        - Se déployer agressif mais en couvert.
+        normal:
+        - Menacer angles de tir dès T1.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Écrans, unités de tir légères ; punir exposés.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Engager une unité fragile pour la bloquer.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - pression T1
+    - anti-tir léger
+- name: Land Raider
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Land Raider
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Armoured Behemoth
+      text: Transport lourd + gros tir ; ancre de ligne.
+    - name: Power of the Machine Spirit
+      text: Reste efficace même en dégâts.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Avancer lentement en couvert ; débarquer au moment clé.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Cibles multi-PV / véhicules / packs d’élite.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - transport lourd
+    - ancre de tir
+- name: Land Raider Crusader
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Land Raider
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Armoured Behemoth
+      text: Transport lourd + gros tir ; ancre de ligne.
+    - name: Power of the Machine Spirit
+      text: Reste efficace même en dégâts.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Avancer lentement en couvert ; débarquer au moment clé.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Cibles multi-PV / véhicules / packs d’élite.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - transport lourd
+    - ancre de tir
+- name: Land Raider Redeemer
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Land Raider
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Armoured Behemoth
+      text: Transport lourd + gros tir ; ancre de ligne.
+    - name: Power of the Machine Spirit
+      text: Reste efficace même en dégâts.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Avancer lentement en couvert ; débarquer au moment clé.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Cibles multi-PV / véhicules / packs d’élite.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - transport lourd
+    - ancre de tir
+- name: Repulsor
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Transport
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Hover Tank
+      text: Transport lourd ; multiples armes saturantes.
+    - name: Power of the Machine Spirit
+      text: Fiable même dégradé.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Projeter une unité Primaris ; rester à mi-portée.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Infanterie/élite légère ; saturation.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - transport lourd
+    - saturation
+- name: Repulsor Executioner
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Transport
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Executioner Cannon
+      text: Anti-char/élite lourd longue portée.
+    - name: Hover Tank
+      text: Transport lourd ; nombreuses armes secondaires.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Tenir fond de table ; angle de tir ouvert.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Véhicules/monstres ; priorités haute valeur.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - anti-char longue portée
+    - transport lourd
+- name: Predator Annihilator
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Predator
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Twin Lascannons
+      text: Anti-char ; appui longue portée.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Angle-toi sans trop t’exposer.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Cibles blindées priorisées.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - anti-char longue portée
+- name: Predator Destructor
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Predator
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Autocannon Turret
+      text: Anti-élite moyenne portée ; multi-PV.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Élite/multi-PV moyen ; garder couvert.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - anti-élite/multi-PV
+- name: Vindicator
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Demolisher Cannon
+      text: Gros gabarit anti-élite/char ; portée courte.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Avancer en couvert vers mid ; menacer centre.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Packs d’élite / chars exposés.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - anti-élite lourd
+    - bunker buster
+- name: Whirlwind
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Artillery
+  - Indirect
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Artillery Support
+      text: Tir indirect ; utility sur objectifs cachés.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Cibles hors LdV / scoring faibles.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score:
+        - Forcer Battleshock sur unités tenant objo.
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - tir indirect
+    - contrôle d’objo
+- name: Hunter
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Anti-Air
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Skyspear Missile
+      text: Anti-vol volant/rapide ; support AA.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Flyers/rapides ; sinon véhicules exposés.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - anti-air
+- name: Stalker
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Anti-Air
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Icarus Arrays
+      text: Anti-air saturation ; utile aussi vs infanterie légère.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Flyers / infanterie légère à découvert.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - anti-air
+    - anti-léger
+- name: Storm Speeder Hailstrike
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Fly
+  - Storm Speeder
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Guns-blazing
+      text: Saturation anti-léger à haute mobilité.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance:
+        - Contournement pour angles inattendus.
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Infanterie légère / écrans.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - saturation mobile
+- name: Storm Speeder Thunderstrike
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Fly
+  - Storm Speeder
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Target Designator
+      text: Debuff/bonus contre véhicules/monstres ciblés.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Véhicules/monstres ; synchroniser avec anti-char allié.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - support anti-char
+- name: Storm Speeder Hammerstrike
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Fly
+  - Storm Speeder
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Close-range Breach
+      text: Burst anti-char à courte portée.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance:
+        - Se mettre à portée courte au moment clé.
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Chars exposés ; priorités haute valeur.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score: []
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - anti-char mobile
+- name: Thunderfire Cannon
+  role: Artillery
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Artillery
+  - Vehicle?
+  - Fortification?
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Subterranean Barrage
+      text: Tir indirect ; ralentit/désorganise l’adversaire.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock: []
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Unités sur objo ; écrans hors LdV.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate: []
+        end: []
+      end:
+        score:
+        - Pression constante pour dégager objos.
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets:
+    - tir indirect
+    - contrôle de zone

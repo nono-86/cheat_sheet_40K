@@ -1,0 +1,142 @@
+# =========================
+# PIPELINE 40K — SCHÉMA YAML (V10)
+# =========================
+# Ce fichier décrit :
+#  - la grille des phases/sous-étapes
+#  - les rappels génériques de faction
+#  - la liste d’unités avec stats, armes, capacités, et "play tips" (pense-bêtes)
+#
+# Remplis en priorité: units[].base, units[].weapons, units[].abilities.unit, units[].play_tips
+# Les champs marqués (OPTIONNEL) sont facultatifs.
+
+schema_version: 1
+
+# Phases officielles (V10) + sous-étapes utiles pour les rappels au bon timing.
+phases:
+  order: [command, movement, shooting, charge, fight, end]
+  steps:
+    command:   [start, battleshock, abilities, end]        # Battleshock se gère ici en V10
+    movement:  [start, normal, advance, fallback, end]
+    shooting:  [start, select_targets, resolve, end]
+    charge:    [start, declare, overwatch_window, move, heroic, end]
+    fight:     [start, pile_in, make_attacks, consolidate, end]
+    end:       [score, cleanup]
+
+# Rappels globaux (affichés pour toutes les listes Ultramarines/Space Marines par défaut)
+faction_helpers:
+  turn_start:
+    - "Déclarer/mettre à jour les effets de détachement/faction (ex: doctrine/cible prioritaire)."
+  generic_reminders:
+    command:
+      - "Gagner CP ; tests d’ébranlement (Battleshock) < 1/2 effectif ; poser auras/buffs."
+    movement:
+      - "Mesurer menaces (overwatch/contre-charge), garder couvert/lignes de vue."
+    shooting:
+      - "Choisir cibles intelligemment (split fire seulement si utile)."
+    charge:
+      - "Penser multi-charge ; garder 1 CP pour relance critique."
+    fight:
+      - "Activer dans le bon ordre ; Pile-in/Consolidate pour voler OC."
+    end:
+      - "Compter OC ; scorer primaires/secondaires ; valider actions."
+
+# =========================
+# UNITS — Liste d’unités
+# =========================
+units:
+  - name: "Nom exact de l’unité"        # REQUIS, sert d’identifiant
+    role: "Battleline|Character|Vehicle|Monster|Infantry|..."  # (OPTIONNEL)
+    keywords: ["Adeptus Astartes","Ultramarines","Infantry","Primaris"]  # (OPTIONNEL mais utile)
+    base:                           # PROFIL SYNTHÉTIQUE (V10)
+      M: "??"                       # Mouvement
+      T: "??"                       # Endurance
+      Sv: "??"                      # Sauvegarde
+      W: "??"                       # PV
+      Ld: "??"                      # Commandement
+      OC: "??"                      # Contrôle d’objo
+      Inv: null                     # (OPTIONNEL) ex: "4+" si invu
+      FnP: null                     # (OPTIONNEL) ex: "5+" si insensible
+    weapons:                        # ARMES (tir & CaC) — mets seulement ce que tu utilises
+      ranged:
+        - name: "Nom arme tir"
+          range: "??"               # ex: "24\""
+          A: "??"
+          BS: "??"
+          S: "??"
+          AP: "??"
+          D: "??"
+          keywords: ["Rapid Fire 1","Assault"]   # (OPTIONNEL)
+          mandatory: true           # true si équipement de base
+      melee:
+        - name: "Nom arme CaC"
+          A: "??"
+          WS: "??"
+          S: "??"
+          AP: "??"
+          D: "??"
+          keywords: []              # (OPTIONNEL)
+          mandatory: true
+    loadouts:                       # (OPTIONNEL) Configs d’armes prêtes à l’emploi
+      - id: "config_alt"
+        note: "Intention (anti-élite/anti-écran, etc.)"
+        replace:
+          ranged:
+            - match: "Nom arme tir"
+              with: "Nom variante"
+          melee: []
+    abilities:
+      faction: "Space Marines"      # (OPTIONNEL)
+      detachment: "Gladius Task Force"  # (OPTIONNEL)
+      unit:
+        - name: "Nom capacité"
+          text: "Mémo concis (évite le copier-coller du wording complet)."
+      leader:                        # (OPTIONNEL)
+        can_join: ["Unités attachables…"]
+    play_tips:                       # Ce bloc alimente la feuille "tour-par-tour"
+      per_turn:                      # Rappels spécifiques par tour (tempo de la liste)
+        1: ["Rappel Tour 1 (placement/pression)"]
+        2: ["Rappel Tour 2 (focus/tempo)"]
+        3: []
+      phases:
+        command:
+          start:        ["Rappel au tout début de la phase de commandement"]
+          battleshock:  ["Si < 1/2 effectif : tester ébranlement"]
+          abilities:    []
+          end:          []
+        movement:
+          start:        []
+          normal:       ["Prendre objo en couvert si possible"]
+          advance:      []
+          fallback:     []
+          end:          []
+        shooting:
+          start:        []
+          select_targets: ["Prioriser cible d’Oath / priorité du détachement"]
+          resolve:      []
+          end:          []
+        charge:
+          start:        []
+          declare:      ["Déclarer multi-charge si pertinent"]
+          overwatch_window: []       # fenêtre réactive (souvent adverse)
+          move:         []
+          heroic:       []           # interventions héroïques
+          end:          []
+        fight:
+          start:        []
+          pile_in:      []
+          make_attacks: []
+          consolidate:  ["Consolider pour voler/contester OC"]
+          end:          []
+        end:
+          score:        ["Compter OC et marquer primaires/secondaires"]
+          cleanup:      []
+      stratagems:                    # (OPTIONNEL) Liste de pense-bêtes CP
+        - when: "shooting.start"     # "phase" ou "phase.step" (ex: fight.consolidate) ou "any"
+          cp: 1
+          text: "Nom court + condition + effet résumé"
+      synergies:                     # (OPTIONNEL) Rappels conditionnels si 2 unités sont présentes
+        - with: "Nom d’une autre unité"
+          when: "any"
+          text: "Rester à portée pour rerolls/aura/etc."
+      targets:                       # (OPTIONNEL) Cibles de prédilection
+        - "anti-élite"
