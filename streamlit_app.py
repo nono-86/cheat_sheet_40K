@@ -44,7 +44,7 @@ def norm(s: str) -> str:
 
 def load_yaml_files(files: List[io.BytesIO]) -> Dict[str, Any]:
     """Charge un corpus YAML à partir d'objets uploadés."""
-    phases, faction_helpers, units = None, None, []
+    phases, faction_helpers, units, stratagems = None, None, [], []
     for f in files:
         data = yaml.safe_load(f.read().decode("utf-8"))
         if phases is None and "phases" in data:
@@ -53,11 +53,18 @@ def load_yaml_files(files: List[io.BytesIO]) -> Dict[str, Any]:
             faction_helpers = data["faction_helpers"]
         if "units" in data:
             units.extend(data["units"])
+        if "stratagems" in data:
+            stratagems.extend(data["stratagems"])
     if phases is None:
         phases = {"order": [], "steps": {}}
     if faction_helpers is None:
         faction_helpers = {}
-    return {"units": units, "phases": phases, "faction_helpers": faction_helpers}
+    return {
+        "units": units,
+        "phases": phases,
+        "faction_helpers": faction_helpers,
+        "stratagems": stratagems,
+    }
 
 
 def load_yaml_dir(directory: Path) -> Dict[str, Any]:
@@ -301,7 +308,10 @@ with tab_input:
         )
         if uploads:
             corpus = load_yaml_files(uploads)
-            st.success(f"{len(corpus['units'])} unités chargées via upload.")
+            st.success(
+                f"{len(corpus['units'])} unités chargées. \n \
+                       {len(corpus['stratagems'])} unités chargées"
+            )
 
     st.subheader("Export 40k")
     col1, col2 = st.columns([2, 1])
