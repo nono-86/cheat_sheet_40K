@@ -338,7 +338,7 @@ def build_phase_board(faction_helpers, matched_units, strats):
                 items.append(f"<li><b>{html.escape(uname)}</b> — {html.escape(b)}</li>")
         
         # stratagems
-        items.extend(strat_map.get(key, []))
+        items.extend(strats.get(key, []))
 
 
         alt_item   = "<li class='small'>&mdash;</li>"   # ← ASCII safe (— devient &mdash;)
