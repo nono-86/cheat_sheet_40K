@@ -294,7 +294,8 @@ with tab_input:
         if DEFAULT_YAML_DIR.exists():
             corpus = load_yaml_dir(DEFAULT_YAML_DIR)
             st.success(
-                f"{len(corpus['units'])} unités chargées depuis `{DEFAULT_YAML_DIR.name}/`."
+                f"{len(corpus['units'])} unités chargées depuis `{DEFAULT_YAML_DIR.name}/`. \n \
+                {len(corpus['units'])} stratagèmes chargés depuis `{DEFAULT_YAML_DIR.name}/`."
             )
         else:
             st.warning(
@@ -309,8 +310,8 @@ with tab_input:
         if uploads:
             corpus = load_yaml_files(uploads)
             st.success(
-                f"{len(corpus['units'])} unités chargées. \n \
-                       {len(corpus['stratagems'])} unités chargées"
+                f"{len(corpus['units'])} unités chargées via upload. \n \
+                       {len(corpus['stratagems'])} stratagèmes chargés via upload."
             )
 
     st.subheader("Export 40k")
