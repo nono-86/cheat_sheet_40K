@@ -566,6 +566,8 @@ def run(export_path: str, yaml_dir: str, out_file: str) -> str:
     strat_yaml_path = Path(yaml_dir, "stratagems.yaml")
     strats = load_stratagems(strat_yaml_path)
 
+    strats = strat_items_by_phase(strats, army["detachment"])
+
     outfile = generate_html(army, matched, faction_helpers, out_file, strats)
     return outfile
 
