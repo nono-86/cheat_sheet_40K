@@ -294,20 +294,25 @@ with tab_input:
         uploaded_path = save_uploaded_file(txt_file)      # <-- VOILÀ LE PATH
         st.session_state["uploaded_path"] = uploaded_path
 
-        with tempfile.NamedTemporaryFile(delete=False, suffix="_tmphtml", dir=dir) as tmp2:
-          html = run(uploaded_path, DEFAULT_YAML_DIR, tmp2)                 # ta fonction de rendu
-          st.session_state["preview_html"] = html       # stocke pour l'affichage persistant
-          st.toast("Fiche générée ✅")
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".html") as tmp_out:
+          out_html_path = tmp_out.name
+        st.session_state["out_html_path"] = out_html_path
+        
+        run(uploaded_path, DEFAULT_YAML_DIR, out_html_path)
+        html = Path(out_html_path).read_text(encoding="utf-8")
 
-          # affiche le résultat tout de suite
-          st.download_button(
-              "Télécharger le HTML",
-              data=html,
-              file_name="cheat_sheet_40k.html",
-              mime="text/html",
-              key="dl_html",
-          )
-          st.components.v1.html(html, height=900, scrolling=True)
+        st.session_state["preview_html"] = html       # stocke pour l'affichage persistant
+        st.toast("Fiche générée ✅")
+
+        # affiche le résultat tout de suite
+        st.download_button(
+            "Télécharger le HTML",
+            data=html,
+            file_name="cheat_sheet_40k.html",
+            mime="text/html",
+            key="dl_html",
+        )
+        st.components.v1.html(html, height=900, scrolling=True)
 
     # bouton pour repartir de zéro (ré-initialiser et relancer le script)
     if st.button("Nouvelle fiche"):
