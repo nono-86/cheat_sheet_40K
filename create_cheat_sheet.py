@@ -1,400 +1,602 @@
-import re
-import io
-import sys
-import yaml
-import tempfile
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+#
+# python create_cheat_sheet.py \
+#   --export export_from_40k_app.txt \
+#   --yaml-dir data \
+#   --out cheat_sheet_ultramarines.html
+
+
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import argparse
+from collections import defaultdict
 from pathlib import Path
-from typing import Dict, Any, List
-import streamlit as st
-from jinja2 import Template
+import re
+import os
+import glob
+import html
+from difflib import get_close_matches
 
-APP_DIR = Path(__file__).resolve().parent
-if str(APP_DIR) not in sys.path:
-    sys.path.insert(0, str(APP_DIR))
-from create_cheat_sheet import run
-
-# --------------------------- CONFIG ---------------------------------
-DEFAULT_YAML_DIR = Path(__file__).parent / "data"
-FACTION = "Adeptus Astartes"
-CHAPTER = "Ultramarines"
-DETACHMENT_DEFAULT = "Gladius Task Force"
-
-# Quelques alias pratiques (ajoute ici si une unité n'est pas matchée)
-ALIASES = {
-    "assault intercessors with jump pack": "Assault Intercessors with Jump Packs",
-    "captain with jump pack": "Captain with Jump Pack",
-    "intercessor squad": "Intercessor Squad",
-    "bladeguard veteran squad": "Bladeguard Veteran Squad",
-    "ballistus dreadnought": "Ballistus Dreadnought",
-    "terminator squad": "Terminator Squad",
-}
-
-# ------------------------ UTILS : PARSE / LOAD ----------------------
+try:
+    import yaml  # type: ignore
+except ImportError:
+    raise SystemExit("PyYAML requis. Installe: pip install pyyaml")
 
 
-def norm(s: str) -> str:
+# -----------------------------
+# Stratagems
+# -----------------------------
+def load_stratagems(yaml_path: str | Path) -> list[dict]:
+    data = yaml.safe_load(Path(yaml_path).read_text(encoding="utf-8"))
+    return data.get("stratagems", [])
+
+
+def normalize_timing(s: dict) -> tuple[str, str, str]:
+    phase = s.get("phase", "command")
+    step = s.get("step", "start")
+    who = s.get("player", "you")  # you|opponent|any
+    # Optionnel: harmoniser quelques steps vers ceux de ta grille
+    alias = {
+        "after_enemy_selects_targets": "start",
+        "after_enemy_resolves_attacks": "end",
+        "after_enemy_ends_move": "start",
+        "after_enemy_declares_charge": "declare",
+        "after_enemy_ends_charge_move": "move",
+        "reinforcements": "start",
+        "any": "start",
+    }
+    step = alias.get(step, step)
+    # préfix utile pour visuel
+    prefix = {"you": "🟦", "opponent": "🟥", "any": "🟨"}[who]
+    label = f"{prefix} Strat · "
+    return phase, step, label
+
+
+def add_stratagems_to_timeline(
+    timeline: dict, strats: list[dict], detachment_name: str
+):
+    for st in strats:
+        if detachment_name not in st.get("detachment", []):
+            continue
+        for w in st.get("when", []):
+            phase, step, label = normalize_timing(w)
+            box = f"{label}{st['name']} ({st['cp']}CP) — {st.get('effect','')}"
+            timeline.setdefault(phase, {}).setdefault(step, []).append(box)
+    return timeline
+
+
+def strat_items_by_phase(
+    strats: list[dict], detachment_name: str | None = None
+) -> dict[str, list[str]]:
+    """
+    Regroupe les stratagèmes par phase en <li> prêts à insérer.
+    Utilise normalize_timing(w) que tu as déjà.
+    """
+    bucket: dict[str, list[str]] = defaultdict(list)
+    for st in strats or []:
+        # filtre détachement si fourni (accepte "All" si tu l'utilises)
+        if detachment_name and (
+            detachment_name not in st.get("detachment", [])
+            and "All" not in st.get("detachment", [])
+        ):
+            continue
+
+        name = st.get("name", "—")
+        cp = st.get("cp", "?")
+        effect = st.get("effect", "")
+
+        for w in st.get("when", []):
+            phase, step, label = normalize_timing(w)  # <- ton helper existant
+            line = (
+                "<li>"
+                + label
+                + "<b>"
+                + html.escape(name)
+                + "</b> ("
+                + str(cp)
+                + "CP) — ["
+                + html.escape(step)
+                + "] "
+                + html.escape(effect)
+                + "</li>"
+            )
+            bucket[phase].append(line)
+    return bucket
+
+
+# -----------------------------
+# Parsing de l'export 40k App
+# -----------------------------
+
+UNIT_LINE_RE = re.compile(r"^([^\n(]+?)\s*\((\d+)\s*points?\)\s*$", re.IGNORECASE)
+SECTION_RE = re.compile(r"^[A-Z][A-Z\s/’'–-]+$")
+
+FORMAT_RE = re.compile(
+    r"^(Combat Patrol|Incursion|Strike Force|Onslaught)\s*\((\d+)\s*points?\)\s*$",
+    re.IGNORECASE,
+)
+
+
+def normalize_name(s: str) -> str:
     s = s.lower()
-    s = re.sub(r"\s*\(.*?\)", "", s)  # retire parenthèses
-    s = s.replace("with jump packs", "with jump pack")
-    s = s.replace("w/ jump packs", "with jump pack")
-    s = s.replace(" w/", " ")
+    s = re.sub(r"[\u2019’']", "", s)
+    s = re.sub(r"[^a-z0-9+&/ -]", " ", s)
     s = re.sub(r"\s+", " ", s).strip()
     return s
 
 
-def load_yaml_files(files: List[io.BytesIO]) -> Dict[str, Any]:
-    """Charge un corpus YAML à partir d'objets uploadés."""
-    phases, faction_helpers, units, stratagems = None, None, [], []
-    for f in files:
-        data = yaml.safe_load(f.read().decode("utf-8"))
-        if phases is None and "phases" in data:
-            phases = data["phases"]
-        if faction_helpers is None and "faction_helpers" in data:
+def parse_export_txt(path: str):
+    """
+    Retourne:
+      - army: dict meta (title, points_total, faction, chapter, detachment, format, format_points)
+      - units: dict key -> {display, count, points_each, section}
+    """
+    with open(path, "r", encoding="utf-8") as f:
+        text = f.read()
+
+    lines = [l.rstrip() for l in text.splitlines() if l is not None]
+
+    army = {
+        "title": None,
+        "points_total": None,
+        "faction": None,
+        "chapter": None,
+        "detachment": None,
+        "format": None,
+        "format_points": None,
+    }
+    units = {}
+    current_section = None
+
+    # Titre (ex: "test (995 points)")
+    if lines:
+        first = lines[0].strip()
+        if first:
+            army["title"] = re.sub(r"\s*\(.*$", "", first).strip() or first
+            mpts = re.search(r"\((\d+)\s*points?\)", first, re.I)
+            if mpts:
+                army["points_total"] = int(mpts.group(1))
+
+    # Méta
+    for l in lines[:30]:
+        if "Space Marines" in l:
+            army["faction"] = "Space Marines"
+        if "Ultramarines" in l:
+            army["chapter"] = "Ultramarines"
+        if "Gladius Task Force" in l:
+            army["detachment"] = "Gladius Task Force"
+        fm = FORMAT_RE.match(l.strip())
+        if fm:
+            army["format"] = fm.group(1).title()
+            army["format_points"] = int(fm.group(2))
+
+    # Unités
+    for i, l in enumerate(lines):
+        s = l.strip()
+        if not s:
+            continue
+        if SECTION_RE.match(s):
+            current_section = s.strip().upper()
+            continue
+
+         # ignorer explicitement quelques lignes d'en-tête
+        if i == 0:  # première ligne = titre "test (995 points)" -> pas une unité
+            continue
+        if FORMAT_RE.match(s):  # "Incursion (1000 points)" -> format, pas une unité
+            continue
+        if s in {
+            "Space Marines", "Ultramarines",
+            "Gladius Task Force", "Anvil Siege Force", "Ironstorm Spearhead",
+            "Firestorm Assault Force", "Stormlance Task Force",
+            "Vanguard Spearhead", "1st Company Task Force", "Librarius Conclave",
+        }:
+            continue
+
+        m = UNIT_LINE_RE.match(s)
+        if m:
+            name = m.group(1).strip()
+            pts = int(m.group(2))
+            key = normalize_name(name)
+            if key not in units:
+                units[key] = {
+                    "display": name,
+                    "count": 0,
+                    "points_each": pts,
+                    "section": current_section,
+                }
+            units[key]["count"] += 1
+
+    return army, units
+
+
+# -----------------------------
+# Chargement YAML
+# -----------------------------
+
+
+def load_units_from_yaml_dir(yaml_dir: str):
+    units_by_key = {}
+    faction_helpers = None
+
+    for path in sorted(glob.glob(os.path.join(yaml_dir, "*.yaml"))):
+        with open(path, "r", encoding="utf-8") as f:
+            data = yaml.safe_load(f) or {}
+
+        if (
+            faction_helpers is None
+            and isinstance(data, dict)
+            and "faction_helpers" in data
+        ):
             faction_helpers = data["faction_helpers"]
-        if "units" in data:
-            units.extend(data["units"])
-        if "stratagems" in data:
-            stratagems.extend(data["stratagems"])
-    if phases is None:
-        phases = {"order": [], "steps": {}}
+
+        if (
+            isinstance(data, dict)
+            and "units" in data
+            and isinstance(data["units"], list)
+        ):
+            for u in data["units"]:
+                if isinstance(u, dict) and u.get("name"):
+                    units_by_key[normalize_name(u["name"])] = u
+
     if faction_helpers is None:
-        faction_helpers = {}
-    return {
-        "units": units,
-        "phases": phases,
-        "faction_helpers": faction_helpers,
-        "stratagems": stratagems,
-    }
+        faction_helpers = {
+            "turn_start": ["Déclarer/mettre à jour les effets de détachement/faction."],
+            "generic_reminders": {
+                "command": ["Gagner CP ; tests d’ébranlement ; poser auras/buffs."],
+                "movement": ["Mesurer menaces ; garder couvert/lignes de vue."],
+                "shooting": ["Choisir cibles intelligemment."],
+                "charge": ["Penser multi-charge ; garder 1 CP pour relance critique."],
+                "fight": [
+                    "Activer dans le bon ordre ; pile-in/consolidation pour voler OC."
+                ],
+                "end": ["Compter OC ; scorer primaires/secondaires ; valider actions."],
+            },
+        }
+    return units_by_key, faction_helpers
 
 
-def load_yaml_dir(directory: Path) -> Dict[str, Any]:
-    files = sorted(directory.glob("ultramarines_*.yaml"))
-    uploads = []
-    for f in files:
-        uploads.append(io.BytesIO(f.read_bytes()))
-    return load_yaml_files(uploads)
+def fuzzy_find(key: str, units_by_key: dict, cutoff: float = 0.72):
+    if key in units_by_key:
+        return key, 1.0
+    choices = list(units_by_key.keys())
+    match = get_close_matches(key, choices, n=1, cutoff=cutoff)
+    if match:
+        return match[0], 0.9
+    return None, 0.0
 
 
-def build_units_index(all_units: List[Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
-    idx = {norm(u["name"]): u for u in all_units}
-    for k, v in ALIASES.items():
-        if norm(v) in idx and k not in idx:
-            idx[k] = idx[norm(v)]
-    return idx
+# -----------------------------
+# Rendu HTML
+# -----------------------------
 
-
-def parse_export_text(txt: str) -> Dict[str, Any]:
-    lines = [l.strip() for l in txt.splitlines()]
-    head = [l for l in lines if l][:5]
-    meta = {
-        "list_name": head[0] if len(head) > 0 else "Ma liste",
-        "faction": head[1] if len(head) > 1 else FACTION,
-        "chapter": head[2] if len(head) > 2 else CHAPTER,
-        "format": head[3] if len(head) > 3 else "Incursion",
-        "detachment": head[4] if len(head) > 4 else DETACHMENT_DEFAULT,
-    }
-    units = []
-    for l in lines:
-        if re.search(r"\(\d+\s*points?\)\s*$", l):
-            units.append({"name": re.sub(r"\s*\(\d+\s*points?\)\s*$", "", l).strip()})
-    return {"meta": meta, "units": units}
-
-
-def collect_phase_tips(
-    phases: Dict[str, Any],
-    faction_helpers: Dict[str, Any],
-    selected_units: List[Dict[str, Any]],
-) -> Dict[str, Dict[str, List[str]]]:
-    result = {}
-    order = phases.get("order", [])
-    steps = phases.get("steps", {})
-    for phase in order:
-        result[phase] = {s: [] for s in steps.get(phase, [])}
-
-    # Faction helpers génériques
-    gen = faction_helpers.get("generic_reminders", {})
-    for phase, payload in gen.items():
-        if isinstance(payload, list):
-            if phase in result and result[phase]:
-                bucket = (
-                    "start"
-                    if "start" in result[phase]
-                    else list(result[phase].keys())[0]
-                )
-                result[phase][bucket].extend(payload)
-        elif isinstance(payload, dict):
-            for stp, msgs in payload.items():
-                if phase in result and stp in result[phase]:
-                    result[phase][stp].extend(msgs)
-
-    # Play tips par unité
-    for u in selected_units:
-        tips = (u.get("play_tips") or {}).get("phases", {})
-        for phase, stepdict in tips.items():
-            if phase not in result:
-                continue
-            for stp, msgs in stepdict.items():
-                if stp in result[phase] and msgs:
-                    result[phase][stp].extend([f"[{u['name']}] {m}" for m in msgs])
-    return result
-
-
-# -------------------------- HTML TEMPLATE ---------------------------
-
-HTML_TPL = Template(
-    r"""
-<!doctype html>
-<html lang="fr">
-<head>
-<meta charset="utf-8"/>
-<title>{{ meta.list_name }} — Cheat Sheet</title>
+CSS = """
 <style>
-:root { --ink:#0b2e54; --muted:#6b7280; }
-@page { size:A4; margin:12mm; }
-@media print { .noprint { display:none !important; } body { margin:0; } }
-body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:#111; }
-h1 { font-size:22px; margin:0 0 4px; color:var(--ink); }
-h2 { font-size:16px; margin:18px 0 6px; color:var(--ink); }
-h3 { font-size:14px; margin:12px 0 6px; color:var(--ink); }
-.muted { color:var(--muted); }
-.card { border:1px solid #e5e7eb; border-radius:10px; padding:10px 12px; margin-bottom:8px; }
-.grid { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
-.pill { display:inline-block; padding:3px 8px; border:1px solid #cbd5e1; border-radius:999px; font-size:12px; color:#334155; }
-.kvs { font-size:12px; color:#374151; }
-ul { margin:6px 0 8px 18px; } li{ margin:3px 0; }
-.phase-table{ width:100%; border-collapse:separate; border-spacing:0 6px; }
-.phase-name{ width:140px; font-weight:600; vertical-align:top; }
-.step{ margin-bottom:4px; }
-.warn{ color:#b45309; }
+  @page { size: A4; margin: 10mm; }
+  html, body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: #0e1326; }
+  h1 { font-size: 18px; margin: 0 0 6px; }
+  h2 { font-size: 14px; margin: 10px 0 6px; border-bottom: 1px solid #ddd; padding-bottom: 4px;}
+  .meta { font-size: 11px; margin-bottom: 8px; color: #374151; }
+  .grid { column-count: 2; column-gap: 14px; }
+  .card { break-inside: avoid; border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px; margin: 0 0 10px; }
+  .unithead { display:flex; justify-content:space-between; align-items:baseline; }
+  .name { font-weight: 700; font-size: 13px; }
+  .tag { font-size: 10px; background:#edf2ff; color:#1d4ed8; padding:2px 6px; border-radius: 999px; margin-left:6px;}
+  .stats { font-size: 11px; margin: 4px 0 6px; color:#111827;}
+  .stats b { font-weight:700; }
+  .weapons, .abilities, .phases { font-size: 11px; margin: 4px 0; }
+  .weapons ul, .abilities ul, .phases ul { margin: 2px 0 2px 16px; padding: 0; }
+  .pill { display:inline-block; font-size:10px; padding:1px 6px; border:1px solid #e5e7eb; border-radius:999px; margin:1px 4px 1px 0; color:#111827;}
+  .phase { font-weight:700; margin-top:6px; }
+  .small { font-size:10px; color:#6b7280;}
+  .right { text-align:right; }
+  .warn { color:#b91c1c; font-weight:600; }
+  .phaseboard { break-inside: avoid; border:1px solid #e5e7eb; border-radius:8px; padding:8px; margin:8px 0 12px;}
+  .phaseboard .colwrap { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+  .phaseboard .box { border:1px solid #eef2f7; border-radius:6px; padding:6px; }
+  .phaseboard ul { margin:4px 0 2px 16px; }
 </style>
-</head>
-<body>
-  <div class="noprint" style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
-    <div>
-      <h1>{{ meta.list_name }}</h1>
-      <div class="muted">{{ meta.format }} — {{ meta.chapter }} — {{ meta.detachment }}</div>
-    </div>
-  </div>
-
-  {% if faction_helpers.turn_start %}
-  <div class="card">
-    <h2>Début de tour</h2>
-    <ul>{% for t in faction_helpers.turn_start %}<li>{{ t }}</li>{% endfor %}</ul>
-  </div>
-  {% endif %}
-
-  <div class="card">
-    <h2>Timeline — Phases & Rappels</h2>
-    <table class="phase-table">
-      {% for phase in phases.order %}
-        <tr>
-          <td class="phase-name">{{ phase|capitalize }}</td>
-          <td>
-            {% set steps = phases.steps.get(phase, []) %}
-            {% for st in steps %}
-              {% set tips = phase_tips.get(phase, {}).get(st, []) %}
-              {% if tips %}
-                <div class="step"><span class="pill">{{ st }}</span>
-                  <ul>{% for tip in tips %}<li>{{ tip }}</li>{% endfor %}</ul>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </td>
-        </tr>
-      {% endfor %}
-    </table>
-  </div>
-
-  <div class="grid">
-    {% for u in units %}
-      <div class="card">
-        <h3>{{ u.name }}</h3>
-        {% if u.role %}<div class="kvs">{{ u.role }}</div>{% endif %}
-        {% if u.base %}<div class="kvs">
-          M {{u.base.M}} • T {{u.base.T}} • Sv {{u.base.Sv}} • W {{u.base.W}} • Ld {{u.base.Ld}} • OC {{u.base.OC}}
-          {% if u.base.Inv %} • Inv {{u.base.Inv}}{% endif %}{% if u.base.FnP %} • FnP {{u.base.FnP}}{% endif %}
-        </div>{% endif %}
-
-        {% if u.weapons and u.weapons.ranged %}
-          <h4>Armes de tir</h4>
-          <ul>
-            {% for w in u.weapons.ranged %}
-            <li><b>{{w.name}}</b> — {{w.range}}, A {{w.A}}, BS {{w.BS}}, S {{w.S}}, AP {{w.AP}}, D {{w.D}}
-              {% if w.keywords %}<span class="muted">({{ w.keywords|join(", ") }})</span>{% endif %}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-
-        {% if u.weapons and u.weapons.melee %}
-          <h4>Armes de CàC</h4>
-          <ul>
-            {% for w in u.weapons.melee %}
-            <li><b>{{w.name}}</b> — A {{w.A}}, WS {{w.WS}}, S {{w.S}}, AP {{w.AP}}, D {{w.D}}
-              {% if w.keywords %}<span class="muted">({{ w.keywords|join(", ") }})</span>{% endif %}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-
-        {% if u.abilities and u.abilities.unit %}
-          <h4>Rappels & règles</h4>
-          <ul>{% for ab in u.abilities.unit %}<li><b>{{ab.name}}.</b> {{ab.text}}</li>{% endfor %}</ul>
-        {% endif %}
-      </div>
-    {% endfor %}
-  </div>
-
-  {% if missing %}
-    <div class="card warn"><b>Unités non trouvées dans les YAML :</b> {{ missing|join(", ") }}</div>
-  {% endif %}
-</body>
-</html>
 """
-)
+
+PHASE_ORDER = [
+    ("command", "Phase de Commandement"),
+    ("movement", "Phase de Mouvement"),
+    ("shooting", "Phase de Tir"),
+    ("charge", "Phase de Charge"),
+    ("fight", "Phase de Combat"),
+    ("end", "Fin de tour"),
+]
 
 
-def render_html(
-    meta, phases, faction_helpers, selected_units, missing, phase_tips
-) -> str:
-    return HTML_TPL.render(
-        meta=meta,
-        phases=phases,
-        faction_helpers=faction_helpers,
-        units=selected_units,
-        missing=missing,
-        phase_tips=phase_tips,
+def render_stats(u):
+    base = u.get("base") or {}
+
+    def g(k, default="–"):
+        return base.get(k, default)
+
+    parts = [
+        f"M {g('M')}",
+        f"T {g('T')}",
+        f"Sv {g('Sv')}",
+        f"W {g('W')}",
+        f"Ld {g('Ld')}",
+        f"OC {g('OC')}",
+    ]
+    if base.get("Inv"):
+        parts.append(f"Inv {base['Inv']}")
+    if base.get("FnP"):
+        parts.append(f"FnP {base['FnP']}")
+    return "  |  ".join(parts)
+
+
+def render_weapons(u, limit_each=2):
+    lines = []
+    w = u.get("weapons") or {}
+    ranged = w.get("ranged") or []
+    melee = w.get("melee") or []
+    if ranged:
+        lines.append(
+            "<b>Tir</b> : "
+            + ", ".join(html.escape(x.get("name", "—")) for x in ranged[:limit_each])
+        )
+    if melee:
+        lines.append(
+            "<b>CaC</b> : "
+            + ", ".join(html.escape(x.get("name", "—")) for x in melee[:limit_each])
+        )
+    return "<br>".join(lines) if lines else "<span class='small'>—</span>"
+
+
+def render_abilities(u, limit=3):
+    ab = u.get("abilities") or {}
+    unit_ab = ab.get("unit") or []
+    items = []
+    for x in unit_ab[:limit]:
+        nm = x.get("name", "—")
+        tx = x.get("text", "")
+        items.append(
+            f"<li><b>{html.escape(nm)}.</b> {html.escape(tx)}</li>"
+            if tx
+            else f"<li><b>{html.escape(nm)}</b></li>"
+        )
+    return (
+        "<ul>" + "".join(items) + "</ul>" if items else "<span class='small'>—</span>"
     )
 
 
-def save_uploaded_file(uploaded_file, dir: str | None = None) -> str:
-    """Sauve un UploadedFile Streamlit sur le disque et renvoie le chemin absolu."""
-    suffix = Path(uploaded_file.name).suffix or ".txt"
-    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix, dir=dir) as tmp:
-        tmp.write(uploaded_file.getbuffer())  # bytes
-        tmp.flush()
-        return tmp.name  # chemin du fichier temp
+def collect_phase_tips_for_unit(faction_helpers, u):
+    """Retourne dict phase -> [bullets] pour une unité."""
+    tips = ((u.get("play_tips") or {}).get("phases")) or {}
+    out = {}
+    for key, _label in PHASE_ORDER:
+        bullets = []
+        sp = tips.get(key)
+        if isinstance(sp, dict):
+            for step, arr in sp.items():
+                if arr:
+                    for t in arr:
+                        bullets.append(f"[{step}] {t}")
+        elif isinstance(sp, list):
+            bullets.extend(sp)
+        if bullets:
+            out[key] = bullets
+    return out
 
 
-# ------------------------------ UI ----------------------------------
+def build_phase_board(faction_helpers, matched_units, strats):
+    """Construit la Timeline globale par phase (génériques + spécifiques par unité)."""
+    gen = (faction_helpers or {}).get("generic_reminders") or {}
+    blocks = []
 
-st.set_page_config(page_title="40k Cheat Sheet", layout="wide")
-st.title("40k Cheat Sheet — Streamlit")
+    # 2 colonnes visuelles: 3 phases par colonne
+    colA = []
+    colB = []
 
-tab_input, tab_preview = st.tabs(["1) Entrée & YAML", "2) Aperçu / Export"])
+    for idx, (key, label) in enumerate(PHASE_ORDER):
+        items = []
+        # génériques
+        gen_list = gen.get(key) or []
+        if gen_list:
+            items.append("<li><b>Rappels généraux :</b></li>")
+            items.extend(f"<li class='small'>{html.escape(x)}</li>" for x in gen_list)
 
-with tab_input:
-    st.subheader("Source YAML")
-    src = st.radio(
-        "Charger les données d’unités depuis…",
-        ["Dossier local `space_marines/`", "Upload de fichiers YAML"],
-        horizontal=True,
+        # spécifiques par unité
+        for mu in matched_units:
+            u = mu.get("unit")
+            if not u:
+                continue
+            unit_tips = collect_phase_tips_for_unit(faction_helpers, u)
+            bullets = unit_tips.get(key)
+            if not bullets:
+                continue
+            uname = u.get("name", mu["display"])
+            for b in bullets:
+                items.append(f"<li><b>{html.escape(uname)}</b> — {html.escape(b)}</li>")
+
+        # stratagems
+        items.extend(strats.get(key, []))
+
+        alt_item = "<li class='small'>&mdash;</li>"  # ← ASCII safe (— devient &mdash;)
+        items_html = "".join(items) if items else alt_item
+
+        html_box = (
+            "<div class='box'><div class='phase'>"
+            + html.escape(label)
+            + "</div><ul>"
+            + items_html
+            + "</ul></div>"
+        )
+        (colA if idx < 3 else colB).append(html_box)
+
+    return f"""
+<div class="phaseboard">
+  <h2>Timeline par phase</h2>
+  <div class="colwrap">
+    <div>{''.join(colA)}</div>
+    <div>{''.join(colB)}</div>
+  </div>
+</div>"""
+
+
+def generate_html(army, matched_units, faction_helpers, outfile, strats):
+    subtitle_bits = []
+    if army.get("format"):
+        p = (
+            f"{army['format']} ({army['format_points']} pts)"
+            if army.get("format_points")
+            else army["format"]
+        )
+        subtitle_bits.append(p)
+    if army.get("detachment"):
+        subtitle_bits.append(f"Détachement : {army['detachment']}")
+    if army.get("points_total"):
+        subtitle_bits.append(f"Total liste : {army['points_total']} pts")
+
+    head = f"""<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8">
+<title>{html.escape(army.get('title') or 'Cheat Sheet')}</title>
+{CSS}
+</head><body>
+<h1>{html.escape(army.get('title') or 'Cheat Sheet')}</h1>
+<div class="meta">{' · '.join(html.escape(x) for x in subtitle_bits if x)}</div>
+"""
+
+    # Timeline globale en tête
+    head += build_phase_board(faction_helpers, matched_units, strats)
+
+    head += '<div class="grid">'
+
+    # Cartes unités
+    cards = []
+    for mu in matched_units:
+        u = mu["unit"]
+        count = mu["count"]
+        score = mu["match_score"]
+        if u is None:
+            cards.append(
+                f"""
+<div class="card">
+  <div class="unithead">
+    <div class="name">{html.escape(mu['display'])}</div>
+    <div class="warn small">Non trouvé dans YAML</div>
+  </div>
+  <div class="small">Vérifie l'orthographe de la fiche ou complète les YAML.</div>
+</div>"""
+            )
+            continue
+
+        name = u.get("name", mu["display"])
+        role = u.get("role", "")
+        badges = []
+        if role:
+            badges.append(role)
+        kws = u.get("keywords") or []
+        if "Ultramarines" in kws:
+            badges.append("Ultramarines")
+        if count > 1:
+            badges.append(f"x{count}")
+
+        stats = render_stats(u)
+        weapons = render_weapons(u)
+        abilities = render_abilities(u)
+
+        # mini recap par phase pour la carte (facultatif mais utile)
+        mini_phase = collect_phase_tips_for_unit(faction_helpers, u)
+        mini_html = []
+        for k, label in PHASE_ORDER:
+            if k in mini_phase:
+                mini_html.append(
+                    f"<div class='small'><b>{label}:</b> "
+                    + " | ".join(html.escape(x) for x in mini_phase[k][:2])
+                    + "</div>"
+                )
+        mini_block = "".join(mini_html) if mini_html else "<div class='small'>—</div>"
+
+        pills = " ".join(f"<span class='pill'>{html.escape(t)}</span>" for t in badges)
+
+        cards.append(
+            f"""
+<div class="card">
+  <div class="unithead">
+    <div class="name">{html.escape(name)}</div>
+    <div class="small right">match {int(score*100)}%</div>
+  </div>
+  <div>{pills}</div>
+  <div class="stats"><b>Profil</b> — {stats}</div>
+  <div class="weapons"><b>Armes</b><br>{weapons}</div>
+  <div class="abilities"><b>Capacités</b>{abilities}</div>
+  <div class="phases"><b>Cette unité — moments clés</b>{mini_block}</div>
+</div>
+"""
+        )
+
+    tail = "</div></body></html>"
+    html_str = head + "\n".join(cards) + tail
+    with open(outfile, "w", encoding="utf-8") as f:
+        f.write(html_str)
+    return outfile
+
+
+# -----------------------------
+# Main
+# -----------------------------
+
+
+def run(export_path: str, yaml_dir: str, out_file: str) -> str:
+    army, listed = parse_export_txt(export_path)
+    units_by_key, faction_helpers = load_units_from_yaml_dir(yaml_dir)
+
+    matched = []
+    section_order = {
+        "CHARACTERS": 0,
+        "BATTLELINE": 1,
+        "DEDICATED TRANSPORTS": 2,
+        "OTHER DATASHEETS": 3,
+    }
+    for key, info in listed.items():
+        mkey, score = fuzzy_find(key, units_by_key, cutoff=0.72)
+        unit = units_by_key.get(mkey) if mkey else None
+        matched.append(
+            {
+                "query_key": key,
+                "display": info["display"],
+                "count": info["count"],
+                "points_each": info["points_each"],
+                "section": info.get("section") or "",
+                "unit": unit,
+                "match_score": score,
+            }
+        )
+    matched.sort(
+        key=lambda x: (
+            section_order.get((x["section"] or "").upper(), 9),
+            -(x["match_score"] or 0),
+        )
     )
 
-    corpus = None
-    if src == "Dossier local `space_marines/`":
-        if DEFAULT_YAML_DIR.exists():
-            corpus = load_yaml_dir(DEFAULT_YAML_DIR)
-            st.success(
-                f"{len(corpus['units'])} unités chargées depuis `{DEFAULT_YAML_DIR.name}/`."
-            )
-        else:
-            st.warning(
-                "Dossier `space_marines/` introuvable à côté de l'app. Utilise l’upload."
-            )
-    else:
-        uploads = st.file_uploader(
-            "Dépose plusieurs fichiers YAML (*.yaml)",
-            type=["yaml", "yml"],
-            accept_multiple_files=True,
-        )
-        if uploads:
-            corpus = load_yaml_files(uploads)
-            st.success(
-                f"{len(corpus['units'])} unités chargées. \n \
-                       {len(corpus['stratagems'])} unités chargées"
-            )
+    # Stratagems
+    strats = []
+    strat_yaml_path = Path(yaml_dir, "stratagems.yaml")
+    strats = load_stratagems(strat_yaml_path)
 
-    st.subheader("Export 40k")
-    col1, col2 = st.columns([2, 1])
-    with col1:
-        export_text = st.text_area(
-            "Colle ici l’export depuis l’app 40k",
-            height=240,
-            placeholder="test (995 points)\n\nSpace Marines\nUltramarines\nIncursion (1000 points)\nGladius Task Force\n\nCHARACTERS\n\nCaptain with Jump Pack (75 points)\n  • ...",
-        )
-    with col2:
-        txt_file = st.file_uploader("…ou uploade le .txt", type=["txt"])
-        if txt_file and not export_text.strip():
-            export_text = txt_file.read().decode("utf-8", errors="ignore")
-            st.info("Texte rempli depuis le fichier uploadé.")
+    strats = strat_items_by_phase(strats, army["detachment"])
 
-    if st.button("Générer la fiche"):
-        # Chemin local : on sauve dans un temp file
-        uploaded_path = save_uploaded_file(txt_file)  # <-- VOILÀ LE PATH
-        st.session_state["uploaded_path"] = uploaded_path
+    outfile = generate_html(army, matched, faction_helpers, out_file, strats)
+    return outfile
 
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".html") as tmp_out:
-            out_html_path = tmp_out.name
-        st.session_state["out_html_path"] = out_html_path
 
-        run(uploaded_path, DEFAULT_YAML_DIR, out_html_path)
-        html = Path(out_html_path).read_text(encoding="utf-8")
+def main(argv=None):
+    ap = argparse.ArgumentParser(description="Fiche mémo A4 (HTML) depuis export 40k")
+    ap.add_argument("--export", required=True, help="export_from_40k_app.txt")
+    ap.add_argument("--yaml-dir", required=True, help="Dossier des ultramarines_*.yaml")
+    ap.add_argument(
+        "--out", default="cheat_sheet_ultramarines.html", help="HTML de sortie"
+    )
+    args = ap.parse_args(argv)
+    out = run(args.export, args.yaml_dir, args.out)
+    print(f"✅ Fiche générée: {out}")
 
-        st.session_state["preview_html"] = html  # stocke pour l'affichage persistant
-        st.toast("Fiche générée ✅")
 
-        # affiche le résultat tout de suite
-        st.download_button(
-            "Télécharger le HTML",
-            data=html,
-            file_name="cheat_sheet_40k.html",
-            mime="text/html",
-            key="dl_html",
-        )
-        st.components.v1.html(html, height=900, scrolling=True)
-
-    # bouton pour repartir de zéro (ré-initialiser et relancer le script)
-    if st.button("Nouvelle fiche"):
-        for k in ("preview_html", "export_text", "parsed_list"):
-            st.session_state.pop(k, None)
-        st.rerun()  # Streamlit >= 1.27 (sinon: st.experimental_rerun())
-
-with tab_preview:
-    if "corpus" not in st.session_state or "export_text" not in st.session_state:
-        st.info(
-            "Charge les YAML et colle l’export dans l’onglet précédent, puis clique sur **Générer la cheat sheet**."
-        )
-    else:
-        corpus = st.session_state["corpus"]
-        parsed = parse_export_text(st.session_state["export_text"])
-
-        units_index = build_units_index(corpus["units"])
-        selected, missing = [], []
-        for u in parsed["units"]:
-            found = units_index.get(norm(u["name"]))
-            if found:
-                selected.append(found)
-            else:
-                missing.append(u["name"])
-
-        phase_tips = collect_phase_tips(
-            corpus["phases"], corpus["faction_helpers"], selected
-        )
-        html = render_html(
-            parsed["meta"],
-            corpus["phases"],
-            corpus["faction_helpers"],
-            selected,
-            missing,
-            phase_tips,
-        )
-
-        st.subheader("Aperçu")
-        st.components.v1.html(html, height=900, scrolling=True)
-
-        st.download_button(
-            "Télécharger le HTML",
-            data=html.encode("utf-8"),
-            file_name=f"cheat_{parsed['meta']['list_name'].strip().replace(' ','_')}.html",
-            mime="text/html",
-            use_container_width=True,
-        )
+if __name__ == "__main__":
+    main()

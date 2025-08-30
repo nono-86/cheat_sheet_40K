@@ -31,18 +31,20 @@ ALIASES = {
 
 # ------------------------ UTILS : PARSE / LOAD ----------------------
 
+
 def norm(s: str) -> str:
     s = s.lower()
-    s = re.sub(r"\s*\(.*?\)", "", s)   # retire parenthèses
+    s = re.sub(r"\s*\(.*?\)", "", s)  # retire parenthèses
     s = s.replace("with jump packs", "with jump pack")
     s = s.replace("w/ jump packs", "with jump pack")
     s = s.replace(" w/", " ")
     s = re.sub(r"\s+", " ", s).strip()
     return s
 
+
 def load_yaml_files(files: List[io.BytesIO]) -> Dict[str, Any]:
     """Charge un corpus YAML à partir d'objets uploadés."""
-    phases, faction_helpers, units = None, None, []
+    phases, faction_helpers, units, stratagems = None, None, [], []
     for f in files:
         data = yaml.safe_load(f.read().decode("utf-8"))
         if phases is None and "phases" in data:
@@ -51,9 +53,19 @@ def load_yaml_files(files: List[io.BytesIO]) -> Dict[str, Any]:
             faction_helpers = data["faction_helpers"]
         if "units" in data:
             units.extend(data["units"])
-    if phases is None: phases = {"order": [], "steps": {}}
-    if faction_helpers is None: faction_helpers = {}
-    return {"units": units, "phases": phases, "faction_helpers": faction_helpers}
+        if "stratagems" in data:
+            stratagems.extend(data["stratagems"])
+    if phases is None:
+        phases = {"order": [], "steps": {}}
+    if faction_helpers is None:
+        faction_helpers = {}
+    return {
+        "units": units,
+        "phases": phases,
+        "faction_helpers": faction_helpers,
+        "stratagems": stratagems,
+    }
+
 
 def load_yaml_dir(directory: Path) -> Dict[str, Any]:
     files = sorted(directory.glob("ultramarines_*.yaml"))
@@ -62,6 +74,7 @@ def load_yaml_dir(directory: Path) -> Dict[str, Any]:
         uploads.append(io.BytesIO(f.read_bytes()))
     return load_yaml_files(uploads)
 
+
 def build_units_index(all_units: List[Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
     idx = {norm(u["name"]): u for u in all_units}
     for k, v in ALIASES.items():
@@ -69,15 +82,16 @@ def build_units_index(all_units: List[Dict[str, Any]]) -> Dict[str, Dict[str, An
             idx[k] = idx[norm(v)]
     return idx
 
+
 def parse_export_text(txt: str) -> Dict[str, Any]:
     lines = [l.strip() for l in txt.splitlines()]
     head = [l for l in lines if l][:5]
     meta = {
         "list_name": head[0] if len(head) > 0 else "Ma liste",
-        "faction":   head[1] if len(head) > 1 else FACTION,
-        "chapter":   head[2] if len(head) > 2 else CHAPTER,
-        "format":    head[3] if len(head) > 3 else "Incursion",
-        "detachment":head[4] if len(head) > 4 else DETACHMENT_DEFAULT,
+        "faction": head[1] if len(head) > 1 else FACTION,
+        "chapter": head[2] if len(head) > 2 else CHAPTER,
+        "format": head[3] if len(head) > 3 else "Incursion",
+        "detachment": head[4] if len(head) > 4 else DETACHMENT_DEFAULT,
     }
     units = []
     for l in lines:
@@ -85,8 +99,12 @@ def parse_export_text(txt: str) -> Dict[str, Any]:
             units.append({"name": re.sub(r"\s*\(\d+\s*points?\)\s*$", "", l).strip()})
     return {"meta": meta, "units": units}
 
-def collect_phase_tips(phases: Dict[str, Any], faction_helpers: Dict[str, Any],
-                       selected_units: List[Dict[str, Any]]) -> Dict[str, Dict[str, List[str]]]:
+
+def collect_phase_tips(
+    phases: Dict[str, Any],
+    faction_helpers: Dict[str, Any],
+    selected_units: List[Dict[str, Any]],
+) -> Dict[str, Dict[str, List[str]]]:
     result = {}
     order = phases.get("order", [])
     steps = phases.get("steps", {})
@@ -98,7 +116,11 @@ def collect_phase_tips(phases: Dict[str, Any], faction_helpers: Dict[str, Any],
     for phase, payload in gen.items():
         if isinstance(payload, list):
             if phase in result and result[phase]:
-                bucket = "start" if "start" in result[phase] else list(result[phase].keys())[0]
+                bucket = (
+                    "start"
+                    if "start" in result[phase]
+                    else list(result[phase].keys())[0]
+                )
                 result[phase][bucket].extend(payload)
         elif isinstance(payload, dict):
             for stp, msgs in payload.items():
@@ -109,16 +131,18 @@ def collect_phase_tips(phases: Dict[str, Any], faction_helpers: Dict[str, Any],
     for u in selected_units:
         tips = (u.get("play_tips") or {}).get("phases", {})
         for phase, stepdict in tips.items():
-            if phase not in result: 
+            if phase not in result:
                 continue
             for stp, msgs in stepdict.items():
                 if stp in result[phase] and msgs:
                     result[phase][stp].extend([f"[{u['name']}] {m}" for m in msgs])
     return result
 
+
 # -------------------------- HTML TEMPLATE ---------------------------
 
-HTML_TPL = Template(r"""
+HTML_TPL = Template(
+    r"""
 <!doctype html>
 <html lang="fr">
 <head>
@@ -224,9 +248,13 @@ ul { margin:6px 0 8px 18px; } li{ margin:3px 0; }
   {% endif %}
 </body>
 </html>
-""")
+"""
+)
 
-def render_html(meta, phases, faction_helpers, selected_units, missing, phase_tips) -> str:
+
+def render_html(
+    meta, phases, faction_helpers, selected_units, missing, phase_tips
+) -> str:
     return HTML_TPL.render(
         meta=meta,
         phases=phases,
@@ -236,6 +264,7 @@ def render_html(meta, phases, faction_helpers, selected_units, missing, phase_ti
         phase_tips=phase_tips,
     )
 
+
 def save_uploaded_file(uploaded_file, dir: str | None = None) -> str:
     """Sauve un UploadedFile Streamlit sur le disque et renvoie le chemin absolu."""
     suffix = Path(uploaded_file.name).suffix or ".txt"
@@ -243,6 +272,7 @@ def save_uploaded_file(uploaded_file, dir: str | None = None) -> str:
         tmp.write(uploaded_file.getbuffer())  # bytes
         tmp.flush()
         return tmp.name  # chemin du fichier temp
+
 
 # ------------------------------ UI ----------------------------------
 
@@ -253,25 +283,38 @@ tab_input, tab_preview = st.tabs(["1) Entrée & YAML", "2) Aperçu / Export"])
 
 with tab_input:
     st.subheader("Source YAML")
-    src = st.radio("Charger les données d’unités depuis…",
-                   ["Dossier local `data/`", "Upload de fichiers YAML"],
-                   horizontal=True)
+    src = st.radio(
+        "Charger les données d’unités depuis…",
+        ["Dossier local `space_marines/`", "Upload de fichiers YAML"],
+        horizontal=True,
+    )
 
     corpus = None
-    if src == "Dossier local `data/`":
+    if src == "Dossier local `space_marines/`":
         if DEFAULT_YAML_DIR.exists():
             corpus = load_yaml_dir(DEFAULT_YAML_DIR)
-            st.success(f"{len(corpus['units'])} unités chargées depuis `{DEFAULT_YAML_DIR.name}/`.")
+            st.success(
+                f"{len(corpus['units'])} unités chargées depuis `{DEFAULT_YAML_DIR.name}/`."
+            )
         else:
-            st.warning("Dossier `data/` introuvable à côté de l'app. Utilise l’upload.")
+            st.warning(
+                "Dossier `space_marines/` introuvable à côté de l'app. Utilise l’upload."
+            )
     else:
-        uploads = st.file_uploader("Dépose plusieurs fichiers YAML (*.yaml)", type=["yaml", "yml"], accept_multiple_files=True)
+        uploads = st.file_uploader(
+            "Dépose plusieurs fichiers YAML (*.yaml)",
+            type=["yaml", "yml"],
+            accept_multiple_files=True,
+        )
         if uploads:
             corpus = load_yaml_files(uploads)
-            st.success(f"{len(corpus['units'])} unités chargées via upload.")
+            st.success(
+                f"{len(corpus['units'])} unités chargées. \n \
+                       {len(corpus['stratagems'])} unités chargées"
+            )
 
     st.subheader("Export 40k")
-    col1, col2 = st.columns([2,1])
+    col1, col2 = st.columns([2, 1])
     with col1:
         export_text = st.text_area(
             "Colle ici l’export depuis l’app 40k",
@@ -286,17 +329,17 @@ with tab_input:
 
     if st.button("Générer la fiche"):
         # Chemin local : on sauve dans un temp file
-        uploaded_path = save_uploaded_file(txt_file)      # <-- VOILÀ LE PATH
+        uploaded_path = save_uploaded_file(txt_file)  # <-- VOILÀ LE PATH
         st.session_state["uploaded_path"] = uploaded_path
 
         with tempfile.NamedTemporaryFile(delete=False, suffix=".html") as tmp_out:
-          out_html_path = tmp_out.name
+            out_html_path = tmp_out.name
         st.session_state["out_html_path"] = out_html_path
-        
+
         run(uploaded_path, DEFAULT_YAML_DIR, out_html_path)
         html = Path(out_html_path).read_text(encoding="utf-8")
 
-        st.session_state["preview_html"] = html       # stocke pour l'affichage persistant
+        st.session_state["preview_html"] = html  # stocke pour l'affichage persistant
         st.toast("Fiche générée ✅")
 
         # affiche le résultat tout de suite
@@ -317,7 +360,9 @@ with tab_input:
 
 with tab_preview:
     if "corpus" not in st.session_state or "export_text" not in st.session_state:
-        st.info("Charge les YAML et colle l’export dans l’onglet précédent, puis clique sur **Générer la cheat sheet**.")
+        st.info(
+            "Charge les YAML et colle l’export dans l’onglet précédent, puis clique sur **Générer la cheat sheet**."
+        )
     else:
         corpus = st.session_state["corpus"]
         parsed = parse_export_text(st.session_state["export_text"])
@@ -326,11 +371,22 @@ with tab_preview:
         selected, missing = [], []
         for u in parsed["units"]:
             found = units_index.get(norm(u["name"]))
-            if found: selected.append(found)
-            else:     missing.append(u["name"])
+            if found:
+                selected.append(found)
+            else:
+                missing.append(u["name"])
 
-        phase_tips = collect_phase_tips(corpus["phases"], corpus["faction_helpers"], selected)
-        html = render_html(parsed["meta"], corpus["phases"], corpus["faction_helpers"], selected, missing, phase_tips)
+        phase_tips = collect_phase_tips(
+            corpus["phases"], corpus["faction_helpers"], selected
+        )
+        html = render_html(
+            parsed["meta"],
+            corpus["phases"],
+            corpus["faction_helpers"],
+            selected,
+            missing,
+            phase_tips,
+        )
 
         st.subheader("Aperçu")
         st.components.v1.html(html, height=900, scrolling=True)
