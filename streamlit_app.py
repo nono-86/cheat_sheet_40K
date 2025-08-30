@@ -30,7 +30,19 @@ ALIASES = {
     "terminator squad": "Terminator Squad",
 }
 
+
 # ------------------------ UTILS : PARSE / LOAD ----------------------
+def find_data_dirs(base: Path) -> list[Path]:
+    """
+    Retourne les sous-dossiers 'data_*' (et 'data' s'il existe) présents à côté de l'app.
+    Triés par nom.
+    """
+    dirs = list(base.glob("data_*"))
+    if (base / "data").is_dir():
+        dirs.insert(0, base / "data")
+    # dédoublonne puis trie
+    uniq = sorted({p.resolve() for p in dirs}, key=lambda p: p.name.lower())
+    return [p for p in uniq if p.is_dir()]
 
 
 def norm(s: str) -> str:
@@ -284,37 +296,69 @@ tab_input, tab_preview = st.tabs(["1) Entrée & YAML", "2) Aperçu / Export"])
 
 with tab_input:
     st.subheader("Source YAML")
+
     src = st.radio(
         "Charger les données d’unités depuis…",
-        [
-            "Dossier local `data/`",
-            "Dossier local `data_noob/`",
-            "Upload de fichiers YAML",
-        ],
+        ["Dossier local (data_*)", "Upload de fichiers YAML"],
         horizontal=True,
     )
 
     corpus = None
-    if src == "Dossier local `data/`":
-        if DEFAULT_YAML_DIR.exists():
-            corpus = load_yaml_dir(DEFAULT_YAML_DIR)
+
+    if src == "Dossier local (data_*)":
+        # 1) Liste des data_* disponibles à la racine du projet
+        data_dirs = find_data_dirs(APP_DIR)
+        labels = [d.name for d in data_dirs]
+
+        # 2) Choix par selectbox (+ option chemin libre)
+        prev_dir = st.session_state.get("data_dir")  # dernier dossier choisi
+        default_label = None
+        if prev_dir:
+            prev_name = Path(prev_dir).name
+            if prev_name in labels:
+                default_label = prev_name
+        if default_label is None and DEFAULT_YAML_DIR.exists():
+            default_label = DEFAULT_YAML_DIR.name
+        default_index = (
+            labels.index(default_label)
+            if (default_label in labels)
+            else (0 if labels else 0)
+        )
+
+        choice = st.selectbox(
+            "Dossier de données YAML",
+            labels + ["⟶ Autre (saisir chemin)"],
+            index=(
+                min(default_index, len(labels) - 1) if labels else len(labels)
+            ),  # si aucun label, pointe sur l'option "Autre"
+        )
+
+        if choice == "⟶ Autre (saisir chemin)":
+            custom = st.text_input(
+                "Chemin absolu/relatif du dossier YAML",
+                value=prev_dir or str(DEFAULT_YAML_DIR),
+            )
+            chosen_dir = Path(custom).expanduser()
+        else:
+            chosen_dir = (
+                data_dirs[labels.index(choice)]
+                if labels
+                else Path(prev_dir or DEFAULT_YAML_DIR)
+            )
+
+        st.session_state["data_dir"] = str(chosen_dir)
+
+        if chosen_dir.exists():
+            corpus = load_yaml_dir(chosen_dir)
+            st.session_state["corpus"] = corpus  # dispo pour l’onglet Aperçu
             st.success(
-                f"{len(corpus['units'])} unités et {len(corpus['stratagems'])} stratagèmes chargés depuis `{DEFAULT_YAML_DIR.name}/`."
+                f"{len(corpus['units'])} unités et {len(corpus['stratagems'])} stratagèmes chargés depuis `{chosen_dir.name}/`."
             )
         else:
             st.warning(
-                "Dossier `space_marines/` introuvable à côté de l'app. Utilise l’upload."
+                "Dossier introuvable. Corrige le chemin ou choisis un dossier existant."
             )
-    elif src == "Dossier local `data_noob/`":
-        if DEFAULT_YAML_DIR_NOOB.exists():
-            corpus = load_yaml_dir(DEFAULT_YAML_DIR_NOOB)
-            st.success(
-                f"{len(corpus['units'])} unités et {len(corpus['stratagems'])} stratagèmes chargés depuis `{DEFAULT_YAML_DIR_NOOB.name}/`."
-            )
-        else:
-            st.warning(
-                "Dossier `space_marines/` introuvable à côté de l'app. Utilise l’upload."
-            )
+
     else:
         uploads = st.file_uploader(
             "Dépose plusieurs fichiers YAML (*.yaml)",
@@ -323,6 +367,8 @@ with tab_input:
         )
         if uploads:
             corpus = load_yaml_files(uploads)
+            st.session_state["corpus"] = corpus
+            st.session_state["data_dir"] = None
             st.success(
                 f"{len(corpus['units'])} unités et {len(corpus['stratagems'])} stratagèmes chargés via upload."
             )
@@ -350,7 +396,8 @@ with tab_input:
             out_html_path = tmp_out.name
         st.session_state["out_html_path"] = out_html_path
 
-        run(uploaded_path, DEFAULT_YAML_DIR, out_html_path)
+        data_dir = Path(st.session_state.get("data_dir") or DEFAULT_YAML_DIR)
+        run(uploaded_path, data_dir, out_html_path)
         html = Path(out_html_path).read_text(encoding="utf-8")
 
         st.session_state["preview_html"] = html  # stocke pour l'affichage persistant
