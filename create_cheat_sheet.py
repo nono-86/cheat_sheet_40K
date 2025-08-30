@@ -4,7 +4,7 @@
 #
 # python create_cheat_sheet.py \
 #   --export export_from_40k_app.txt \
-#   --yaml-dir space_marines \
+#   --yaml-dir data \
 #   --out cheat_sheet_ultramarines.html
 
 

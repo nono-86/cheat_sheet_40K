@@ -14,7 +14,7 @@ if str(APP_DIR) not in sys.path:
 from create_cheat_sheet import run
 
 # --------------------------- CONFIG ---------------------------------
-DEFAULT_YAML_DIR = Path(__file__).parent / "space_marines"
+DEFAULT_YAML_DIR = Path(__file__).parent / "data"
 FACTION = "Adeptus Astartes"
 CHAPTER = "Ultramarines"
 DETACHMENT_DEFAULT = "Gladius Task Force"
