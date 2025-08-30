@@ -309,8 +309,7 @@ with tab_input:
         if uploads:
             corpus = load_yaml_files(uploads)
             st.success(
-                f"{len(corpus['units'])} unités chargées. \n \
-                       {len(corpus['stratagems'])} unités chargées"
+                f"{len(corpus['units'])} unités chargées. {len(corpus['stratagems'])} unités chargées"
             )
 
     st.subheader("Export 40k")
