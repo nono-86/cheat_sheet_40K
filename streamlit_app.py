@@ -258,12 +258,12 @@ with tab_input:
                    horizontal=True)
 
     corpus = None
-    if src == "Dossier local `space_marines/`":
+    if src == "Dossier local `data/`":
         if DEFAULT_YAML_DIR.exists():
             corpus = load_yaml_dir(DEFAULT_YAML_DIR)
             st.success(f"{len(corpus['units'])} unités chargées depuis `{DEFAULT_YAML_DIR.name}/`.")
         else:
-            st.warning("Dossier `space_marines/` introuvable à côté de l'app. Utilise l’upload.")
+            st.warning("Dossier `data/` introuvable à côté de l'app. Utilise l’upload.")
     else:
         uploads = st.file_uploader("Dépose plusieurs fichiers YAML (*.yaml)", type=["yaml", "yml"], accept_multiple_files=True)
         if uploads:
