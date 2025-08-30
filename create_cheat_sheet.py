@@ -21,9 +21,10 @@ import html
 from difflib import get_close_matches
 
 try:
-    import yaml # type: ignore
+    import yaml  # type: ignore
 except ImportError:
     raise SystemExit("PyYAML requis. Installe: pip install pyyaml")
+
 
 # -----------------------------
 # Stratagems
@@ -32,10 +33,11 @@ def load_stratagems(yaml_path: str | Path) -> list[dict]:
     data = yaml.safe_load(Path(yaml_path).read_text(encoding="utf-8"))
     return data.get("stratagems", [])
 
+
 def normalize_timing(s: dict) -> tuple[str, str, str]:
     phase = s.get("phase", "command")
-    step  = s.get("step", "start")
-    who   = s.get("player", "you")  # you|opponent|any
+    step = s.get("step", "start")
+    who = s.get("player", "you")  # you|opponent|any
     # Optionnel: harmoniser quelques steps vers ceux de ta grille
     alias = {
         "after_enemy_selects_targets": "start",
@@ -48,11 +50,14 @@ def normalize_timing(s: dict) -> tuple[str, str, str]:
     }
     step = alias.get(step, step)
     # préfix utile pour visuel
-    prefix = {"you":"🟦", "opponent":"🟥", "any":"🟨"}[who]
-    label  = f"{prefix} Strat · "
+    prefix = {"you": "🟦", "opponent": "🟥", "any": "🟨"}[who]
+    label = f"{prefix} Strat · "
     return phase, step, label
 
-def add_stratagems_to_timeline(timeline: dict, strats: list[dict], detachment_name: str):
+
+def add_stratagems_to_timeline(
+    timeline: dict, strats: list[dict], detachment_name: str
+):
     for st in strats:
         if detachment_name not in st.get("detachment", []):
             continue
@@ -63,19 +68,24 @@ def add_stratagems_to_timeline(timeline: dict, strats: list[dict], detachment_na
     return timeline
 
 
-def strat_items_by_phase(strats: list[dict], detachment_name: str | None = None) -> dict[str, list[str]]:
+def strat_items_by_phase(
+    strats: list[dict], detachment_name: str | None = None
+) -> dict[str, list[str]]:
     """
     Regroupe les stratagèmes par phase en <li> prêts à insérer.
     Utilise normalize_timing(w) que tu as déjà.
     """
     bucket: dict[str, list[str]] = defaultdict(list)
-    for st in (strats or []):
+    for st in strats or []:
         # filtre détachement si fourni (accepte "All" si tu l'utilises)
-        if detachment_name and (detachment_name not in st.get("detachment", []) and "All" not in st.get("detachment", [])):
+        if detachment_name and (
+            detachment_name not in st.get("detachment", [])
+            and "All" not in st.get("detachment", [])
+        ):
             continue
 
-        name   = st.get("name", "—")
-        cp     = st.get("cp", "?")
+        name = st.get("name", "—")
+        cp = st.get("cp", "?")
         effect = st.get("effect", "")
 
         for w in st.get("when", []):
@@ -83,14 +93,20 @@ def strat_items_by_phase(strats: list[dict], detachment_name: str | None = None)
             line = (
                 "<li>"
                 + label
-                + "<b>" + html.escape(name) + "</b> ("
-                + str(cp) + "CP) — ["
-                + html.escape(step) + "] "
+                + "<b>"
+                + html.escape(name)
+                + "</b> ("
+                + str(cp)
+                + "CP) — ["
+                + html.escape(step)
+                + "] "
                 + html.escape(effect)
                 + "</li>"
             )
             bucket[phase].append(line)
     return bucket
+
+
 # -----------------------------
 # Parsing de l'export 40k App
 # -----------------------------
@@ -103,12 +119,14 @@ FORMAT_RE = re.compile(
     re.IGNORECASE,
 )
 
+
 def normalize_name(s: str) -> str:
     s = s.lower()
     s = re.sub(r"[\u2019’']", "", s)
     s = re.sub(r"[^a-z0-9+&/ -]", " ", s)
     s = re.sub(r"\s+", " ", s).strip()
     return s
+
 
 def parse_export_txt(path: str):
     """
@@ -179,9 +197,11 @@ def parse_export_txt(path: str):
 
     return army, units
 
+
 # -----------------------------
 # Chargement YAML
 # -----------------------------
+
 
 def load_units_from_yaml_dir(yaml_dir: str):
     units_by_key = {}
@@ -191,10 +211,18 @@ def load_units_from_yaml_dir(yaml_dir: str):
         with open(path, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f) or {}
 
-        if faction_helpers is None and isinstance(data, dict) and "faction_helpers" in data:
+        if (
+            faction_helpers is None
+            and isinstance(data, dict)
+            and "faction_helpers" in data
+        ):
             faction_helpers = data["faction_helpers"]
 
-        if isinstance(data, dict) and "units" in data and isinstance(data["units"], list):
+        if (
+            isinstance(data, dict)
+            and "units" in data
+            and isinstance(data["units"], list)
+        ):
             for u in data["units"]:
                 if isinstance(u, dict) and u.get("name"):
                     units_by_key[normalize_name(u["name"])] = u
@@ -207,11 +235,14 @@ def load_units_from_yaml_dir(yaml_dir: str):
                 "movement": ["Mesurer menaces ; garder couvert/lignes de vue."],
                 "shooting": ["Choisir cibles intelligemment."],
                 "charge": ["Penser multi-charge ; garder 1 CP pour relance critique."],
-                "fight": ["Activer dans le bon ordre ; pile-in/consolidation pour voler OC."],
+                "fight": [
+                    "Activer dans le bon ordre ; pile-in/consolidation pour voler OC."
+                ],
                 "end": ["Compter OC ; scorer primaires/secondaires ; valider actions."],
             },
         }
     return units_by_key, faction_helpers
+
 
 def fuzzy_find(key: str, units_by_key: dict, cutoff: float = 0.72):
     if key in units_by_key:
@@ -221,6 +252,7 @@ def fuzzy_find(key: str, units_by_key: dict, cutoff: float = 0.72):
     if match:
         return match[0], 0.9
     return None, 0.0
+
 
 # -----------------------------
 # Rendu HTML
@@ -263,13 +295,27 @@ PHASE_ORDER = [
     ("end", "Fin de tour"),
 ]
 
+
 def render_stats(u):
     base = u.get("base") or {}
-    def g(k, default="–"): return base.get(k, default)
-    parts = [f"M {g('M')}", f"T {g('T')}", f"Sv {g('Sv')}", f"W {g('W')}", f"Ld {g('Ld')}", f"OC {g('OC')}"]
-    if base.get("Inv"): parts.append(f"Inv {base['Inv']}")
-    if base.get("FnP"): parts.append(f"FnP {base['FnP']}")
+
+    def g(k, default="–"):
+        return base.get(k, default)
+
+    parts = [
+        f"M {g('M')}",
+        f"T {g('T')}",
+        f"Sv {g('Sv')}",
+        f"W {g('W')}",
+        f"Ld {g('Ld')}",
+        f"OC {g('OC')}",
+    ]
+    if base.get("Inv"):
+        parts.append(f"Inv {base['Inv']}")
+    if base.get("FnP"):
+        parts.append(f"FnP {base['FnP']}")
     return "  |  ".join(parts)
+
 
 def render_weapons(u, limit_each=2):
     lines = []
@@ -277,23 +323,38 @@ def render_weapons(u, limit_each=2):
     ranged = w.get("ranged") or []
     melee = w.get("melee") or []
     if ranged:
-        lines.append("<b>Tir</b> : " + ", ".join(html.escape(x.get("name","—")) for x in ranged[:limit_each]))
+        lines.append(
+            "<b>Tir</b> : "
+            + ", ".join(html.escape(x.get("name", "—")) for x in ranged[:limit_each])
+        )
     if melee:
-        lines.append("<b>CaC</b> : " + ", ".join(html.escape(x.get("name","—")) for x in melee[:limit_each]))
+        lines.append(
+            "<b>CaC</b> : "
+            + ", ".join(html.escape(x.get("name", "—")) for x in melee[:limit_each])
+        )
     return "<br>".join(lines) if lines else "<span class='small'>—</span>"
+
 
 def render_abilities(u, limit=3):
     ab = u.get("abilities") or {}
     unit_ab = ab.get("unit") or []
     items = []
     for x in unit_ab[:limit]:
-        nm = x.get("name", "—"); tx = x.get("text", "")
-        items.append(f"<li><b>{html.escape(nm)}.</b> {html.escape(tx)}</li>" if tx else f"<li><b>{html.escape(nm)}</b></li>")
-    return "<ul>" + "".join(items) + "</ul>" if items else "<span class='small'>—</span>"
+        nm = x.get("name", "—")
+        tx = x.get("text", "")
+        items.append(
+            f"<li><b>{html.escape(nm)}.</b> {html.escape(tx)}</li>"
+            if tx
+            else f"<li><b>{html.escape(nm)}</b></li>"
+        )
+    return (
+        "<ul>" + "".join(items) + "</ul>" if items else "<span class='small'>—</span>"
+    )
+
 
 def collect_phase_tips_for_unit(faction_helpers, u):
     """Retourne dict phase -> [bullets] pour une unité."""
-    tips = (((u.get("play_tips") or {}).get("phases")) or {})
+    tips = ((u.get("play_tips") or {}).get("phases")) or {}
     out = {}
     for key, _label in PHASE_ORDER:
         bullets = []
@@ -308,6 +369,7 @@ def collect_phase_tips_for_unit(faction_helpers, u):
         if bullets:
             out[key] = bullets
     return out
+
 
 def build_phase_board(faction_helpers, matched_units, strats):
     """Construit la Timeline globale par phase (génériques + spécifiques par unité)."""
@@ -329,19 +391,20 @@ def build_phase_board(faction_helpers, matched_units, strats):
         # spécifiques par unité
         for mu in matched_units:
             u = mu.get("unit")
-            if not u: continue
+            if not u:
+                continue
             unit_tips = collect_phase_tips_for_unit(faction_helpers, u)
             bullets = unit_tips.get(key)
-            if not bullets: continue
+            if not bullets:
+                continue
             uname = u.get("name", mu["display"])
             for b in bullets:
                 items.append(f"<li><b>{html.escape(uname)}</b> — {html.escape(b)}</li>")
-        
+
         # stratagems
         items.extend(strats.get(key, []))
 
-
-        alt_item   = "<li class='small'>&mdash;</li>"   # ← ASCII safe (— devient &mdash;)
+        alt_item = "<li class='small'>&mdash;</li>"  # ← ASCII safe (— devient &mdash;)
         items_html = "".join(items) if items else alt_item
 
         html_box = (
@@ -362,10 +425,15 @@ def build_phase_board(faction_helpers, matched_units, strats):
   </div>
 </div>"""
 
+
 def generate_html(army, matched_units, faction_helpers, outfile, strats):
     subtitle_bits = []
     if army.get("format"):
-        p = f"{army['format']} ({army['format_points']} pts)" if army.get("format_points") else army["format"]
+        p = (
+            f"{army['format']} ({army['format_points']} pts)"
+            if army.get("format_points")
+            else army["format"]
+        )
         subtitle_bits.append(p)
     if army.get("detachment"):
         subtitle_bits.append(f"Détachement : {army['detachment']}")
@@ -388,25 +456,32 @@ def generate_html(army, matched_units, faction_helpers, outfile, strats):
     # Cartes unités
     cards = []
     for mu in matched_units:
-        u = mu["unit"]; count = mu["count"]; score = mu["match_score"]
+        u = mu["unit"]
+        count = mu["count"]
+        score = mu["match_score"]
         if u is None:
-            cards.append(f"""
+            cards.append(
+                f"""
 <div class="card">
   <div class="unithead">
     <div class="name">{html.escape(mu['display'])}</div>
     <div class="warn small">Non trouvé dans YAML</div>
   </div>
   <div class="small">Vérifie l'orthographe de la fiche ou complète les YAML.</div>
-</div>""")
+</div>"""
+            )
             continue
 
         name = u.get("name", mu["display"])
         role = u.get("role", "")
         badges = []
-        if role: badges.append(role)
+        if role:
+            badges.append(role)
         kws = u.get("keywords") or []
-        if "Ultramarines" in kws: badges.append("Ultramarines")
-        if count > 1: badges.append(f"x{count}")
+        if "Ultramarines" in kws:
+            badges.append("Ultramarines")
+        if count > 1:
+            badges.append(f"x{count}")
 
         stats = render_stats(u)
         weapons = render_weapons(u)
@@ -417,12 +492,17 @@ def generate_html(army, matched_units, faction_helpers, outfile, strats):
         mini_html = []
         for k, label in PHASE_ORDER:
             if k in mini_phase:
-                mini_html.append(f"<div class='small'><b>{label}:</b> " + " | ".join(html.escape(x) for x in mini_phase[k][:2]) + "</div>")
+                mini_html.append(
+                    f"<div class='small'><b>{label}:</b> "
+                    + " | ".join(html.escape(x) for x in mini_phase[k][:2])
+                    + "</div>"
+                )
         mini_block = "".join(mini_html) if mini_html else "<div class='small'>—</div>"
 
         pills = " ".join(f"<span class='pill'>{html.escape(t)}</span>" for t in badges)
 
-        cards.append(f"""
+        cards.append(
+            f"""
 <div class="card">
   <div class="unithead">
     <div class="name">{html.escape(name)}</div>
@@ -434,7 +514,8 @@ def generate_html(army, matched_units, faction_helpers, outfile, strats):
   <div class="abilities"><b>Capacités</b>{abilities}</div>
   <div class="phases"><b>Cette unité — moments clés</b>{mini_block}</div>
 </div>
-""")
+"""
+        )
 
     tail = "</div></body></html>"
     html_str = head + "\n".join(cards) + tail
@@ -442,46 +523,66 @@ def generate_html(army, matched_units, faction_helpers, outfile, strats):
         f.write(html_str)
     return outfile
 
+
 # -----------------------------
 # Main
 # -----------------------------
+
 
 def run(export_path: str, yaml_dir: str, out_file: str) -> str:
     army, listed = parse_export_txt(export_path)
     units_by_key, faction_helpers = load_units_from_yaml_dir(yaml_dir)
 
     matched = []
-    section_order = {"CHARACTERS": 0, "BATTLELINE": 1, "DEDICATED TRANSPORTS": 2, "OTHER DATASHEETS": 3}
+    section_order = {
+        "CHARACTERS": 0,
+        "BATTLELINE": 1,
+        "DEDICATED TRANSPORTS": 2,
+        "OTHER DATASHEETS": 3,
+    }
     for key, info in listed.items():
         mkey, score = fuzzy_find(key, units_by_key, cutoff=0.72)
         unit = units_by_key.get(mkey) if mkey else None
-        matched.append({
-            "query_key": key,
-            "display": info["display"],
-            "count": info["count"],
-            "points_each": info["points_each"],
-            "section": info.get("section") or "",
-            "unit": unit,
-            "match_score": score,
-        })
-    matched.sort(key=lambda x: (section_order.get((x["section"] or "").upper(), 9), -(x["match_score"] or 0)))
+        matched.append(
+            {
+                "query_key": key,
+                "display": info["display"],
+                "count": info["count"],
+                "points_each": info["points_each"],
+                "section": info.get("section") or "",
+                "unit": unit,
+                "match_score": score,
+            }
+        )
+    matched.sort(
+        key=lambda x: (
+            section_order.get((x["section"] or "").upper(), 9),
+            -(x["match_score"] or 0),
+        )
+    )
 
     # Stratagems
     strats = []
-    strat_yaml_path = Path(yaml_dir, "stratagems.yaml") 
+    strat_yaml_path = Path(yaml_dir, "stratagems.yaml")
     strats = load_stratagems(strat_yaml_path)
+
+    strats = strat_items_by_phase(strats, army["detachment"])
 
     outfile = generate_html(army, matched, faction_helpers, out_file, strats)
     return outfile
+
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Fiche mémo A4 (HTML) depuis export 40k")
     ap.add_argument("--export", required=True, help="export_from_40k_app.txt")
     ap.add_argument("--yaml-dir", required=True, help="Dossier des ultramarines_*.yaml")
-    ap.add_argument("--out", default="cheat_sheet_ultramarines.html", help="HTML de sortie")
+    ap.add_argument(
+        "--out", default="cheat_sheet_ultramarines.html", help="HTML de sortie"
+    )
     args = ap.parse_args(argv)
     out = run(args.export, args.yaml_dir, args.out)
     print(f"✅ Fiche générée: {out}")
+
 
 if __name__ == "__main__":
     main()
