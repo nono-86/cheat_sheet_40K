@@ -254,7 +254,7 @@ tab_input, tab_preview = st.tabs(["1) Entrée & YAML", "2) Aperçu / Export"])
 with tab_input:
     st.subheader("Source YAML")
     src = st.radio("Charger les données d’unités depuis…",
-                   ["Dossier local `space_marines/`", "Upload de fichiers YAML"],
+                   ["Dossier local `data/`", "Upload de fichiers YAML"],
                    horizontal=True)
 
     corpus = None
