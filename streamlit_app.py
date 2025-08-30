@@ -6,6 +6,8 @@ from typing import Dict, Any, List
 import streamlit as st
 from jinja2 import Template
 
+from create_cheat_sheet import run
+
 # --------------------------- CONFIG ---------------------------------
 DEFAULT_YAML_DIR = Path(__file__).parent / "space_marines"
 FACTION = "Adeptus Astartes"
@@ -229,6 +231,14 @@ def render_html(meta, phases, faction_helpers, selected_units, missing, phase_ti
         phase_tips=phase_tips,
     )
 
+def save_uploaded_file(uploaded_file, dir: str | None = None) -> str:
+    """Sauve un UploadedFile Streamlit sur le disque et renvoie le chemin absolu."""
+    suffix = Path(uploaded_file.name).suffix or ".txt"
+    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix, dir=dir) as tmp:
+        tmp.write(uploaded_file.getbuffer())  # bytes
+        tmp.flush()
+        return tmp.name  # chemin du fichier temp
+
 # ------------------------------ UI ----------------------------------
 
 st.set_page_config(page_title="40k Cheat Sheet", layout="wide")
@@ -275,7 +285,11 @@ with tab_input:
     #     st.switch_page("app.py")  # reste sur la page mais force le rafraîchissement
     # ... dans le handler du bouton "Générer"
     if st.button("Générer la fiche"):
-        html = build_cheat_sheet(...)                 # ta fonction de rendu
+        # Chemin local : on sauve dans un temp file
+        uploaded_path = save_uploaded_file(txt_file)      # <-- VOILÀ LE PATH
+        st.session_state["uploaded_path"] = uploaded_path
+
+        html = run(uploaded_path, DEFAULT_YAML_DIR, )                 # ta fonction de rendu
         st.session_state["preview_html"] = html       # stocke pour l'affichage persistant
         st.toast("Fiche générée ✅")
 
