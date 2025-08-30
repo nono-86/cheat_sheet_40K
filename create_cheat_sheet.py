@@ -365,18 +365,11 @@ def generate_html(army, matched_units, faction_helpers, outfile):
 # Main
 # -----------------------------
 
-def main():
-    ap = argparse.ArgumentParser(description="Fiche mémo A4 (HTML) depuis export 40k App + YAMLs.")
-    ap.add_argument("--export", required=True, help="export_from_40k_app.txt")
-    ap.add_argument("--yaml-dir", required=True, help="Dossier des ultramarines_*.yaml")
-    ap.add_argument("--out", default="cheat_sheet_ultramarines.html", help="HTML de sortie")
-    args = ap.parse_args()
-
-    army, listed = parse_export_txt(args.export)
-    units_by_key, faction_helpers = load_units_from_yaml_dir(args.yaml_dir)
+def run(export_path: str, yaml_dir: str, out_file: str) -> str:
+    army, listed = parse_export_txt(export_path)
+    units_by_key, faction_helpers = load_units_from_yaml_dir(yaml_dir)
 
     matched = []
-    # garde l'ordre d’apparition par section (Characters > Battleline > Other …)
     section_order = {"CHARACTERS": 0, "BATTLELINE": 1, "DEDICATED TRANSPORTS": 2, "OTHER DATASHEETS": 3}
     for key, info in listed.items():
         mkey, score = fuzzy_find(key, units_by_key, cutoff=0.72)
@@ -386,14 +379,23 @@ def main():
             "display": info["display"],
             "count": info["count"],
             "points_each": info["points_each"],
-            "section": info["section"] or "",
+            "section": info.get("section") or "",
             "unit": unit,
-            "match_score": score
+            "match_score": score,
         })
-    matched.sort(key=lambda x: (section_order.get((x["section"] or "").upper(), 99), x["display"].lower()))
+    matched.sort(key=lambda x: (section_order.get((x["section"] or "").upper(), 9), -(x["match_score"] or 0)))
 
-    outfile = generate_html(army, matched, faction_helpers, args.out)
-    print(f"✅ Fiche générée: {outfile}")
+    outfile = generate_html(army, matched, faction_helpers, out_file)
+    return outfile
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description="Fiche mémo A4 (HTML) depuis export 40k")
+    ap.add_argument("--export", required=True, help="export_from_40k_app.txt")
+    ap.add_argument("--yaml-dir", required=True, help="Dossier des ultramarines_*.yaml")
+    ap.add_argument("--out", default="cheat_sheet_ultramarines.html", help="HTML de sortie")
+    args = ap.parse_args(argv)
+    out = run(args.export, args.yaml_dir, args.out)
+    print(f"✅ Fiche générée: {out}")
 
 if __name__ == "__main__":
     main()
