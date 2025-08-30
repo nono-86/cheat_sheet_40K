@@ -272,7 +272,6 @@ with tab_input:
     if st.button("Générer la fiche"):
         html = build_cheat_sheet(...)                 # ta fonction de rendu
         st.session_state["preview_html"] = html       # stocke pour l'affichage persistant
-        st.toast("Fiche générée ✅")
 
         # affiche le résultat tout de suite
         st.download_button(
