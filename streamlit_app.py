@@ -68,7 +68,7 @@ def load_yaml_files(files: List[io.BytesIO]) -> Dict[str, Any]:
 
 
 def load_yaml_dir(directory: Path) -> Dict[str, Any]:
-    files = sorted(directory.glob("ultramarines_*.yaml"))
+    files = sorted(directory.glob("*.yaml"))
     uploads = []
     for f in files:
         uploads.append(io.BytesIO(f.read_bytes()))
