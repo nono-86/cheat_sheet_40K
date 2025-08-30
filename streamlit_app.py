@@ -295,7 +295,7 @@ with tab_input:
             )
     else:
         uploads = st.file_uploader(
-            "Dépose plusieurs fichiers YAML (ultramarines_*.yaml)",
+            "Dépose plusieurs fichiers YAML (*.yaml)",
             type=["yaml", "yml"],
             accept_multiple_files=True,
         )
