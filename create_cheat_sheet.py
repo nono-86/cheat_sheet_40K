@@ -269,7 +269,13 @@ def build_phase_board(faction_helpers, matched_units):
             for b in bullets:
                 items.append(f"<li><b>{html.escape(uname)}</b> — {html.escape(b)}</li>")
 
-        html_box = f"<div class='box'><div class='phase'>{html.escape(label)}</div><ul>{''.join(items) if items else '<li class=\"small\">—</li>'}</ul></div>"
+        alt_item = "<li class='small'>—</li>"           # pas d'antislash
+        items_html = "".join(items) if items else alt_item
+
+        html_box = (
+            f"<div class='box'><div class='phase'>{html.escape(label)}</div>"
+            f"<ul>{items_html}</ul></div>"
+        )
         (colA if idx < 3 else colB).append(html_box)
 
     return f"""
