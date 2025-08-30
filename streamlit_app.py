@@ -1,11 +1,15 @@
 import re
 import io
+import sys
 import yaml
 from pathlib import Path
 from typing import Dict, Any, List
 import streamlit as st
 from jinja2 import Template
 
+APP_DIR = Path(__file__).resolve().parent
+if str(APP_DIR) not in sys.path:
+    sys.path.insert(0, str(APP_DIR))
 from create_cheat_sheet import run
 
 # --------------------------- CONFIG ---------------------------------
