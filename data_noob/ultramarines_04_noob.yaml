@@ -1,0 +1,1545 @@
+schema_version: 1
+units:
+- name: Redemptor Dreadnought
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Walker
+  - Dreadnought
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Macro Plasma/Onslaught
+      text: Polyvalent ; anti-élite/anti-char selon loadout.
+    - name: Wisdom of the Ancients
+      text: Buff ponctuel aux alliés (fiabilise une phase).
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Positionner en couvert léger ; éviter le CàC non souhaité.
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Cibler élites/véhicules ; aligner avec Oath.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks:
+        - Peut achever une unité moyenne.
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - polyvalent lourd
+- name: Ironclad Dreadnought
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Walker
+  - Dreadnought
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Siege Specialist
+      text: Très fort au CàC sur véhicules/fortifs.
+    - name: Adamantine Hull
+      text: Tanking élevé ; bon pour tenir un point contesté.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance:
+        - Avancer en couverts ; préparer la charge.
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Choisir une cible isolée ou un char.
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks:
+        - Profil anti-véhicule prioritaire ; consolider sur objo.
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - anti-char CàC
+    - prise de point
+- name: Invictor Tactical Warsuit
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Walker
+  - Invictor
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Concealed Positions
+      text: Déploiement avancé ; pression T1.
+    - name: Versatile Loadout
+      text: Polyvalent tir court/moyen.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start:
+        - Se déployer agressif mais en couvert.
+        normal:
+        - Menacer angles de tir dès T1.
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Écrans, unités de tir légères ; punir exposés.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Engager une unité fragile pour la bloquer.
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - pression T1
+    - anti-tir léger
+- name: Land Raider
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Land Raider
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Armoured Behemoth
+      text: Transport lourd + gros tir ; ancre de ligne.
+    - name: Power of the Machine Spirit
+      text: Reste efficace même en dégâts.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Avancer lentement en couvert ; débarquer au moment clé.
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Cibles multi-PV / véhicules / packs d’élite.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - transport lourd
+    - ancre de tir
+- name: Land Raider Crusader
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Land Raider
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Armoured Behemoth
+      text: Transport lourd + gros tir ; ancre de ligne.
+    - name: Power of the Machine Spirit
+      text: Reste efficace même en dégâts.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Avancer lentement en couvert ; débarquer au moment clé.
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Cibles multi-PV / véhicules / packs d’élite.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - transport lourd
+    - ancre de tir
+- name: Land Raider Redeemer
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Land Raider
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Armoured Behemoth
+      text: Transport lourd + gros tir ; ancre de ligne.
+    - name: Power of the Machine Spirit
+      text: Reste efficace même en dégâts.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Avancer lentement en couvert ; débarquer au moment clé.
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Cibles multi-PV / véhicules / packs d’élite.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - transport lourd
+    - ancre de tir
+- name: Repulsor
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Transport
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Hover Tank
+      text: Transport lourd ; multiples armes saturantes.
+    - name: Power of the Machine Spirit
+      text: Fiable même dégradé.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Projeter une unité Primaris ; rester à mi-portée.
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Infanterie/élite légère ; saturation.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - transport lourd
+    - saturation
+- name: Repulsor Executioner
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Transport
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Executioner Cannon
+      text: Anti-char/élite lourd longue portée.
+    - name: Hover Tank
+      text: Transport lourd ; nombreuses armes secondaires.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Tenir fond de table ; angle de tir ouvert.
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Véhicules/monstres ; priorités haute valeur.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - anti-char longue portée
+    - transport lourd
+- name: Predator Annihilator
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Predator
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Twin Lascannons
+      text: Anti-char ; appui longue portée.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Angle-toi sans trop t’exposer.
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Cibles blindées priorisées.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - anti-char longue portée
+- name: Predator Destructor
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Predator
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Autocannon Turret
+      text: Anti-élite moyenne portée ; multi-PV.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Élite/multi-PV moyen ; garder couvert.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - anti-élite/multi-PV
+- name: Vindicator
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Demolisher Cannon
+      text: Gros gabarit anti-élite/char ; portée courte.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Avancer en couvert vers mid ; menacer centre.
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Packs d’élite / chars exposés.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - anti-élite lourd
+    - bunker buster
+- name: Whirlwind
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Artillery
+  - Indirect
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Artillery Support
+      text: Tir indirect ; utility sur objectifs cachés.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Cibles hors LdV / scoring faibles.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Forcer Battleshock sur unités tenant objo.
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - tir indirect
+    - contrôle d’objo
+- name: Hunter
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Anti-Air
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Skyspear Missile
+      text: Anti-vol volant/rapide ; support AA.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Flyers/rapides ; sinon véhicules exposés.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - anti-air
+- name: Stalker
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Tank
+  - Anti-Air
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Icarus Arrays
+      text: Anti-air saturation ; utile aussi vs infanterie légère.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Flyers / infanterie légère à découvert.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - anti-air
+    - anti-léger
+- name: Storm Speeder Hailstrike
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Fly
+  - Storm Speeder
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Guns-blazing
+      text: Saturation anti-léger à haute mobilité.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance:
+        - Contournement pour angles inattendus.
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Infanterie légère / écrans.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - saturation mobile
+- name: Storm Speeder Thunderstrike
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Fly
+  - Storm Speeder
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Target Designator
+      text: Debuff/bonus contre véhicules/monstres ciblés.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Véhicules/monstres ; synchroniser avec anti-char allié.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - support anti-char
+- name: Storm Speeder Hammerstrike
+  role: Vehicle
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Vehicle
+  - Fly
+  - Storm Speeder
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Close-range Breach
+      text: Burst anti-char à courte portée.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance:
+        - Se mettre à portée courte au moment clé.
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Chars exposés ; priorités haute valeur.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - anti-char mobile
+- name: Thunderfire Cannon
+  role: Artillery
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Artillery
+  - Vehicle?
+  - Fortification?
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Subterranean Barrage
+      text: Tir indirect ; ralentit/désorganise l’adversaire.
+    leader:
+      can_join: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Unités sur objo ; écrans hors LdV.
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Pression constante pour dégager objos.
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - tir indirect
+    - contrôle de zone
+phases:
+  order:
+  - command
+  - movement
+  - shooting
+  - charge
+  - fight
+  - end
+  steps:
+    command:
+    - start
+    - battleshock
+    - abilities
+    - end
+    movement:
+    - start
+    - normal
+    - advance
+    - fallback
+    - end
+    shooting:
+    - start
+    - select_targets
+    - resolve
+    - end
+    charge:
+    - start
+    - declare
+    - overwatch_window
+    - move
+    - heroic
+    - end
+    fight:
+    - start
+    - pile_in
+    - make_attacks
+    - consolidate
+    - end
+    end:
+    - score
+    - cleanup
+faction_helpers:
+  turn_start:
+  - Gagner 1CP. Choisir/mettre à jour l’effet de détachement/doctrine.
+  - Déclarer la cible prioritaire (Oath) si applicable.
+  generic_reminders:
+    command:
+    - Battleshock sur unités à < 1/2 effectif.
+    - Placer auras/buffs en pensant à l’activation.
+    movement:
+    - Mesurer menaces (OW/HI) ; rester en couvert si possible.
+    shooting:
+    - Prioriser Oath/menaces ; éviter le split fire inutile.
+    charge:
+    - Prévoir multi-charge ; garder 1CP pour relance.
+    fight:
+    - Activer dans le bon ordre ; consolider pour voler OC.
+    end:
+    - Compter OC, scorer primaires/secondaires ; faire actions.

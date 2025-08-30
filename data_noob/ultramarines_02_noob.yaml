@@ -1,0 +1,2995 @@
+units:
+- name: Captain in Phobos Armour
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Character
+  - Primaris
+  - Phobos
+  - Captain
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '5'
+    Ld: 6+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Bolt pistol
+      range: 12"
+      A: '1'
+      BS: 2+
+      S: '4'
+      AP: '0'
+      D: '1'
+      keywords:
+      - Pistol
+      mandatory: false
+    - name: Instigator bolt carbine
+      range: 24"
+      A: '1'
+      BS: 2+
+      S: '4'
+      AP: '-1'
+      D: '2'
+      keywords:
+      - Precision
+      mandatory: true
+    melee:
+    - name: Combat knife
+      A: '6'
+      WS: 2+
+      S: '4'
+      AP: '-1'
+      D: '1'
+      mandatory: true
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Rites of Battle
+      text: '1/round : quand une unité amie utilise un Stratagem et cible l’unité
+        menée par ce modèle, réduis son coût de 1CP.'
+    - name: Master of Deceit
+      text: 'Après le déploiement des deux joueurs : jusqu’à 3 unités INFANTRY Astartes
+        ami(e)s (dont celle-ci) peuvent être placées en Réserves Stratégiques ou être
+        redéployées.'
+    - name: Infiltrators, Leader, Stealth
+      text: Frappe d’avant-poste ; peut mener Eliminators, Incursors, Infiltrators,
+        Reivers, Scouts.
+    leader:
+      can_join:
+      - Eliminator Squad
+      - Incursor Squad
+      - Infiltrator Squad
+      - Reiver Squad
+      - Scout Squad
+  play_tips:
+    per_turn:
+      1:
+      - Infiltrer/occuper un objo avancé en couvert, préparer un redeploy ‘Master
+        of Deceit’ si match-up défavorable.
+      2:
+      - Protéger la pièce de tir de précision ; forcer des trades via -1CP sur un
+        strat clé.
+      3:
+      - 'Passer en jeu d’objo : OC1 mais Stealth + couverts pour tenir.'
+    phases:
+      command:
+        start:
+        - Identifier le stratagem cible pour Rites of Battle (économie 1CP).
+        battleshock:
+        - Tester si unité <1/2 et tenir objo.
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        normal:
+        - Avancer avec écran Phobos ; garder LoS pour carabine de précision.
+        - Prendre objo en couvert si possible.
+        start:
+        - Utilise infiltration/scout pour pression et écrans.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        select_targets:
+        - Sniper une figurine clé (apothicaire/étendard/sergent d’arme lourde).
+        - Prioriser la cible d’Oath / priorité de liste.
+        - Chasse persos de support si possible.
+        start: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        consolidate:
+        - Consolider pour contester un objo sans s’exposer.
+        - Consolider pour voler/contester OC.
+        start: []
+        pile_in: []
+        make_attacks: []
+        end: []
+      end:
+        score:
+        - Compter OC et tenir l’objo midfield.
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    targets:
+    - anti-personnage de soutien
+    - prise d’objo avancé
+    - contrôle carte
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+- name: Captain in Terminator Armour
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Terminator
+  - Captain
+  - Character
+  base:
+    M: 5"
+    T: '5'
+    Sv: 2+
+    W: '6'
+    Ld: 6+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Storm bolter [Rapid Fire 2]
+      range: 24"
+      A: '2'
+      BS: 2+
+      S: '4'
+      AP: '0'
+      D: '1'
+      keywords:
+      - Rapid Fire 2
+      - Twin-linked
+      mandatory: true
+    melee:
+    - name: Relic blade
+      A: '6'
+      WS: 2+
+      S: '6'
+      AP: '-2'
+      D: '2'
+      keywords: []
+      mandatory: false
+    - name: Power fist
+      A: '5'
+      WS: 2+
+      S: '8'
+      AP: '-2'
+      D: '2'
+      keywords: []
+      mandatory: true
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Rites of Battle
+      text: Réduction de 1CP 1/round pour un Stratagem ciblant son unité.
+    - name: The Imperium’s Sword
+      text: Relance des jets de Charge pour l’unité qu’il mène.
+    - name: Deep Strike, Leader
+      text: FEP et peut mener Terminator Squad / Assault Terminator.
+    leader:
+      can_join:
+      - Terminator Assault Squad
+      - Terminator Squad
+  play_tips:
+    per_turn:
+      1:
+      - FEP T1/T2 selon menace AA ; choisir le point d’impact pour menacer le centre.
+      2:
+      - Reroll charge pour verrouiller la cible prioritaire, activer -1CP sur strat
+        clé.
+      - Arrive en FEP pour couper les lignes (si possible).
+      3:
+      - Tenir objo en tankant (2+/4+ Inv) ; garder l’aura sur unité lourde.
+    phases:
+      charge:
+        declare:
+        - Déclarer multi-charge si possible pour verrouiller 2 cibles.
+        - Déclarer multi-charge si pertinent.
+        start: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        make_attacks:
+        - Choisir arme (fist vs relais d’armure, blade pour horde).
+        start: []
+        pile_in: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        - Bloque les lignes/contre-charge après kill.
+        end: []
+      end:
+        score:
+        - Tenir centre avec OC de l’escouade Terminator.
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start:
+        - 'Deep Strike: menace les objos de fond.'
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - tenue d’objo
+    - pression
+- name: Captain Sicarius
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Character
+  - Epic Hero
+  - Captain
+  - Sicarius
+  - Infantry
+  - Primaris?
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '5'
+    Ld: 6+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Artisan plasma pistol
+      range: 12"
+      A: '1'
+      BS: 2+
+      S: '8'
+      AP: '-3'
+      D: '2'
+      keywords:
+      - Pistol
+      - Hazardous
+      mandatory: true
+    melee:
+    - name: Talassarian Tempest Blade
+      A: '6'
+      WS: 2+
+      S: '6'
+      AP: '-2'
+      D: '2'
+      keywords:
+      - Lethal Hits
+      mandatory: true
+  abilities:
+    faction: Space Marines
+    detachment: Gladius Task Force
+    unit:
+    - name: Lead from the Front
+      text: Si l’unité menée fait un Advance, elle peut charger (Infanterie seulement).
+    - name: Lightning Assault
+      text: '1/round en Mouvement ennemi : si une unité ennemie termine un move à
+        9" de l’unité menée, faire un Normal Move de 6".'
+    - name: Rites of Battle
+      text: Réduction 1CP 1/round sur un Stratagem ciblant son unité.
+    leader:
+      can_join:
+      - Assault Intercessor Squad
+      - Bladeguard Veteran Squad
+      - Company Heroes
+      - Intercessor Squad
+      - SternGuard Veteran Squad
+      - Tactical Squad
+  play_tips:
+    per_turn:
+      1:
+      - Projeter pression avec ‘Lightning Assault’ pour contre-déployer.
+      2:
+      - Advance + Charge pour casser un flanc.
+    phases:
+      movement:
+        normal:
+        - Menacer un ‘intercept move’ (6") durant le tour adverse.
+        - Prendre objo en couvert si possible.
+        start: []
+        advance: []
+        fallback: []
+        end: []
+      charge:
+        declare:
+        - Profiter d’Advance+Charge pour attraper la cible clef.
+        - Déclarer multi-charge si pertinent.
+        start: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets: []
+- name: Captain with Jump Pack
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Jump Pack
+  - Captain
+  - Character
+  base:
+    M: 12"
+    T: '4'
+    Sv: 3+
+    W: '6'
+    Ld: 6+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Heavy bolt pistol
+      range: 18"
+      A: '1'
+      BS: 2+
+      S: '4'
+      AP: '-1'
+      D: '1'
+      keywords:
+      - Pistol
+      mandatory: true
+    melee:
+    - name: Astartes chainsword
+      A: '6'
+      WS: 2+
+      S: '5'
+      AP: '-1'
+      D: '1'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Deep Strike, Leader
+      text: FEP ; peut mener Assault Intercessors with Jump Packs / Vanguard Veterans
+        with Jump Packs.
+    - name: Rites of Battle
+      text: Réduction 1CP 1/round sur un strat ciblant son unité.
+    - name: Relic Shield
+      text: +1 PV (W6) & 4++ ; très bon pour tanker des BM.
+    leader:
+      can_join:
+      - Assault Intercessors with Jump Packs
+      - Vanguard Veteran Squad with Jump Packs
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Placer en FEP ou en angle de charge safe.
+      2:
+      - Forcer une multi-charge pour verrouiller anti-tir.
+    phases:
+      charge:
+        declare:
+        - Garder 1CP pour relance ; mesurer contre-charge ennemie.
+        - Déclarer multi-charge si pertinent.
+        - Choisis des charges où ses relances/aura ont un impact.
+        start: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        consolidate:
+        - Consolider pour voler OC.
+        - Consolider pour voler/contester OC.
+        start: []
+        pile_in: []
+        make_attacks: []
+        end: []
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start:
+        - Reste à portée de l’escouade d’assaut qu’il accompagne.
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies:
+    - with: Assault Intercessors with Jump Packs
+      when: charge.start
+      text: Bénéficie/partage des buffs d’attaque.
+    targets: []
+- name: Chaplain
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Character
+  - Chaplain
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '5'
+    Ld: 6+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Absolver bolt pistol
+      range: 18"
+      A: '1'
+      BS: 3+
+      S: '5'
+      AP: '-1'
+      D: '2'
+      keywords:
+      - Pistol
+      mandatory: true
+    melee:
+    - name: Crozius arcanum
+      A: '6'
+      WS: 2+
+      S: '6'
+      AP: '-1'
+      D: '2'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Litanies of Hate
+      text: 'Tant que l’unité est menée : chaque fois qu’un modèle de l’unité fait
+        une attaque de mêlée, +1 à la touche.'
+    - name: Spiritual Leader
+      text: 'Début de round de Combat : une unité amie à 6" gagne Fight on Death 4+
+        jusqu’à la fin du tour.'
+    - name: Leader
+      text: Peut mener de nombreuses unités de base Primaris (Intercessors, Assault
+        Intercessors, etc.).
+    leader:
+      can_join:
+      - Assault Intercessor Squad
+      - Bladeguard Veteran Squad
+      - Company Heroes
+      - Hellblaster Squad
+      - Intercessor Squad
+      - SternGuard Veteran Squad
+      - Tactical Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Mettre +1 To Hit au CaC pour fiabiliser une escouade.
+      2:
+      - Fight on Death si trade nécessaire.
+    phases:
+      fight:
+        make_attacks:
+        - Activer au bon timing pour maximiser +1 touche.
+        start: []
+        pile_in: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities:
+        - Place l’aura/buff offensif sur l’unité qui va frapper.
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - buff/offensif
+- name: Chaplain in Terminator Armour
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Terminator
+  - Chaplain
+  - Character
+  base:
+    M: 5"
+    T: '5'
+    Sv: 2+
+    W: '6'
+    Ld: 5+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Storm bolter [Rapid Fire 2]
+      range: 24"
+      A: '2'
+      BS: 2+
+      S: '4'
+      AP: '0'
+      D: '1'
+      keywords:
+      - Rapid Fire 2
+      - Twin-linked
+      mandatory: true
+    melee:
+    - name: Crozius arcanum
+      A: '6'
+      WS: 2+
+      S: '6'
+      AP: '-1'
+      D: '2'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Deep Strike, Leader
+      text: FEP ; peut mener Terminator Assault / Terminator Squad.
+    - name: Litanies of Hate
+      text: +1 touche au CaC sur l’unité menée.
+    - name: Recitations of Faith
+      text: 'Une fois par bataille : l’unité menée gagne FNP 5+ contre BM ce tour.'
+    leader:
+      can_join:
+      - Terminator Assault Squad
+      - Terminator Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Menace FEP + charge reroll via auras/chap.
+      2:
+      - Arrive en FEP pour couper les lignes (si possible).
+    phases:
+      charge:
+        declare:
+        - Choisir la cible qui profite le mieux de +1 touche.
+        - Déclarer multi-charge si pertinent.
+        start: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities:
+        - Place l’aura/buff offensif sur l’unité qui va frapper.
+        end: []
+      movement:
+        start:
+        - 'Deep Strike: menace les objos de fond.'
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        - Bloque les lignes/contre-charge après kill.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - tenue d’objo
+    - pression
+    - buff/offensif
+- name: Chaplain on Bike
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Character
+  - Mounted
+  - Chaplain
+  - Outrider
+  base:
+    M: 12"
+    T: '5'
+    Sv: 3+
+    W: '6'
+    Ld: 5+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Twin bolt rifle (bike)
+      range: 24"
+      A: '6'
+      BS: 3+
+      S: '4'
+      AP: '0'
+      D: '1'
+      keywords:
+      - Twin-linked
+      - Rapid Fire 2
+      mandatory: true
+    melee:
+    - name: Crozius arcanum
+      A: '6'
+      WS: 2+
+      S: '6'
+      AP: '-1'
+      D: '2'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Litanies of Hate
+      text: +1 touche au CaC pour son unité.
+    - name: Exhortation of Rage
+      text: Tant qu’il mène une unité, au début de la phase de Tir, choisis un ennemi
+        à 12" ; l’unité menée gagne [SUSTAINED HITS 1] contre elle jusqu’à la fin
+        de la phase.
+    - name: Leader
+      text: Peut mener Outrider Squad.
+    leader:
+      can_join:
+      - Outrider Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Poke à la saturation avec Sustained Hits sur cible prioritaire.
+    phases:
+      movement:
+        normal:
+        - Jouer l’angle 12" pour l’Exhortation.
+        - Prendre objo en couvert si possible.
+        start: []
+        advance: []
+        fallback: []
+        end: []
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities:
+        - Place l’aura/buff offensif sur l’unité qui va frapper.
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - buff/offensif
+- name: Chaplain with Jump Pack
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Jump Pack
+  - Chaplain
+  - Character
+  base:
+    M: 12"
+    T: '4'
+    Sv: 3+
+    W: '6'
+    Ld: 5+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Absolver bolt pistol
+      range: 18"
+      A: '1'
+      BS: 3+
+      S: '5'
+      AP: '-1'
+      D: '2'
+      keywords:
+      - Pistol
+      mandatory: true
+    melee:
+    - name: Crozius arcanum
+      A: '6'
+      WS: 2+
+      S: '6'
+      AP: '-1'
+      D: '2'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Deep Strike, Leader
+      text: FEP ; peut mener Assault Intercessors with Jump Packs / Vanguard Vets
+        w/ Jump Packs.
+    - name: Litanies of Hate
+      text: +1 touche au CaC sur l’unité menée.
+    - name: Exhortation of Rage (bomb)
+      text: 'Début de Tir : choisir une cible à 12" ; [SUSTAINED HITS 1] pour l’unité
+        menée — parfait pour pistolets/plasmas JP.'
+    leader:
+      can_join:
+      - Assault Intercessors with Jump Packs
+      - Vanguard Veteran Squad with Jump Packs
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Préparer une ‘bomb’ JP avec Sustained Hits sur la bonne cible.
+      2:
+      - Forcer le trade avec Fight on Death allié si dispo.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities:
+        - Place l’aura/buff offensif sur l’unité qui va frapper.
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - buff/offensif
+- name: Chief Librarian Tigurius
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Character
+  - Epic Hero
+  - Psyker
+  - Librarian
+  - Infantry
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '4'
+    Ld: 6+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Bolt pistol
+      range: 12"
+      A: '1'
+      BS: 2+
+      S: '4'
+      AP: '0'
+      D: '1'
+      keywords:
+      - Pistol
+      mandatory: false
+    - name: Storm of the Emperor’s Wrath — witchfire
+      range: 18"/36"
+      A: D6 / 2D6
+      BS: 2+
+      S: '6'
+      AP: '-2'
+      D: '2'
+      keywords:
+      - Ignores Cover
+      - Psychic
+      - Focused/Blast modes
+      mandatory: true
+    melee:
+    - name: Rod of Tigurius
+      A: '5'
+      WS: 3+
+      S: '7'
+      AP: '-2'
+      D: '2'
+      keywords:
+      - Precision
+      mandatory: true
+  abilities:
+    unit:
+    - name: Hood of Hellfire
+      text: 'Tant qu’il mène une unité : FNP 5+ contre BM à cette unité.'
+    - name: Master of Prescience
+      text: 'Début de phase de Tir : choisis une unité ennemie visible. Jusqu’à la
+        fin du tour : +1 pour blesser contre cette cible.'
+    - name: Leader
+      text: Peut mener de nombreuses escouades d’infanterie SM (Intercessors, Devastators,
+        etc.).
+    leader:
+      can_join:
+      - Assault Intercessor Squad
+      - Bladeguard Veteran Squad
+      - Devastator Squad
+      - Desolation Squad
+      - Hellblaster Squad
+      - Intercessor Squad
+      - SternGuard Veteran Squad
+      - Tactical Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Placer le +1 to wound sur la menace prioritaire.
+      2:
+      - Utiliser la BM witchfire pour nettoyer écran ou fiabiliser un snipe.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets: []
+- name: Judiciar
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Character
+  - Judiciar
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '5'
+    Ld: 6+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Absolver bolt pistol
+      range: 18"
+      A: '1'
+      BS: 3+
+      S: '5'
+      AP: '-1'
+      D: '2'
+      keywords:
+      - Pistol
+      mandatory: true
+    melee:
+    - name: Executor relic blade
+      A: '6'
+      WS: 2+
+      S: '7'
+      AP: '-2'
+      D: '2'
+      keywords:
+      - Precision
+      mandatory: true
+  abilities:
+    unit:
+    - name: Silent Fury
+      text: 'Quand l’unité menée détruit une unité ennemie, jusqu’à la fin du tour
+        : +1 OC pour l’unité et +1 pour blesser au CaC si sous effectif.'
+    - name: Tempormortis
+      text: 'Début de phase de Combat : choisis une unité ennemie à 6" ; cette unité
+        frappe en dernier.'
+    leader:
+      can_join:
+      - Assault Intercessor Squad
+      - Bladeguard Veteran Squad
+      - Devastator Squad
+      - Hellblaster Squad
+      - Intercessor Squad
+      - SternGuard Veteran Squad
+      - Tactical Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Marquer une cible ‘Fight Last’ pour sécuriser l’activation.
+      2:
+      - Utiliser l’OC boost pour voler un objo après un wipe.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets: []
+- name: Librarian
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Character
+  - Psyker
+  - Librarian
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '4'
+    Ld: 6+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Smite (psychic)
+      range: 18"
+      A: D6
+      BS: 3+
+      S: '5'
+      AP: '-1'
+      D: '1'
+      keywords:
+      - Psychic
+      - Blast
+      mandatory: true
+    melee:
+    - name: Force weapon
+      A: '4'
+      WS: 3+
+      S: '6'
+      AP: '-1'
+      D: '2'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Psychic Hood
+      text: 'Tant qu’il mène une unité : FNP 5+ contre BM.'
+    - name: Veil of Time
+      text: 'Tant qu’il mène : armes de l’unité gagnent [SUSTAINED HITS 1] (Psychic).'
+    leader:
+      can_join:
+      - Assault Intercessor Squad
+      - Devastator Squad
+      - Desolation Squad
+      - Hellblaster Squad
+      - Intercessor Squad
+      - SternGuard Veteran Squad
+      - Tactical Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Mettre SH1 sur l’unité de tir qui a l’angle le plus rentable.
+      2:
+      - Smite pour finir une cible à distance sûre.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets: []
+- name: Librarian in Phobos Armour
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Character
+  - Psyker
+  - Phobos
+  - Librarian
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '4'
+    Ld: 6+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Smite (psychic, focused/witchfire)
+      range: 18"/24"/36"
+      A: D6 / 2D6
+      BS: 3+
+      S: 5/6
+      AP: -1/-2
+      D: 1/2
+      keywords:
+      - Psychic
+      - Ignores Cover
+      - Blast
+      mandatory: true
+    melee:
+    - name: Force weapon
+      A: '4'
+      WS: 3+
+      S: '6'
+      AP: '-1'
+      D: '2'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Psychic Veil (Phobos)
+      text: 'Tant qu’il mène : l’unité gagne Stealth ; ne peut pas être ciblée par
+        des attaques à >18" sauf si la cible la plus proche.'
+    - name: Shoot-and-Shroud
+      text: 'Pendant la phase de Tir : après avoir tiré, l’unité peut faire un move
+        Normal de 6" mais ne peut pas charger.'
+    leader:
+      can_join:
+      - Eliminator Squad
+      - Incursor Squad
+      - Infiltrator Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - 'Jouer ‘peek-a-boo’ : tirer puis se re-cacher derrière couvert.'
+      2:
+      - Tenir un objo secondaire en furtif.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start:
+        - Utilise infiltration/scout pour pression et écrans.
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        - Chasse persos de support si possible.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - contrôle carte
+- name: Librarian in Terminator Armour
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Terminator
+  - Character
+  - Psyker
+  - Librarian
+  base:
+    M: 5"
+    T: '5'
+    Sv: 2+
+    W: '6'
+    Ld: 6+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Storm bolter [Rapid Fire 2]
+      range: 24"
+      A: '2'
+      BS: 2+
+      S: '4'
+      AP: '0'
+      D: '1'
+      keywords:
+      - Rapid Fire 2
+      - Twin-linked
+      mandatory: false
+    - name: Smite / Vortex (psychic)
+      range: 24"
+      A: D6 / 2D6
+      BS: 2+
+      S: 5/6
+      AP: -1/-2
+      D: 1/2
+      keywords:
+      - Psychic
+      - Blast
+      mandatory: true
+    melee:
+    - name: Force weapon (axe/staff)
+      A: '5'
+      WS: 3+
+      S: '7'
+      AP: '-2'
+      D: '2'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Deep Strike, Leader
+      text: FEP ; peut mener Terminator Assault / Terminator Squad.
+    - name: Veil of Time (Psychic)
+      text: 'Tant qu’il mène : [SUSTAINED HITS 1] aux armes de l’unité.'
+    leader:
+      can_join:
+      - Terminator Assault Squad
+      - Terminator Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - FEP pour pression puis fiabiliser la phase de tir/charge de l’unité.
+      2:
+      - Arrive en FEP pour couper les lignes (si possible).
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start:
+        - 'Deep Strike: menace les objos de fond.'
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        - Bloque les lignes/contre-charge après kill.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - tenue d’objo
+    - pression
+- name: Lieutenant
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Character
+  - Lieutenant
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '4'
+    Ld: 6+
+    OC: '1'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged:
+    - name: Bolt pistol / master-crafted bolter / plasma pistol (base au choix)
+      range: 12"/24"/12"
+      A: 1/2/1
+      BS: 2+
+      S: 4/4/8
+      AP: 0/0/-3
+      D: 1/1/2
+      keywords:
+      - Pistol (selon)
+      mandatory: true
+    melee:
+    - name: Master-crafted power weapon
+      A: '5'
+      WS: 2+
+      S: '5'
+      AP: '-2'
+      D: '2'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Tactical Precision
+      text: 'Tant qu’il mène : +1 pour blesser aux attaques de l’unité (armes de tir)
+        contre la cible d’Engagement Range d’une unité amie (ou marquée), ou contre
+        une cible déjà Blessée.'
+    - name: Lone Operative (si seul)
+      text: Devient Lone Operative si non menant et pas d’autre perso à 3".
+    leader:
+      can_join:
+      - Assault Intercessor Squad
+      - Bladeguard Veteran Squad
+      - Company Heroes
+      - Hellblaster Squad
+      - Intercessor Squad
+      - SternGuard Veteran Squad
+      - Tactical Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Poser +1 pour blesser sur l’escouade de tir la plus impactante.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets: []
+- name: Lieutenant in Phobos Armour
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Phobos
+  - Character
+  - Lieutenant
+  - Scout 6"
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '4'
+    Ld: 6+
+    OC: '1'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged:
+    - name: Scoped bolt carbine
+      range: 24"
+      A: '2'
+      BS: 2+
+      S: '4'
+      AP: '-1'
+      D: '1'
+      keywords:
+      - Precision
+      mandatory: true
+    melee:
+    - name: Paired combat blades
+      A: '6'
+      WS: 2+
+      S: '4'
+      AP: '-1'
+      D: '1'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Infiltrators, Scouts 6"
+      text: Avant-garde et scout 6" pour sa propre unité.
+    - name: Tactical Precision (Phobos)
+      text: Relances de 1 aux jets de Blessure de l’unité menée contre la cible marquée
+        par un ‘Shoot-and-Fade’ allié.
+    leader:
+      can_join:
+      - Eliminator Squad
+      - Incursor Squad
+      - Infiltrator Squad
+      - Reiver Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Projeter un écran avancé avec Scout 6" et Infiltrators.
+      2:
+      - Utiliser Precision pour punir personnages d’appui.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start:
+        - Utilise infiltration/scout pour pression et écrans.
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        - Chasse persos de support si possible.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - contrôle carte
+- name: Lieutenant in Reiver Armour
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Phobos
+  - Reiver
+  - Character
+  - Lieutenant
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '4'
+    Ld: 6+
+    OC: '1'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged:
+    - name: Special-issue bolt pistol (Reiver)
+      range: 12"
+      A: '2'
+      BS: 2+
+      S: '4'
+      AP: '-1'
+      D: '1'
+      keywords:
+      - Pistol
+      - Precision
+      mandatory: true
+    melee:
+    - name: Combat knife (Reiver)
+      A: '6'
+      WS: 2+
+      S: '4'
+      AP: '-1'
+      D: '1'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Leader, Stealth, Scout 6"
+      text: Avant-garde agressive avec Reivers ; augmente portée de ‘Terror Troops’
+        de son unité.
+    leader:
+      can_join:
+      - Reiver Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Pression T1 sur objo/mid ; menace de charge courte.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start:
+        - Utilise infiltration/scout pour pression et écrans.
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        - Chasse persos de support si possible.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - contrôle carte
+- name: Lieutenant with Combi-weapon
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Character
+  - Lieutenant
+  - Combi-weapon
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '4'
+    Ld: 6+
+    OC: '1'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged:
+    - name: Combi-weapon (bolter + plasma)
+      range: 24"/18"
+      A: 2/1
+      BS: 2+
+      S: 4/8
+      AP: 0/-3
+      D: 1/2
+      keywords:
+      - Hazardous (plasma)
+      mandatory: true
+    melee:
+    - name: Paired combat blades
+      A: '5'
+      WS: 2+
+      S: '4'
+      AP: '-1'
+      D: '1'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Lone Survivor
+      text: Peut être sélectionné comme Seigneur de Guerre ; s’il survit quand une
+        unité amie est détruite à 12", effectue un Normal Move de 6".
+    leader:
+      can_join:
+      - Infiltrator Squad
+      - Intercessor Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Jouer en flanc pour achever/dissuader via Hazardous ciblé.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets: []
+- name: Marneus Calgar
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Character
+  - Epic Hero
+  - Gravis
+  - Marneus Calgar
+  base:
+    M: 6"
+    T: '6'
+    Sv: 2+
+    W: '8'
+    Ld: 5+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Gauntlets of Ultramar (twin-linked, twin bolters)
+      range: 18"
+      A: '4'
+      BS: 2+
+      S: '4'
+      AP: '-1'
+      D: '2'
+      keywords:
+      - Twin-linked
+      mandatory: true
+    melee:
+    - name: Gauntlets of Ultramar (melee)
+      A: '8'
+      WS: 2+
+      S: '10'
+      AP: '-2'
+      D: '3'
+      keywords:
+      - Twin-linked
+      mandatory: true
+    - name: Victrix power sword (bodyguard)
+      A: '5'
+      WS: 2+
+      S: '5'
+      AP: '-2'
+      D: '2'
+      mandatory: false
+  abilities:
+    unit:
+    - name: Inspiring Leader
+      text: L’unité menée gagne +1 OC ; peut Advanced + Charge si accompagnée par
+        Victrix Honour Guard.
+    - name: Master Tactician
+      text: 'Début de ta phase de Commandement : +1CP.'
+    - name: Honour Guard
+      text: Inclut 2 Victrix Honour Guard (4++).
+    leader:
+      can_join:
+      - Assault Intercessor Squad
+      - Bladeguard Veteran Squad
+      - Company Heroes
+      - Hellblaster Squad
+      - Intercessor Squad
+      - SternGuard Veteran Squad
+      - Tactical Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Stacker CP via Master Tactician ; lancer une grosse phase de charge.
+      2:
+      - Tenir centre — profil de tank et OC boosté.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets: []
+- name: Roboute Guilliman
+  role: Monster
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Primarch
+  - Epic Hero
+  - Monster
+  - Roboute Guilliman
+  base:
+    M: 8"
+    T: '9'
+    Sv: 2+
+    W: '10'
+    Ld: 5+
+    OC: '4'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Hand of Dominion (bolt)
+      range: 30"
+      A: '2'
+      BS: 2+
+      S: '6'
+      AP: '-2'
+      D: '2'
+      keywords: []
+      mandatory: true
+    melee:
+    - name: Emperor’s Sword (Devastating Wounds)
+      A: '14'
+      WS: 2+
+      S: '12'
+      AP: '-3'
+      D: '3'
+      keywords:
+      - Devastating Wounds
+      mandatory: true
+    - name: Hand of Dominion (melee)
+      A: '2'
+      WS: 2+
+      S: '14'
+      AP: '-4'
+      D: '4'
+      keywords: []
+      mandatory: false
+  abilities:
+    unit:
+    - name: Author of the Codex
+      text: 'Début de ta phase de Commandement : sélectionne deux Core Doctrines (Gladius)
+        différentes — applique les deux ce round.'
+    - name: Primarch of the XIII
+      text: 'A 6" : Astartes amis gagnent +1 OC ; CORE Astartes à 6" relancent 1 touche
+        1 blessure / phase.'
+    - name: Armour of Fate
+      text: '1/partie, la première fois qu’il est détruit : sur 3+, se relève avec
+        D6 PV.'
+    - name: Supreme Commander
+      text: Doit être seigneur de guerre si inclus.
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Doubler les doctrines au round clef ; projeter aura OC au centre.
+      2:
+      - Garder Armour of Fate pour encaisser l’alpha.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets: []
+- name: Techmarine
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Character
+  - Infantry
+  - Techmarine
+  base:
+    M: 6"
+    T: '4'
+    Sv: 2+
+    W: '4'
+    Ld: 6+
+    OC: '1'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged:
+    - name: Forge bolter
+      range: 24"
+      A: '3'
+      BS: 2+
+      S: '5'
+      AP: '-1'
+      D: '2'
+      keywords: []
+      mandatory: true
+    - name: Grav-pistol
+      range: 12"
+      A: '1'
+      BS: 2+
+      S: '5'
+      AP: '-2'
+      D: '2'
+      keywords:
+      - Pistol
+      mandatory: false
+    melee:
+    - name: Omnissian power axe
+      A: '4'
+      WS: 3+
+      S: '7'
+      AP: '-2'
+      D: '2'
+      mandatory: true
+    - name: Servo-arm (extra attacks)
+      A: '1'
+      WS: 3+
+      S: '8'
+      AP: '-2'
+      D: '3'
+      keywords:
+      - Extra Attacks
+      mandatory: true
+  abilities:
+    unit:
+    - name: Technomancer
+      text: 'A 3" d’un ou plusieurs VEHICLE Astartes : au début de la Command phase,
+        restaure D3 PV à un véhicule (ou dupliquer un tir de tourelle sur Firestrike/Gladiator
+        selon datasheet).'
+    - name: Bionics
+      text: FNP 5+.
+    - name: Vengeance for Omnissiah
+      text: Tant qu’un VEHICLE ami est détruit ce round, +1 à la touche pour l’unité
+        menée.
+    leader:
+      can_join:
+      - Assault Intercessor Squad
+      - Devastator Squad
+      - Desolation Squad
+      - Hellblaster Squad
+      - Intercessor Squad
+      - SternGuard Veteran Squad
+      - Tactical Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Rester à 3" d’un char clé pour réparer/booster.
+      2:
+      - Utiliser le tir de support du Forge bolter pour finir une cible.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets: []
+- name: Uriel Ventris
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Character
+  - Epic Hero
+  - Captain
+  - Uriel Ventris
+  - Infantry
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '5'
+    Ld: 5+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged:
+    - name: Bolt pistol
+      range: 12"
+      A: '1'
+      BS: 2+
+      S: '4'
+      AP: '0'
+      D: '1'
+      keywords:
+      - Pistol
+      mandatory: false
+    melee:
+    - name: Sword of Idonus
+      A: '6'
+      WS: 2+
+      S: '6'
+      AP: '-2'
+      D: '2'
+      keywords:
+      - Sustained Hits 1
+      mandatory: true
+  abilities:
+    unit:
+    - name: Unorthodox Strategist (Aura)
+      text: 'Chaque fois que l’adversaire joue un Stratagem à 12" : +1 au coût (1/round).'
+    - name: Master of the Fleet
+      text: 'Au début de la phase de Déclaration de Bataille : sélectionne une unité
+        INFANTRY Astartes amie — gagne Deep Strike ce tour.'
+    leader:
+      can_join:
+      - Assault Intercessor Squad
+      - Bladeguard Veteran Squad
+      - Company Heroes
+      - Intercessor Squad
+      - SternGuard Veteran Squad
+      - Tactical Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Taxer le CP adverse ; donner FEP à une unité clé pour menaces croisées.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets: []
+- name: Lieutenant Titus
+  role: Character
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Character
+  - Epic Hero
+  - Lieutenant
+  - Titus
+  - Infantry
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '5'
+    Ld: 6+
+    OC: '1'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged:
+    - name: Heavy bolt pistol
+      range: 18"
+      A: '1'
+      BS: 2+
+      S: '4'
+      AP: '-1'
+      D: '1'
+      keywords:
+      - Pistol
+      mandatory: true
+    melee:
+    - name: Astartes chainsword
+      A: '6'
+      WS: 2+
+      S: '5'
+      AP: '-1'
+      D: '1'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Feel No Pain 5+
+      text: FNP 5+ (héros de film).
+    - name: Press the Attack
+      text: L’unité menée peut faire un Move Normal de 6" après avoir tué une cible
+        en Combat.
+    leader:
+      can_join:
+      - Assault Intercessor Squad
+      - Bladeguard Veteran Squad
+      - Hellblaster Squad
+      - Intercessor Squad
+      - SternGuard Veteran Squad
+      - Tactical Squad
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Chercher un kill pour ‘move after’ et voler un objo.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets: []
+- name: Assault Intercessor Squad
+  role: Battleline
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Battleline
+  - Primaris
+  - Assault Intercessor
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '2'
+    Ld: 6+
+    OC: '2'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged:
+    - name: Heavy bolt pistol (Sergent)
+      range: 18"
+      A: '1'
+      BS: 3+
+      S: '4'
+      AP: '-1'
+      D: '1'
+      keywords:
+      - Pistol
+      mandatory: false
+    melee:
+    - name: Astartes chainsword
+      A: '4'
+      WS: 3+
+      S: '5'
+      AP: '-1'
+      D: '1'
+      mandatory: true
+    - name: Power fist (option Sergent)
+      A: '3'
+      WS: 4+
+      S: '8'
+      AP: '-2'
+      D: '2'
+      mandatory: false
+  abilities:
+    unit:
+    - name: Shock Assault
+      text: 'Chaque fois qu’un modèle de l’unité cible un ennemi à portée d’Engagement
+        : sur un 6 pour toucher au CaC, +1 BM (max 6 par phase).'
+    leader:
+      can_join:
+      - Ancient
+      - Apothecary
+      - Chaplain
+      - Captain
+      - Judiciar
+      - Lieutenant
+      - Librarian
+      - Techmarine
+      - Uriel Ventris
+      - Lieutenant Titus
+      - Captain Sicarius
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Pousser en couvert, pistols, puis charge ; viser écran/OC.
+      - Cache-toi T1, prépare une charge T2.
+      2:
+      - BM sur 6 naturellement — relances utiles via auras.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        - Garde 1CP pour relancer la charge décisive.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks:
+        - Focus sur cibles OC faible pour voler l’objo.
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - anti-infanterie
+    - prise d’objo
+- name: Heavy Intercessor Squad
+  role: Battleline
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Battleline
+  - Heavy Intercessor
+  - Gravis
+  base:
+    M: 5"
+    T: '6'
+    Sv: 3+
+    W: '3'
+    Ld: 6+
+    OC: '2'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged:
+    - name: Heavy bolt rifle
+      range: 30"
+      A: '2'
+      BS: 3+
+      S: '5'
+      AP: '-1'
+      D: '2'
+      keywords: []
+      mandatory: true
+    melee:
+    - name: Close combat weapon
+      A: '3'
+      WS: 4+
+      S: '5'
+      AP: '0'
+      D: '1'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Unflinching in the Face of Fire
+      text: Si l’unité reste Stationary, chaque 6 pour toucher au tir => +1 touche.
+    leader:
+      can_join:
+      - Apothecary Biologis
+      - Captain in Gravis Armour
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Occuper objo fond de table ; buff via Biologis pour Lethal Hits.
+      - Pose écran et prends les objos en couverts.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        - Reste à portée d’objectif (OC élevé).
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        - Tire à mi-portée pour fiabiliser (rapid fire si dispo).
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - anti-écran
+    - tenue d’objo
+- name: Intercessor Squad
+  role: Battleline
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Battleline
+  - Primaris
+  - Intercessor
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '2'
+    Ld: 6+
+    OC: '2'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged:
+    - name: Bolt rifle
+      range: 24"
+      A: '2'
+      BS: 3+
+      S: '4'
+      AP: '0'
+      D: '1'
+      keywords: []
+      mandatory: true
+    - name: Plasma pistol (Sergent, option)
+      range: 12"
+      A: '1'
+      BS: 3+
+      S: '8'
+      AP: '-3'
+      D: '2'
+      keywords:
+      - Pistol
+      - Hazardous
+      mandatory: false
+    melee:
+    - name: Close combat weapon
+      A: '3'
+      WS: 4+
+      S: '4'
+      AP: '0'
+      D: '1'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Objective Secured
+      text: Si tu contrôles un objo à la fin de ta phase de Commandement, place un
+        marqueur — l’ennemi doit avoir +1 OC pour te le reprendre (jusqu’à ton prochain
+        tour).
+    leader:
+      can_join:
+      - Ancient
+      - Apothecary
+      - Chaplain
+      - Captain
+      - Judiciar
+      - Lieutenant
+      - Librarian
+      - Techmarine
+      - Uriel Ventris
+      - Lieutenant Titus
+      - Captain Sicarius
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Verrouiller un objo en posant le marqueur dès le T1.
+      - Pose écran et prends les objos en couverts.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        - Reste à portée d’objectif (OC élevé).
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        - Tire à mi-portée pour fiabiliser (rapid fire si dispo).
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets:
+    - anti-écran
+    - tenue d’objo
+- name: Tactical Squad
+  role: Battleline
+  keywords:
+  - Adeptus Astartes
+  - Ultramarines
+  - Infantry
+  - Battleline
+  - Tactical
+  base:
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: 1/2*
+    Ld: 6+
+    OC: '2'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged:
+    - name: Bolter
+      range: 24"
+      A: '2'
+      BS: 3+
+      S: '4'
+      AP: '0'
+      D: '1'
+      keywords: []
+      mandatory: true
+    melee:
+    - name: Astartes chainsword (sergent)
+      A: '4'
+      WS: 3+
+      S: '5'
+      AP: '-1'
+      D: '1'
+      mandatory: false
+    - name: Close combat weapon
+      A: '2'
+      WS: 3+
+      S: '4'
+      AP: '0'
+      D: '1'
+      mandatory: true
+  abilities:
+    unit:
+    - name: Combat Squads
+      text: Après avoir été placée sur table, peut se scinder en 2 unités (5/5) avec
+        équipements répartis.
+    leader:
+      can_join:
+      - Ancient
+      - Apothecary
+      - Chaplain
+      - Captain
+      - Judiciar
+      - Lieutenant
+      - Librarian
+      - Techmarine
+      - Uriel Ventris
+      - Lieutenant Titus
+      - Captain Sicarius
+    faction: Space Marines
+    detachment: Gladius Task Force
+  play_tips:
+    per_turn:
+      1:
+      - Utiliser Combat Squads pour occuper 2 objos/angles de tir.
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Prendre objo en couvert si possible.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets:
+        - Prioriser la cible d’Oath / priorité de liste.
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Déclarer multi-charge si pertinent.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Consolider pour voler/contester OC.
+        end: []
+      end:
+        score:
+        - Compter OC et marquer primaires/secondaires.
+        cleanup: []
+    stratagems:
+    - when: any
+      cp: 1
+      text: Garder 1CP pour Armour of Contempt si salve dangereuse.
+    synergies: []
+    targets: []
+schema_version: 1
+phases:
+  order:
+  - command
+  - movement
+  - shooting
+  - charge
+  - fight
+  - end
+  steps:
+    command:
+    - start
+    - battleshock
+    - abilities
+    - end
+    movement:
+    - start
+    - normal
+    - advance
+    - fallback
+    - end
+    shooting:
+    - start
+    - select_targets
+    - resolve
+    - end
+    charge:
+    - start
+    - declare
+    - overwatch_window
+    - move
+    - heroic
+    - end
+    fight:
+    - start
+    - pile_in
+    - make_attacks
+    - consolidate
+    - end
+    end:
+    - score
+    - cleanup
+faction_helpers:
+  turn_start:
+  - Gagner 1CP. Choisir/mettre à jour l’effet de détachement/doctrine.
+  - Déclarer la cible prioritaire (Oath) si applicable.
+  generic_reminders:
+    command:
+    - Battleshock sur unités à < 1/2 effectif.
+    - Placer auras/buffs en pensant à l’activation.
+    movement:
+    - Mesurer menaces (OW/HI) ; rester en couvert si possible.
+    shooting:
+    - Prioriser Oath/menaces ; éviter le split fire inutile.
+    charge:
+    - Prévoir multi-charge ; garder 1CP pour relance.
+    fight:
+    - Activer dans le bon ordre ; consolider pour voler OC.
+    end:
+    - Compter OC, scorer primaires/secondaires ; faire actions.

@@ -1,0 +1,563 @@
+schema_version: 1
+source: "Wahapedia — Space Marines (No Supplements), consulté 2025-08-30"
+notes: "Timing = quand jouer. 'player' peut être 'you', 'opponent' ou 'any'. 'phase' = command|movement|shooting|charge|fight|end, 'step' est un indicateur fin que tu peux mapper dans ta grille."
+
+stratagems:
+  # =====================
+  # GLADIUS TASK FORCE
+  # =====================
+  - name: "Armour of Contempt"
+    cp: 1
+    detachment: ["Gladius Task Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: opponent, phase: shooting, step: after_enemy_selects_targets }
+      - { player: opponent, phase: fight,    step: after_enemy_selects_targets }
+    target: "Une unité ADEPTUS ASTARTES ciblée."
+    effect: "Jusqu’à la fin des attaques de l’ennemi, AP -1 contre ton unité (i.e. l’ennemi voit son AP empiré de 1)."
+    play_tips:
+      - "Garde 1CP pour encaisser un spike (melta, PA élevée)."
+
+  - name: "Only in Death Does Duty End"
+    cp: 2
+    detachment: ["Gladius Task Force"]
+    type: "Epic Deed"
+    when:
+      - { player: any, phase: fight, step: after_enemy_selects_targets }
+    target: "Une unité ADEPTUS ASTARTES ciblée ce tour."
+    effect: "Tes figurines détruites peuvent frapper après les attaques ennemies (puis retirées)."
+    play_tips:
+      - "Parfait si tu te fais charger et vas perdre l’init."
+
+  - name: "Honour the Chapter"
+    cp: 1
+    detachment: ["Gladius Task Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: you, phase: fight, step: start }
+    target: "Une unité ADEPTUS ASTARTES."
+    effect: "[LANCE] aux armes de mêlée ; si Assault Doctrine actif: AP+1."
+    play_tips:
+      - "Optimale sur charge ou unité de percée."
+
+  - name: "Adaptive Strategy"
+    cp: 1
+    detachment: ["Gladius Task Force"]
+    type: "Strategic Ploy"
+    when:
+      - { player: you, phase: command, step: start }
+    target: "Une unité ADEPTUS ASTARTES."
+    effect: "Active Devastator/Tactical/Assault pour CETTE unité jusqu’à ta prochaine phase de commandement."
+    play_tips:
+      - "Permet d’isoler la bonne doctrine pour l’unité clé."
+
+  - name: "Storm of Fire"
+    cp: 1
+    detachment: ["Gladius Task Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: you, phase: shooting, step: start }
+    target: "Une unité n’ayant pas encore tiré."
+    effect: "[IGNORES COVER]; si Devastator actif: AP+1 aussi."
+    play_tips:
+      - "Idéal pour déloger des unités à couvert (Oath cible)."
+
+  - name: "Squad Tactics"
+    cp: 1
+    detachment: ["Gladius Task Force"]
+    type: "Strategic Ploy"
+    when:
+      - { player: opponent, phase: movement, step: after_enemy_ends_move }
+    target: "INFANTRY/MOUNTED à 9\" de l’ennemi qui vient de bouger."
+    effect: "Mouvement normal D6\" (6\" si Tactical actif). Interdit si engagé."
+    play_tips:
+      - "Clutch pour ‘phaser’ lignes de tir/objos/charges."
+
+  # =====================
+  # ANVIL SIEGE FORCE
+  # =====================
+  - name: "Armour of Contempt"
+    cp: 1
+    detachment: ["Anvil Siege Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: opponent, phase: shooting, step: after_enemy_selects_targets }
+      - { player: opponent, phase: fight,    step: after_enemy_selects_targets }
+    target: "Une unité ciblée."
+    effect: "AP adverse -1 jusqu’à fin des attaques."
+    play_tips:
+      - "Protège tes briques assises sur un objo."
+
+  - name: "Rigid Discipline"
+    cp: 1
+    detachment: ["Anvil Siege Force"]
+    type: "Strategic Ploy"
+    when:
+      - { player: any, phase: fight, step: end }
+    target: "Une unité à portée d’ennemis."
+    effect: "Effectue immédiatement un Fall Back jusqu’à 6\". Doit finir dans ta zone de déploiement ou à portée d’un objo."
+    play_tips:
+      - "S’extraire d’un mauvais CàC pour re-tirer."
+
+  - name: "Not One Backwards Step"
+    cp: 1
+    detachment: ["Anvil Siege Force"]
+    type: "Strategic Ploy"
+    when:
+      - { player: you, phase: command, step: start }
+    target: "INFANTRY sur un objo contrôlé."
+    effect: "Double OC jusqu’à fin du tour ; doit Remain Stationary."
+    play_tips:
+      - "Transformer une petite escouade en mur d’OC."
+
+  - name: "No Threat Too Great"
+    cp: 2
+    detachment: ["Anvil Siege Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: you, phase: shooting, step: start }
+    target: "Une unité n’ayant pas tiré."
+    effect: "Contre MONSTER/VEHICLE: tu peux relancer les jets de blessure."
+    play_tips:
+      - "Bouton ‘delete’ sur monstres/chars."
+
+  - name: "Battle Drill Recall"
+    cp: 1
+    detachment: ["Anvil Siege Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: you, phase: shooting, step: start }
+    target: "Une unité n’ayant pas tiré."
+    effect: "[SUSTAINED HITS 1]; si Remained Stationary: Crit sur 5+."
+    play_tips:
+      - "Gros tour stationnaire pour saturer."
+
+  - name: "Hail of Vengeance"
+    cp: 2
+    detachment: ["Anvil Siege Force"]
+    type: "Strategic Ploy"
+    when:
+      - { player: opponent, phase: shooting, step: after_enemy_resolves_attacks }
+    target: "Une unité ayant perdu des figurines à cause de cet ennemi."
+    effect: "Tire comme en ta phase de tir mais uniquement sur l’attaquant (si cible éligible)."
+    play_tips:
+      - "Dissuasion du tir adverse / contre-alpha."
+
+  # =====================
+  # IRONSTORM SPEARHEAD
+  # =====================
+  - name: "Unbowed Conviction"
+    cp: 1
+    detachment: ["Ironstorm Spearhead"]
+    type: "Battle Tactic"
+    when:
+      - { player: you, phase: command, step: start }
+    target: "Une unité sous Starting Strength."
+    effect: "Ignore tous modifs de caracs et de jets/tests (hors sauvegardes) jusqu’à fin du tour."
+    play_tips:
+      - "Garde utilité à une unité amochée."
+
+  - name: "Armour of Contempt"
+    cp: 1
+    detachment: ["Ironstorm Spearhead"]
+    type: "Battle Tactic"
+    when:
+      - { player: opponent, phase: shooting, step: after_enemy_selects_targets }
+      - { player: opponent, phase: fight,    step: after_enemy_selects_targets }
+    target: "Une unité ciblée."
+    effect: "AP adverse -1 jusqu’à fin des attaques."
+    play_tips:
+      - "Très fort sur tes véhicules sous feu lourd."
+
+  - name: "Mercy is Weakness"
+    cp: 2
+    detachment: ["Ironstorm Spearhead"]
+    type: "Battle Tactic"
+    when:
+      - { player: you, phase: shooting, step: start }
+      - { player: you, phase: fight,    step: start }
+    target: "Une unité n’ayant pas tiré/frappé."
+    effect: "Contre unités < Starting Strength: [SUSTAINED HITS 1]; si attaquant est VEHICLE: Crit sur 5+."
+    play_tips:
+      - "Finition sur cibles déjà entamées."
+
+  - name: "Vengeful Animus"
+    cp: 1
+    detachment: ["Ironstorm Spearhead"]
+    type: "Epic Deed"
+    when:
+      - { player: any, phase: any, step: after_vehicle_destroyed_with_deadly_demise }
+    target: "Un VEHICLE ami (Deadly Demise) détruit."
+    effect: "Deadly Demise auto (pas de jet)."
+    play_tips:
+      - "Assure des mortelles sur explosion."
+
+  - name: "Ancient Fury"
+    cp: 1
+    detachment: ["Ironstorm Spearhead"]
+    type: "Epic Deed"
+    when:
+      - { player: you, phase: command, step: start }
+    target: "Un WALKER ADEPTUS ASTARTES."
+    effect: "+1 M, +1 T, +1 Ld, +1 OC, et +1 pour toucher jusqu’à ta prochaine phase de commandement."
+    play_tips:
+      - "Pré-buff Dread avant push."
+
+  - name: "Power of the Machine Spirit"
+    cp: 1
+    detachment: ["Ironstorm Spearhead"]
+    type: "Epic Deed"
+    when:
+      - { player: opponent, phase: shooting, step: after_enemy_resolves_attacks }
+    target: "Un VEHICLE passé < Half-Strength par cet ennemi."
+    effect: "Tire en représailles sur cet ennemi (si cible éligible)."
+    play_tips:
+      - "Retour de flamme après focus adverse."
+
+  # =====================
+  # FIRESTORM ASSAULT FORCE
+  # =====================
+  - name: "Armour of Contempt"
+    cp: 1
+    detachment: ["Firestorm Assault Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: opponent, phase: shooting, step: after_enemy_selects_targets }
+      - { player: opponent, phase: fight,    step: after_enemy_selects_targets }
+    target: "Une unité ciblée."
+    effect: "AP adverse -1 jusqu’à fin des attaques."
+    play_tips:
+      - "Protège transport/première ligne."
+
+  - name: "Crucible of Battle"
+    cp: 1
+    detachment: ["Firestorm Assault Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: you, phase: shooting, step: start }
+      - { player: you, phase: fight,    step: start }
+    target: "INFANTRY n’ayant pas tiré/frappé."
+    effect: "+1 pour blesser si vise la cible éligible la plus proche à 6\"."
+    play_tips:
+      - "Parfait pour SM à courte portée."
+
+  - name: "Rapid Embarkation"
+    cp: 1
+    detachment: ["Firestorm Assault Force"]
+    type: "Strategic Ploy"
+    when:
+      - { player: any, phase: fight, step: end }
+    target: "Un TRANSPORT vide + une INFANTRY à 6\"."
+    effect: "L’INFANTRY embarque immédiatement (limitations usuelles)."
+    play_tips:
+      - "Extraction après CàC pour se reprojeter."
+
+  - name: "Immolation Protocols"
+    cp: 2
+    detachment: ["Firestorm Assault Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: you, phase: shooting, step: start }
+    target: "Une unité n’ayant pas tiré."
+    effect: "Armes Torrent gagnent [DEVASTATING WOUNDS] ce tour."
+    play_tips:
+      - "Démolit élites/multi-PV en pack."
+
+  - name: "Onslaught of Fire"
+    cp: 1
+    detachment: ["Firestorm Assault Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: you, phase: shooting, step: start }
+    target: "Une unité ayant débarqué ce tour et pas encore tiré."
+    effect: "Contre la cible éligible la plus proche à 12\": +1 pour toucher; si pertes: test de Battleshock."
+    play_tips:
+      - "Combo ‘débarque + rafale’ pour casser l’OC."
+
+  - name: "Burning Vengeance"
+    cp: 1
+    detachment: ["Firestorm Assault Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: opponent, phase: shooting, step: after_enemy_resolves_attacks }
+    target: "Un TRANSPORT ciblé; choisis une unité embarquée."
+    effect: "Elle débarque (comme en phase de mvt) puis tire (comme en phase de tir) uniquement sur cet ennemi (si éligible)."
+    play_tips:
+      - "Piège de représailles au tir sur transport."
+
+  # =====================
+  # STORMLANCE TASK FORCE
+  # =====================
+  - name: "Armour of Contempt"
+    cp: 1
+    detachment: ["Stormlance Task Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: opponent, phase: shooting, step: after_enemy_selects_targets }
+      - { player: opponent, phase: fight,    step: after_enemy_selects_targets }
+    target: "Une unité ciblée."
+    effect: "AP adverse -1 jusqu’à fin des attaques."
+    play_tips:
+      - "Sauver motos/volants d’un alpha adverse."
+
+  - name: "Blitzing Fusillade"
+    cp: 1
+    detachment: ["Stormlance Task Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: you, phase: shooting, step: start }
+    target: "Une unité n’ayant pas tiré."
+    effect: "Armes gagnent [ASSAULT]; si déjà [ASSAULT], gagnent [SUSTAINED HITS 1] à la place."
+    play_tips:
+      - "Advance & shoot propre; spike de saturation."
+
+  - name: "Full Throttle"
+    cp: 2
+    detachment: ["Stormlance Task Force"]
+    type: "Wargear"
+    when:
+      - { player: you, phase: movement, step: start }
+    target: "MOUNTED ou VEHICLE (sauf WALKER)."
+    effect: "Si Advance: pas de jet, +6\" (ou +9\" si MOUNTED) au Move pour la phase."
+    play_tips:
+      - "Angles T1 / charge longue portée."
+
+  - name: "Shock Assault"
+    cp: 1
+    detachment: ["Stormlance Task Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: you, phase: charge, step: declare }
+    target: "Une unité MOUNTED n’ayant pas encore déclaré."
+    effect: "Relance de charge; armes de mêlée gagnent [LANCE] ce tour."
+    play_tips:
+      - "Marteau monté; combo Full Throttle."
+
+  - name: "Ride Hard, Ride Fast"
+    cp: 1
+    detachment: ["Stormlance Task Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: opponent, phase: shooting, step: after_enemy_selects_targets }
+    target: "MOUNTED ou VEHICLE (FLY) ciblé."
+    effect: "Jusqu’à fin de phase: -1 pour toucher et -1 pour blesser contre ton unité."
+    play_tips:
+      - "Clutch survivabilité bikes/volants."
+
+  - name: "Wind-Swift Evasion"
+    cp: 1
+    detachment: ["Stormlance Task Force"]
+    type: "Strategic Ploy"
+    when:
+      - { player: opponent, phase: movement, step: after_enemy_ends_move }
+    target: "INFANTRY/MOUNTED à 9\" de l’ennemi."
+    effect: "Mouvement normal 6\". Interdit si engagé."
+    play_tips:
+      - "Sortir des lignes de vue / casser multi-charge."
+
+  # =====================
+  # VANGUARD SPEARHEAD
+  # =====================
+  - name: "A Deadly Prize"
+    cp: 1
+    detachment: ["Vanguard Spearhead"]
+    type: "Wargear"
+    when:
+      - { player: you, phase: command, step: start }
+    target: "INFANTRY/MOUNTED à portée d’un objo contrôlé."
+    effect: "L’objectif devient Sabotaged et reste à toi jusqu’à capture adverse; chaque fin de mouvement ennemi à portée: sur 2+ inflige D3 BM."
+    play_tips:
+      - "Piège à mi-table; use & attrition."
+
+  - name: "Armour of Contempt"
+    cp: 1
+    detachment: ["Vanguard Spearhead"]
+    type: "Battle Tactic"
+    when:
+      - { player: opponent, phase: shooting, step: after_enemy_selects_targets }
+      - { player: opponent, phase: fight,    step: after_enemy_selects_targets }
+    target: "Une unité ciblée."
+    effect: "AP adverse -1 jusqu’à fin des attaques."
+    play_tips:
+      - "Protège tes écrans infiltrés."
+
+  - name: "Surgical Strikes"
+    cp: 2
+    detachment: ["Vanguard Spearhead"]
+    type: "Battle Tactic"
+    when:
+      - { player: any, phase: fight, step: start }
+    target: "INFANTRY n’ayant pas encore frappé."
+    effect: "Armes de mêlée gagnent [PRECISION] ce tour."
+    play_tips:
+      - "Assassiner des persos intégrés au pack."
+
+  - name: "Strike from the Shadows"
+    cp: 1
+    detachment: ["Vanguard Spearhead"]
+    type: "Battle Tactic"
+    when:
+      - { player: you, phase: shooting, step: start }
+    target: "INFANTRY n’ayant pas tiré."
+    effect: "Contre cibles à >12\": +1 CT et +1 AP; si pertes: test de Battleshock."
+    play_tips:
+      - "Phobos/snipers pour breaker morale/OC."
+
+  - name: "Calculated Feint"
+    cp: 1
+    detachment: ["Vanguard Spearhead"]
+    type: "Strategic Ploy"
+    when:
+      - { player: opponent, phase: charge, step: after_enemy_declares_charge }
+    target: "INFANTRY visée par cette charge."
+    effect: "Mouvement normal D6\" (6\" si PHOBOS/SCOUT)."
+    play_tips:
+      - "Casse la multi-charge, crée des échecs de charge."
+
+  - name: "Guerrilla Tactics"
+    cp: 1
+    detachment: ["Vanguard Spearhead"]
+    type: "Strategic Ploy"
+    when:
+      - { player: opponent, phase: fight, step: end }
+    target: "Jusqu’à 2 PHOBOS/SCOUT, ou 1 autre INFANTRY."
+    effect: "Retire ces unités en Réserves Stratégiques (>3\" de tout ennemi)."
+    play_tips:
+      - "Extraction/reprojection pour le T2/T3."
+
+  # =====================
+  # 1ST COMPANY TASK FORCE
+  # =====================
+  - name: "Armour of Contempt"
+    cp: 1
+    detachment: ["1st Company Task Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: opponent, phase: shooting, step: after_enemy_selects_targets }
+      - { player: opponent, phase: fight,    step: after_enemy_selects_targets }
+    target: "Une unité ciblée."
+    effect: "AP adverse -1 jusqu’à fin des attaques."
+    play_tips:
+      - "Sauve tes vétérans haute valeur."
+
+  - name: "Heroes of the Chapter"
+    cp: 1
+    detachment: ["1st Company Task Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: you, phase: shooting, step: start }
+      - { player: you, phase: fight,    step: start }
+    target: "TERMINATOR/BLADEGUARD/STERNGUARD/VANGUARD VETS n’ayant pas tiré/frappé."
+    effect: "+1 pour toucher; si < Half-strength: +1 pour blesser aussi."
+    play_tips:
+      - "Spike de dégâts sur vétérans clés."
+
+  - name: "Terrifying Proficiency"
+    cp: 1
+    detachment: ["1st Company Task Force"]
+    type: "Strategic Ploy"
+    when:
+      - { player: you, phase: fight, step: start }
+    target: "Même familles d’unités, ayant chargé et détruit une unité ce tour."
+    effect: "Dans la prochaine phase de commandement adverse, chaque ennemi à 6\" doit faire un test de Battleshock (-1 si < Half-strength)."
+    play_tips:
+      - "Bascule pression morale en zone."
+
+  - name: "Duty and Honour"
+    cp: 1
+    detachment: ["1st Company Task Force"]
+    type: "Strategic Ploy"
+    when:
+      - { player: you, phase: movement, step: start }
+    target: "Même familles d’unités à portée d’un objo contrôlé."
+    effect: "L’objo reste à toi jusqu’à ce que l’adversaire le contrôle au début/fin de tour."
+    play_tips:
+      - "Verrouille un objo pendant redeploi."
+
+  - name: "Orbital Teleportarium"
+    cp: 1
+    detachment: ["1st Company Task Force"]
+    type: "Strategic Ploy"
+    when:
+      - { player: opponent, phase: fight, step: end }
+    target: "TERMINATOR non engagé."
+    effect: "Retire en Réserves Stratégiques; revient à ta prochaine phase de mvt (Reinforcements) en Deep Strike."
+    play_tips:
+      - "Sortie d’un mauvais CàC, set-up de DS."
+
+  - name: "Legendary Fortitude"
+    cp: 1
+    detachment: ["1st Company Task Force"]
+    type: "Battle Tactic"
+    when:
+      - { player: opponent, phase: charge, step: after_enemy_ends_charge_move }
+    target: "TERMINATOR/BLADEGUARD/STERNGUARD/VANGUARD VETS au contact du chargeur."
+    effect: "Jusqu’à fin du tour: Dégâts -1 contre cette unité."
+    play_tips:
+      - "Convertit une charge dangereuse en charge molle."
+
+  # =====================
+  # LIBRARIUS CONCLAVE
+  # =====================
+  - name: "Sensory Assault"
+    cp: 1
+    detachment: ["Librarius Conclave"]
+    type: "Strategic Ploy"
+    when:
+      - { player: you, phase: command, step: start }
+    target: "Une unité PSYKER ; sélectionne un ennemi à 18\" visible."
+    effect: "L’ennemi est ‘pinned’ (-2\" Mouvement, -2 Charge) jusqu’à ton prochain tour ; si Telepathy actif: test de Battleshock à -1."
+    play_tips:
+      - "Ralentit une menace de mêlée."
+
+  - name: "Armour of Contempt"
+    cp: 1
+    detachment: ["Librarius Conclave"]
+    type: "Strategic Ploy"
+    when:
+      - { player: opponent, phase: shooting, step: after_enemy_selects_targets }
+      - { player: opponent, phase: fight,    step: after_enemy_selects_targets }
+    target: "Une unité ciblée."
+    effect: "AP adverse -1 jusqu’à fin des attaques."
+
+  - name: "Fiery Shield"
+    cp: 1
+    detachment: ["Librarius Conclave"]
+    type: "Strategic Ploy"
+    when:
+      - { player: any, phase: fight, step: after_enemy_selects_targets }
+    target: "INFANTRY/MOUNTED à 18\" d’un PSYKER ami, ciblée par l’ennemi."
+    effect: "-1 pour toucher contre ton unité; si Pyromancy actif: attaques ennemies [HAZARDOUS]."
+    play_tips:
+      - "Parapluie défensif autour du Librarian."
+
+  - name: "Iron Arm"
+    cp: 1
+    detachment: ["Librarius Conclave"]
+    type: "Strategic Ploy"
+    when:
+      - { player: any, phase: fight, step: start }
+    target: "INFANTRY à 18\" d’un PSYKER, n’ayant pas frappé."
+    effect: "+1 Force en mêlée (ou +2 si Biomancy actif)."
+
+  - name: "Assail"
+    cp: 1
+    detachment: ["Librarius Conclave"]
+    type: "Strategic Ploy"
+    when:
+      - { player: you, phase: shooting, step: start }
+    target: "PSYKER apte à tirer ; choisis un ennemi visible à 18\" (hors Lone Operative)."
+    effect: "6D6 ( +1 par dé si Telekinesis actif ) ; chaque 4+ = 1 BM."
+    play_tips:
+      - "Gratte de la PV sur supports/écran."
+
+  - name: "Prescient Precision"
+    cp: 1
+    detachment: ["Librarius Conclave"]
+    type: "Strategic Ploy"
+    when:
+      - { player: you, phase: shooting, step: start }
+    target: "PSYKER n’ayant pas tiré."
+    effect: "[LETHAL HITS] ; si Divination actif: [IGNORES COVER] aussi."
+    play_tips:
+      - "Fiabilise la phase de tir soutenue."
