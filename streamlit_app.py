@@ -6,7 +6,7 @@ from typing import Dict, Any, List
 import streamlit as st
 from jinja2 import Template
 
-from create_cheat_sheet import run
+from .create_cheat_sheet import run
 
 # --------------------------- CONFIG ---------------------------------
 DEFAULT_YAML_DIR = Path(__file__).parent / "space_marines"
