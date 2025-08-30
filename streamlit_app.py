@@ -15,6 +15,7 @@ from create_cheat_sheet import run
 
 # --------------------------- CONFIG ---------------------------------
 DEFAULT_YAML_DIR = Path(__file__).parent / "data"
+DEFAULT_YAML_DIR_NOOB = Path(__file__).parent / "data_noob"
 FACTION = "Adeptus Astartes"
 CHAPTER = "Ultramarines"
 DETACHMENT_DEFAULT = "Gladius Task Force"
@@ -285,16 +286,30 @@ with tab_input:
     st.subheader("Source YAML")
     src = st.radio(
         "Charger les données d’unités depuis…",
-        ["Dossier local `space_marines/`", "Upload de fichiers YAML"],
+        [
+            "Dossier local `data/`",
+            "Dossier local `data_noob/`",
+            "Upload de fichiers YAML",
+        ],
         horizontal=True,
     )
 
     corpus = None
-    if src == "Dossier local `space_marines/`":
+    if src == "Dossier local `data/`":
         if DEFAULT_YAML_DIR.exists():
             corpus = load_yaml_dir(DEFAULT_YAML_DIR)
             st.success(
                 f"{len(corpus['units'])} unités et {len(corpus['stratagems'])} stratagèmes chargés depuis `{DEFAULT_YAML_DIR.name}/`."
+            )
+        else:
+            st.warning(
+                "Dossier `space_marines/` introuvable à côté de l'app. Utilise l’upload."
+            )
+    elif src == "Dossier local `data_noob/`":
+        if DEFAULT_YAML_DIR_NOOB.exists():
+            corpus = load_yaml_dir(DEFAULT_YAML_DIR_NOOB)
+            st.success(
+                f"{len(corpus['units'])} unités et {len(corpus['stratagems'])} stratagèmes chargés depuis `{DEFAULT_YAML_DIR_NOOB.name}/`."
             )
         else:
             st.warning(
