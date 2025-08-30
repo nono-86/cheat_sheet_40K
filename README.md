@@ -11,10 +11,11 @@ Based on those files and on an export from 40k android app, the app will create 
 *file_descriptor.yml*
 
 ## Obtain Yaml files???....
-Go to https://wahapedia.ru/wh40k10ed/factions/space-marines/datasheets.html
+https://wahapedia.ru/wh40k10ed/factions/space-marines/datasheets.html
 Ask ChatGPT to extract the data and produce yaml files for any army, based on *file_descriptor.yml*
 
 ## StreamLit
+https://cheatsheet40k.streamlit.app/
 The app can be deployed on StreamLit : just copy the files and you're done
 
 ### Streamlit specifics
