@@ -1,0 +1,30 @@
+# =========================
+# SCHEMA — STRATAGEM (V10)
+# =========================
+# Champs REQUIS: name, cp, detachment, type, when[], effect
+# Conventions:
+#  - player: you | opponent | any
+#  - phase:  command | movement | shooting | charge | fight | end
+#  - step:   utiliser tes steps canoniques (ex: start, select_targets, resolve, end, ...)
+#            ou un alias libre si besoin (ex: after_enemy_selects_targets) que tu mapperas.
+#  - detachment: liste des détachements autorisés (peut être ["All"] si valable partout)
+
+- name: "Nom du stratagème"
+  cp: 1                         # coût CP (entier)
+  detachment: ["Gladius Task Force"]   # ["All"] possible, ou plusieurs détachements
+  type: "Battle Tactic"         # "Battle Tactic" | "Strategic Ploy" | "Epic Deed" | "Wargear"
+  when:                         # une ou plusieurs fenêtres de timing
+    - player: opponent          # you | opponent | any
+      phase: shooting           # command|movement|shooting|charge|fight|end
+      step: select_targets      # un step de ta grille; alias possible si besoin
+      timing_note: "après que l’adversaire a choisi les cibles"   # (OPTIONNEL)
+  target: "Texte concis: qui peut en bénéficier / condition d’éligibilité"
+  effect: "Résumé clair et court de l’effet en langage joueur."
+  restrictions:                 # (OPTIONNEL) garde-fous/limites de fréquence
+    - "Une fois par phase"      # ex. “non cumulable”, “VEHICLE uniquement”, etc.
+  play_tips:                    # (OPTIONNEL) 2–4 tips jouables qui alimentent la timeline
+    - "Quand l’ennemi spike en PA, garde 1CP pour ce bouton panique."
+    - "Priorité: protéger une brique sur objectif en fin de tour adverse."
+  tags:                         # (OPTIONNEL) pour filtrer/afficher
+    - defensive
+    - universal

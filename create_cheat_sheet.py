@@ -12,6 +12,8 @@
 # -*- coding: utf-8 -*-
 
 import argparse
+from collections import defaultdict
+from pathlib import Path
 import re
 import os
 import glob
@@ -19,10 +21,76 @@ import html
 from difflib import get_close_matches
 
 try:
-    import yaml
+    import yaml # type: ignore
 except ImportError:
     raise SystemExit("PyYAML requis. Installe: pip install pyyaml")
 
+# -----------------------------
+# Stratagems
+# -----------------------------
+def load_stratagems(yaml_path: str | Path) -> list[dict]:
+    data = yaml.safe_load(Path(yaml_path).read_text(encoding="utf-8"))
+    return data.get("stratagems", [])
+
+def normalize_timing(s: dict) -> tuple[str, str, str]:
+    phase = s.get("phase", "command")
+    step  = s.get("step", "start")
+    who   = s.get("player", "you")  # you|opponent|any
+    # Optionnel: harmoniser quelques steps vers ceux de ta grille
+    alias = {
+        "after_enemy_selects_targets": "start",
+        "after_enemy_resolves_attacks": "end",
+        "after_enemy_ends_move": "start",
+        "after_enemy_declares_charge": "declare",
+        "after_enemy_ends_charge_move": "move",
+        "reinforcements": "start",
+        "any": "start",
+    }
+    step = alias.get(step, step)
+    # préfix utile pour visuel
+    prefix = {"you":"🟦", "opponent":"🟥", "any":"🟨"}[who]
+    label  = f"{prefix} Strat · "
+    return phase, step, label
+
+def add_stratagems_to_timeline(timeline: dict, strats: list[dict], detachment_name: str):
+    for st in strats:
+        if detachment_name not in st.get("detachment", []):
+            continue
+        for w in st.get("when", []):
+            phase, step, label = normalize_timing(w)
+            box = f"{label}{st['name']} ({st['cp']}CP) — {st.get('effect','')}"
+            timeline.setdefault(phase, {}).setdefault(step, []).append(box)
+    return timeline
+
+
+def strat_items_by_phase(strats: list[dict], detachment_name: str | None = None) -> dict[str, list[str]]:
+    """
+    Regroupe les stratagèmes par phase en <li> prêts à insérer.
+    Utilise normalize_timing(w) que tu as déjà.
+    """
+    bucket: dict[str, list[str]] = defaultdict(list)
+    for st in (strats or []):
+        # filtre détachement si fourni (accepte "All" si tu l'utilises)
+        if detachment_name and (detachment_name not in st.get("detachment", []) and "All" not in st.get("detachment", [])):
+            continue
+
+        name   = st.get("name", "—")
+        cp     = st.get("cp", "?")
+        effect = st.get("effect", "")
+
+        for w in st.get("when", []):
+            phase, step, label = normalize_timing(w)  # <- ton helper existant
+            line = (
+                "<li>"
+                + label
+                + "<b>" + html.escape(name) + "</b> ("
+                + str(cp) + "CP) — ["
+                + html.escape(step) + "] "
+                + html.escape(effect)
+                + "</li>"
+            )
+            bucket[phase].append(line)
+    return bucket
 # -----------------------------
 # Parsing de l'export 40k App
 # -----------------------------
@@ -241,7 +309,7 @@ def collect_phase_tips_for_unit(faction_helpers, u):
             out[key] = bullets
     return out
 
-def build_phase_board(faction_helpers, matched_units):
+def build_phase_board(faction_helpers, matched_units, strats):
     """Construit la Timeline globale par phase (génériques + spécifiques par unité)."""
     gen = (faction_helpers or {}).get("generic_reminders") or {}
     blocks = []
@@ -268,6 +336,10 @@ def build_phase_board(faction_helpers, matched_units):
             uname = u.get("name", mu["display"])
             for b in bullets:
                 items.append(f"<li><b>{html.escape(uname)}</b> — {html.escape(b)}</li>")
+        
+        # stratagems
+        items.extend(strat_map.get(key, []))
+
 
         html_box = f"<div class='box'><div class='phase'>{html.escape(label)}</div><ul>{''.join(items) if items else '<li class=\"small\">—</li>'}</ul></div>"
         (colA if idx < 3 else colB).append(html_box)
@@ -281,7 +353,7 @@ def build_phase_board(faction_helpers, matched_units):
   </div>
 </div>"""
 
-def generate_html(army, matched_units, faction_helpers, outfile):
+def generate_html(army, matched_units, faction_helpers, outfile, strats):
     subtitle_bits = []
     if army.get("format"):
         p = f"{army['format']} ({army['format_points']} pts)" if army.get("format_points") else army["format"]
@@ -300,7 +372,7 @@ def generate_html(army, matched_units, faction_helpers, outfile):
 """
 
     # Timeline globale en tête
-    head += build_phase_board(faction_helpers, matched_units)
+    head += build_phase_board(faction_helpers, matched_units, strats)
 
     head += '<div class="grid">'
 
@@ -385,7 +457,12 @@ def run(export_path: str, yaml_dir: str, out_file: str) -> str:
         })
     matched.sort(key=lambda x: (section_order.get((x["section"] or "").upper(), 9), -(x["match_score"] or 0)))
 
-    outfile = generate_html(army, matched, faction_helpers, out_file)
+    # Stratagems
+    strats = []
+    strat_yaml_path = Path(yaml_dir, "stratagems.yaml") 
+    strats = load_stratagems(strat_yaml_path)
+
+    outfile = generate_html(army, matched, faction_helpers, out_file, strats)
     return outfile
 
 def main(argv=None):
