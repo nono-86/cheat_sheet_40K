@@ -323,7 +323,7 @@ with tab_input:
             default_label = DEFAULT_YAML_DIR.name
 
         # 3) Radios : un bouton par dossier + option "Autre"
-        options = labels + ["⟶ Autre (saisir chemin)"]
+        options = labels
         try:
             default_index = options.index(default_label) if default_label else 0
         except ValueError:
