@@ -336,14 +336,7 @@ with tab_input:
         )
 
         # 4) Résolution du dossier choisi
-        if choice == "⟶ Autre (saisir chemin)":
-            custom = st.text_input(
-                "Chemin absolu/relatif du dossier YAML",
-                value=prev_dir or str(DEFAULT_YAML_DIR),
-            )
-            chosen_dir = Path(custom).expanduser()
-        else:
-            chosen_dir = data_dirs[labels.index(choice)]
+        chosen_dir = data_dirs[labels.index(choice)]
 
         # 5) Mémorise et charge le corpus
         st.session_state["data_dir"] = str(chosen_dir)
