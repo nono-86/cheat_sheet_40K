@@ -1,0 +1,2860 @@
+schema_version: 1
+phases:
+  order:
+  - command
+  - movement
+  - shooting
+  - charge
+  - fight
+  - end
+  steps:
+    command:
+    - start
+    - battleshock
+    - abilities
+    - end
+    movement:
+    - start
+    - normal
+    - advance
+    - fallback
+    - end
+    shooting:
+    - start
+    - select_targets
+    - resolve
+    - end
+    charge:
+    - start
+    - declare
+    - overwatch_window
+    - move
+    - heroic
+    - end
+    fight:
+    - start
+    - pile_in
+    - make_attacks
+    - consolidate
+    - end
+    end:
+    - score
+    - cleanup
+faction_helpers:
+  turn_start:
+  - 'Shadow in the Warp (1×/partie) : choisir un tour clé (souvent T2–T3) pour forcer
+    les tests.'
+  - Déclarer l’Hyper-adaptation du Détachement (si applicable).
+  generic_reminders:
+    command:
+    - 'Vérifier Synapse : rester à 6" d’une unité SYNAPSE pour bonus & tests 3D6.'
+    - Regeneration/Feed the Swarm (selon détachement).
+    movement:
+    - Mesurer menaces & poser angles de charges ; penser FEP/Réserves/Tunnels.
+    shooting:
+    - 'Tagger une cible pour buffs (ex: Bio-stimulus/precisions du détachement).'
+    charge:
+    - Multi-charges prudentes ; garder 1 CP pour relance.
+    fight:
+    - Activer dans l’ordre (unités fragiles d’abord s’il y a menace).
+    - Pile-in/Consolidate pour voler OC.
+    end:
+    - Compter OC sur objos ; marquer primaires/secondaires ; placer spores si pertinent.
+units:
+- name: Broodlord
+  role: Character
+  keywords:
+  - Tyranids
+  - Synapse
+  base:
+    M: 8"
+    T: '5'
+    Sv: 4+
+    W: '6'
+    Ld: 7+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Synapse
+      text: 'À 6": tests d’ébranlement à 3D6 ; +1F aux attaques de CàC amies. Rester
+        groupé.'
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start:
+        - Rester à 6" d’une SYNAPSE pour bonus.
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Deathleaper
+  role: Character
+  keywords:
+  - Tyranids
+  base:
+    M: 8"
+    T: '5'
+    Sv: 3+
+    W: '7'
+    Ld: 6+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Hive Tyrant
+  role: Character
+  keywords:
+  - Tyranids
+  - Synapse
+  base:
+    M: 6"
+    T: '10'
+    Sv: 2+
+    W: '10'
+    Ld: 7+
+    OC: '3'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Synapse
+      text: 'À 6": tests d’ébranlement à 3D6 ; +1F aux attaques de CàC amies. Rester
+        groupé.'
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start:
+        - Rester à 6" d’une SYNAPSE pour bonus.
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Neurotyrant
+  role: Character
+  keywords:
+  - Tyranids
+  - Synapse
+  base:
+    M: 6"
+    T: '8'
+    Sv: 4+
+    W: '9'
+    Ld: 7+
+    OC: '3'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Synapse
+      text: 'À 6": tests d’ébranlement à 3D6 ; +1F aux attaques de CàC amies. Rester
+        groupé.'
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start:
+        - Rester à 6" d’une SYNAPSE pour bonus.
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Old One Eye
+  role: Character
+  keywords:
+  - Tyranids
+  base:
+    M: 8"
+    T: '9'
+    Sv: 2+
+    W: '9'
+    Ld: 8+
+    OC: '3'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Parasite Of Mortrex
+  role: Character
+  keywords:
+  - Tyranids
+  - Synapse
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Synapse
+      text: 'À 6": tests d’ébranlement à 3D6 ; +1F aux attaques de CàC amies. Rester
+        groupé.'
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start:
+        - Rester à 6" d’une SYNAPSE pour bonus.
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Tervigon
+  role: Character
+  keywords:
+  - Tyranids
+  - Synapse
+  base:
+    M: 8"
+    T: '11'
+    Sv: 2+
+    W: '16'
+    Ld: 7+
+    OC: '5'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Synapse
+      text: 'À 6": tests d’ébranlement à 3D6 ; +1F aux attaques de CàC amies. Rester
+        groupé.'
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start:
+        - Rester à 6" d’une SYNAPSE pour bonus.
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: The Swarmlord
+  role: Character
+  keywords:
+  - Tyranids
+  - Synapse
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Synapse
+      text: 'À 6": tests d’ébranlement à 3D6 ; +1F aux attaques de CàC amies. Rester
+        groupé.'
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start:
+        - Rester à 6" d’une SYNAPSE pour bonus.
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Winged Hive Tyrant
+  role: Character
+  keywords:
+  - Tyranids
+  - Synapse
+  base:
+    M: 12"
+    T: '9'
+    Sv: 2+
+    W: '10'
+    Ld: 7+
+    OC: '3'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Synapse
+      text: 'À 6": tests d’ébranlement à 3D6 ; +1F aux attaques de CàC amies. Rester
+        groupé.'
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start:
+        - Rester à 6" d’une SYNAPSE pour bonus.
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Winged Tyranid Prime
+  role: Character
+  keywords:
+  - Tyranids
+  - Synapse
+  base:
+    M: 12"
+    T: '5'
+    Sv: 4+
+    W: '6'
+    Ld: 7+
+    OC: '1'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Synapse
+      text: 'À 6": tests d’ébranlement à 3D6 ; +1F aux attaques de CàC amies. Rester
+        groupé.'
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start:
+        - Rester à 6" d’une SYNAPSE pour bonus.
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Termagants
+  role: Infantry
+  keywords:
+  - Tyranids
+  base:
+    M: 6"
+    T: '3'
+    Sv: 5+
+    W: '1'
+    Ld: 7+
+    OC: '2'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Écran & prise d’objo ; rester en Synapse pour +1F au CàC.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start:
+        - Focus écrans / tenir objo, ne pas s’exposer inutilement.
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Hormagaunts
+  role: Infantry
+  keywords:
+  - Tyranids
+  base:
+    M: 10"
+    T: '3'
+    Sv: 5+
+    W: '1'
+    Ld: 7+
+    OC: '2'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Écran & prise d’objo ; rester en Synapse pour +1F au CàC.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start:
+        - Focus écrans / tenir objo, ne pas s’exposer inutilement.
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Gargoyles
+  role: Infantry
+  keywords:
+  - Tyranids
+  base:
+    M: 12"
+    T: '3'
+    Sv: 5+
+    W: '1'
+    Ld: 7+
+    OC: '2'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal:
+        - Écran & prise d’objo ; rester en Synapse pour +1F au CàC.
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start:
+        - Focus écrans / tenir objo, ne pas s’exposer inutilement.
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Tyranid Warriors With Melee Bio-weapons
+  role: Infantry
+  keywords:
+  - Tyranids
+  - Synapse
+  base:
+    M: 6"
+    T: '5'
+    Sv: 4+
+    W: '3'
+    Ld: 7+
+    OC: '2'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Synapse
+      text: 'À 6": tests d’ébranlement à 3D6 ; +1F aux attaques de CàC amies. Rester
+        groupé.'
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start:
+        - Rester à 6" d’une SYNAPSE pour bonus.
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities:
+        - Choisir l’impératif / buff de détachement utile pour la tâche.
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Tyranid Warriors With Ranged Bio-weapons
+  role: Infantry
+  keywords:
+  - Tyranids
+  - Synapse
+  base:
+    M: 6"
+    T: '5'
+    Sv: 4+
+    W: '3'
+    Ld: 7+
+    OC: '2'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Synapse
+      text: 'À 6": tests d’ébranlement à 3D6 ; +1F aux attaques de CàC amies. Rester
+        groupé.'
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start:
+        - Rester à 6" d’une SYNAPSE pour bonus.
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities:
+        - Choisir l’impératif / buff de détachement utile pour la tâche.
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Tyrant Guard
+  role: null
+  keywords:
+  - Tyranids
+  base:
+    M: 6"
+    T: '7'
+    Sv: 3+
+    W: '4'
+    Ld: 8+
+    OC: '1'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Zoanthropes
+  role: null
+  keywords:
+  - Tyranids
+  - Synapse
+  base:
+    M: 7"
+    T: '5'
+    Sv: 4+
+    W: '3'
+    Ld: 7+
+    OC: '1'
+    Inv: 4+
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Synapse
+      text: 'À 6": tests d’ébranlement à 3D6 ; +1F aux attaques de CàC amies. Rester
+        groupé.'
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start:
+        - Rester à 6" d’une SYNAPSE pour bonus.
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Venomthropes
+  role: null
+  keywords:
+  - Tyranids
+  base:
+    M: 8"
+    T: '5'
+    Sv: 4+
+    W: '3'
+    Ld: 7+
+    OC: '1'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Lictor
+  role: null
+  keywords:
+  - Tyranids
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance:
+        - Mettre la pression tôt ; menacer les angles et persos isolés.
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start:
+        - Déclarer charges multiples pour bloquer / enfermer des unités.
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Neurolictor
+  role: null
+  keywords:
+  - Tyranids
+  - Synapse
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Synapse
+      text: 'À 6": tests d’ébranlement à 3D6 ; +1F aux attaques de CàC amies. Rester
+        groupé.'
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start:
+        - Rester à 6" d’une SYNAPSE pour bonus.
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance:
+        - Mettre la pression tôt ; menacer les angles et persos isolés.
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start:
+        - Déclarer charges multiples pour bloquer / enfermer des unités.
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Pyrovores
+  role: null
+  keywords:
+  - Tyranids
+  - Harvester
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Genestealers
+  role: null
+  keywords:
+  - Tyranids
+  base:
+    M: 8"
+    T: '4'
+    Sv: 5+
+    W: '2'
+    Ld: 7+
+    OC: '1'
+    Inv: 5+
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance:
+        - Mettre la pression tôt ; menacer les angles et persos isolés.
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start:
+        - Déclarer charges multiples pour bloquer / enfermer des unités.
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Hive Guard
+  role: null
+  keywords:
+  - Tyranids
+  base:
+    M: 6"
+    T: '7'
+    Sv: 3+
+    W: '4'
+    Ld: 8+
+    OC: '1'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Barbgaunts
+  role: null
+  keywords:
+  - Tyranids
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Biovores
+  role: null
+  keywords:
+  - Tyranids
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Ripper Swarms
+  role: Swarms
+  keywords:
+  - Tyranids
+  base:
+    M: 10"
+    T: '2'
+    Sv: 6+
+    W: '4'
+    Ld: 8+
+    OC: '0'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Spore Mines
+  role: Swarms
+  keywords:
+  - Tyranids
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Sporocyst
+  role: null
+  keywords:
+  - Tyranids
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Raveners
+  role: null
+  keywords:
+  - Tyranids
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance:
+        - Mettre la pression tôt ; menacer les angles et persos isolés.
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start:
+        - Déclarer charges multiples pour bloquer / enfermer des unités.
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Von Ryan’s Leapers
+  role: null
+  keywords:
+  - Tyranids
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance:
+        - Mettre la pression tôt ; menacer les angles et persos isolés.
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start:
+        - Déclarer charges multiples pour bloquer / enfermer des unités.
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Carnifexes
+  role: Monster
+  keywords:
+  - Tyranids
+  base:
+    M: 8"
+    T: '9'
+    Sv: 2+
+    W: '8'
+    Ld: 8+
+    OC: '3'
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start:
+        - Mesurer lignes de vue & menaces ; penser couvert.
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Multi-charge si possible, attention au tir en état d’alerte.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Screamer-killer
+  role: Monster
+  keywords:
+  - Tyranids
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start:
+        - Mesurer lignes de vue & menaces ; penser couvert.
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Multi-charge si possible, attention au tir en état d’alerte.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Exocrine
+  role: Monster
+  keywords:
+  - Tyranids
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start:
+        - Mesurer lignes de vue & menaces ; penser couvert.
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Multi-charge si possible, attention au tir en état d’alerte.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Haruspex
+  role: Monster
+  keywords:
+  - Tyranids
+  - Harvester
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Psychophage
+  role: Monster
+  keywords:
+  - Tyranids
+  - Harvester
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Rôle
+      text: Debuff tir puis buff AP en CàC contre une cible touchée (Bio-stimulus).
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Tyrannofex
+  role: Monster
+  keywords:
+  - Tyranids
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start:
+        - Mesurer lignes de vue & menaces ; penser couvert.
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare:
+        - Multi-charge si possible, attention au tir en état d’alerte.
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Maleceptor
+  role: Monster
+  keywords:
+  - Tyranids
+  - Synapse
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Synapse
+      text: 'À 6": tests d’ébranlement à 3D6 ; +1F aux attaques de CàC amies. Rester
+        groupé.'
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start:
+        - Rester à 6" d’une SYNAPSE pour bonus.
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Norn Emissary
+  role: Monster
+  keywords:
+  - Tyranids
+  - Synapse
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Synapse
+      text: 'À 6": tests d’ébranlement à 3D6 ; +1F aux attaques de CàC amies. Rester
+        groupé.'
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start:
+        - Rester à 6" d’une SYNAPSE pour bonus.
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Norn Assimilator
+  role: Monster
+  keywords:
+  - Tyranids
+  - Harvester
+  - Synapse
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Synapse
+      text: 'À 6": tests d’ébranlement à 3D6 ; +1F aux attaques de CàC amies. Rester
+        groupé.'
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start:
+        - Rester à 6" d’une SYNAPSE pour bonus.
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Trygon
+  role: Monster
+  keywords:
+  - Tyranids
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Mawloc
+  role: Monster
+  keywords:
+  - Tyranids
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit: []
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
+- name: Tyrannocyte
+  role: Dedicated Transport
+  keywords:
+  - Tyranids
+  base:
+    M: ??
+    T: ??
+    Sv: ??
+    W: ??
+    Ld: ??
+    OC: ??
+    Inv: null
+    FnP: null
+  weapons:
+    ranged: []
+    melee: []
+  abilities:
+    faction: Tyranids
+    detachment: null
+    unit:
+    - name: Rôle
+      text: Transport tyranide (INFANTRY x20 ou MONSTER ≤ 12PV).
+  play_tips:
+    per_turn:
+      1: []
+      2: []
+      3: []
+    phases:
+      command:
+        start: []
+        battleshock:
+        - Tester si < 1/2 effectif.
+        abilities: []
+        end: []
+      movement:
+        start: []
+        normal: []
+        advance: []
+        fallback: []
+        end: []
+      shooting:
+        start: []
+        select_targets: []
+        resolve: []
+        end: []
+      charge:
+        start: []
+        declare: []
+        overwatch_window: []
+        move: []
+        heroic: []
+        end: []
+      fight:
+        start: []
+        pile_in: []
+        make_attacks: []
+        consolidate:
+        - Conso pour voler OC
+        end: []
+      end:
+        score:
+        - Compter OC
+        cleanup: []
+    stratagems: []
+    synergies: []
+    targets: []
