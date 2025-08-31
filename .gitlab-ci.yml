@@ -36,5 +36,3 @@ mirror_to_github:
     - git remote add mirror "https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/${GITHUB_OWNER}/${GITHUB_REPO}.git"
     # push complet : branches + tags + notes
     - git push --mirror mirror
-  only:
-    - main
