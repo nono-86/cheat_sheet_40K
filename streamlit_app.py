@@ -306,12 +306,14 @@ with tab_input:
     corpus = None
 
     if src == "Dossier local (data_*)":
-        # 1) Liste des data_* disponibles à la racine du projet
-        data_dirs = find_data_dirs(APP_DIR)
+        # 1) Liste tous les dossiers data_* + "data" s'il existe
+        data_dirs = find_data_dirs(
+            APP_DIR
+        )  # [Path(.../data), Path(.../data_noob), Path(.../data_xxx), ...]
         labels = [d.name for d in data_dirs]
 
-        # 2) Choix par selectbox (+ option chemin libre)
-        prev_dir = st.session_state.get("data_dir")  # dernier dossier choisi
+        # 2) Gestion du défaut (dernier choix ou DEFAULT_YAML_DIR)
+        prev_dir = st.session_state.get("data_dir")
         default_label = None
         if prev_dir:
             prev_name = Path(prev_dir).name
@@ -319,20 +321,21 @@ with tab_input:
                 default_label = prev_name
         if default_label is None and DEFAULT_YAML_DIR.exists():
             default_label = DEFAULT_YAML_DIR.name
-        default_index = (
-            labels.index(default_label)
-            if (default_label in labels)
-            else (0 if labels else 0)
+
+        # 3) Radios : un bouton par dossier + option "Autre"
+        options = labels + ["⟶ Autre (saisir chemin)"]
+        try:
+            default_index = options.index(default_label) if default_label else 0
+        except ValueError:
+            default_index = 0
+
+        choice = st.radio(
+            "Choisis le dossier de données YAML",
+            options=options,
+            index=min(default_index, len(options) - 1),
         )
 
-        choice = st.selectbox(
-            "Dossier de données YAML",
-            labels + ["⟶ Autre (saisir chemin)"],
-            index=(
-                min(default_index, len(labels) - 1) if labels else len(labels)
-            ),  # si aucun label, pointe sur l'option "Autre"
-        )
-
+        # 4) Résolution du dossier choisi
         if choice == "⟶ Autre (saisir chemin)":
             custom = st.text_input(
                 "Chemin absolu/relatif du dossier YAML",
@@ -340,15 +343,12 @@ with tab_input:
             )
             chosen_dir = Path(custom).expanduser()
         else:
-            chosen_dir = (
-                data_dirs[labels.index(choice)]
-                if labels
-                else Path(prev_dir or DEFAULT_YAML_DIR)
-            )
+            chosen_dir = data_dirs[labels.index(choice)]
 
+        # 5) Mémorise et charge le corpus
         st.session_state["data_dir"] = str(chosen_dir)
 
-        if chosen_dir.exists():
+        if chosen_dir.exists() and chosen_dir.is_dir():
             corpus = load_yaml_dir(chosen_dir)
             st.session_state["corpus"] = corpus  # dispo pour l’onglet Aperçu
             st.success(
