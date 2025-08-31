@@ -1,0 +1,40 @@
+stages:
+  - test
+  - mirror
+
+variables:
+  GIT_DEPTH: "0"            # on veut l'historique complet pour un push --mirror
+
+# (Optionnel) Lint/quick tests avant de déployer
+lint:
+  stage: test
+  image: python:3.11-slim
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  before_script:
+    - pip install --no-cache-dir flake8
+  script:
+    - flake8 .
+  allow_failure: false
+
+mirror_to_github:
+  stage: mirror
+  image: alpine:3.20
+  needs: ["lint"]
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  before_script:
+    - apk add --no-cache git
+    # configure l'identité git pour le push
+    - git config --global user.email "${GITLAB_USER_EMAIL:-ci@gitlab}"
+    - git config --global user.name  "${GITLAB_USER_NAME:-gitlab-ci}"
+    # s'assure d'avoir tous les refs (tags, branches)
+    - git fetch --prune --tags
+  script:
+    # ajoute le remote GitHub authentifié via PAT
+    - git remote remove mirror 2>/dev/null || true
+    - git remote add mirror "https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/${GITHUB_OWNER}/${GITHUB_REPO}.git"
+    # push complet : branches + tags + notes
+    - git push --mirror mirror
+  only:
+    - main

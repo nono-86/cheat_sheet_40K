@@ -67,13 +67,13 @@ units:
   - Tyranids
   - Synapse
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
-    Inv: null
+    M: 8"
+    T: '5'
+    Sv: 4+
+    W: '6'
+    Ld: 7+
+    OC: '1'
+    Inv: 4+
     FnP: null
   weapons:
     ranged: []
@@ -135,13 +135,13 @@ units:
   keywords:
   - Tyranids
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
-    Inv: null
+    M: 8"
+    T: '5'
+    Sv: 3+
+    W: '7'
+    Ld: 6+
+    OC: '1'
+    Inv: 4+
     FnP: null
   weapons:
     ranged: []
@@ -200,13 +200,13 @@ units:
   - Tyranids
   - Synapse
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
-    Inv: null
+    M: 6"
+    T: '10'
+    Sv: 2+
+    W: '10'
+    Ld: 7+
+    OC: '3'
+    Inv: 4+
     FnP: null
   weapons:
     ranged: []
@@ -269,13 +269,13 @@ units:
   - Tyranids
   - Synapse
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
-    Inv: null
+    M: 6"
+    T: '8'
+    Sv: 4+
+    W: '9'
+    Ld: 7+
+    OC: '3'
+    Inv: 4+
     FnP: null
   weapons:
     ranged: []
@@ -337,12 +337,12 @@ units:
   keywords:
   - Tyranids
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 8"
+    T: '9'
+    Sv: 2+
+    W: '9'
+    Ld: 8+
+    OC: '3'
     Inv: null
     FnP: null
   weapons:
@@ -471,12 +471,12 @@ units:
   - Tyranids
   - Synapse
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 8"
+    T: '11'
+    Sv: 2+
+    W: '16'
+    Ld: 7+
+    OC: '5'
     Inv: null
     FnP: null
   weapons:
@@ -609,13 +609,13 @@ units:
   - Tyranids
   - Synapse
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
-    Inv: null
+    M: 12"
+    T: '9'
+    Sv: 2+
+    W: '10'
+    Ld: 7+
+    OC: '3'
+    Inv: 4+
     FnP: null
   weapons:
     ranged: []
@@ -678,12 +678,12 @@ units:
   - Tyranids
   - Synapse
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 12"
+    T: '5'
+    Sv: 4+
+    W: '6'
+    Ld: 7+
+    OC: '1'
     Inv: null
     FnP: null
   weapons:
@@ -746,12 +746,12 @@ units:
   keywords:
   - Tyranids
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 6"
+    T: '3'
+    Sv: 5+
+    W: '1'
+    Ld: 7+
+    OC: '2'
     Inv: null
     FnP: null
   weapons:
@@ -812,12 +812,12 @@ units:
   keywords:
   - Tyranids
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 10"
+    T: '3'
+    Sv: 5+
+    W: '1'
+    Ld: 7+
+    OC: '2'
     Inv: null
     FnP: null
   weapons:
@@ -878,12 +878,12 @@ units:
   keywords:
   - Tyranids
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 12"
+    T: '3'
+    Sv: 5+
+    W: '1'
+    Ld: 7+
+    OC: '2'
     Inv: null
     FnP: null
   weapons:
@@ -945,12 +945,12 @@ units:
   - Tyranids
   - Synapse
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 6"
+    T: '5'
+    Sv: 4+
+    W: '3'
+    Ld: 7+
+    OC: '2'
     Inv: null
     FnP: null
   weapons:
@@ -1015,12 +1015,12 @@ units:
   - Tyranids
   - Synapse
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 6"
+    T: '5'
+    Sv: 4+
+    W: '3'
+    Ld: 7+
+    OC: '2'
     Inv: null
     FnP: null
   weapons:
@@ -1084,12 +1084,12 @@ units:
   keywords:
   - Tyranids
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 6"
+    T: '7'
+    Sv: 3+
+    W: '4'
+    Ld: 8+
+    OC: '1'
     Inv: null
     FnP: null
   weapons:
@@ -1149,13 +1149,13 @@ units:
   - Tyranids
   - Synapse
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
-    Inv: null
+    M: 7"
+    T: '5'
+    Sv: 4+
+    W: '3'
+    Ld: 7+
+    OC: '1'
+    Inv: 4+
     FnP: null
   weapons:
     ranged: []
@@ -1217,12 +1217,12 @@ units:
   keywords:
   - Tyranids
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 8"
+    T: '5'
+    Sv: 4+
+    W: '3'
+    Ld: 7+
+    OC: '1'
     Inv: null
     FnP: null
   weapons:
@@ -1483,13 +1483,13 @@ units:
   keywords:
   - Tyranids
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
-    Inv: null
+    M: 8"
+    T: '4'
+    Sv: 5+
+    W: '2'
+    Ld: 7+
+    OC: '1'
+    Inv: 5+
     FnP: null
   weapons:
     ranged: []
@@ -1549,12 +1549,12 @@ units:
   keywords:
   - Tyranids
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 6"
+    T: '7'
+    Sv: 3+
+    W: '4'
+    Ld: 8+
+    OC: '1'
     Inv: null
     FnP: null
   weapons:
@@ -1741,12 +1741,12 @@ units:
   keywords:
   - Tyranids
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 10"
+    T: '2'
+    Sv: 6+
+    W: '4'
+    Ld: 8+
+    OC: '0'
     Inv: null
     FnP: null
   weapons:
@@ -2065,12 +2065,12 @@ units:
   keywords:
   - Tyranids
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 8"
+    T: '9'
+    Sv: 2+
+    W: '8'
+    Ld: 8+
+    OC: '3'
     Inv: null
     FnP: null
   weapons:
