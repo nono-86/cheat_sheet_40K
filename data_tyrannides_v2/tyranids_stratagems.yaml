@@ -1,0 +1,648 @@
+stratagems:
+- name: Rapid Regeneration
+  cp: 1
+  detachment:
+  - Invasion Fleet
+  type: battle_tactic
+  when:
+  - phase: shooting
+    step: select_targets
+    player: opponent
+  - phase: fight
+    step: start
+    player: opponent
+    timing_note: just after enemy selects targets
+  target: 1 TYRANIDS unit just targeted
+  effect: Until end of phase, your unit gains FnP 6+ (FnP 5+ if within your army’s
+    Synapse Range).
+  play_tips:
+  - À claquer quand une unité clé va se faire arroser.
+  official_when: Opponent’s Shooting or Fight phase, just after an enemy unit has
+    selected its targets.
+  official_target: One TYRANIDS unit from your army that was selected as a target
+    of the attacking unit’s attacks.
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Adrenal Surge
+  cp: 2
+  detachment:
+  - Invasion Fleet
+  type: battle_tactic
+  when:
+  - phase: fight
+    step: start
+    player: you
+  target: 2 unités en Synapse (ou 1 autre éligible)
+  effect: Until end of phase, unmodified 5+ to hit scores a Critical Hit for each
+    selected unit.
+  play_tips:
+  - Idéal pour lancer une phase de CàC décisive.
+  official_when: Fight phase.
+  official_target: Up to two TYRANIDS units within Synapse Range and eligible to fight,
+    or one other eligible TYRANIDS unit.
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Death Frenzy
+  cp: 1
+  detachment:
+  - Invasion Fleet
+  type: strategic_ploy
+  when:
+  - phase: fight
+    step: start
+    player: opponent
+    timing_note: just after enemy selects targets
+  target: 1 unité ciblée par l’ennemi
+  effect: Until end of phase, each destroyed model in your unit can fight on 4+ before
+    being removed (if it hasn’t fought).
+  play_tips:
+  - Punir les unités qui te tapent en premier.
+  official_when: Fight phase, just after an enemy unit has selected its targets.
+  official_target: One TYRANIDS unit from your army that was selected as a target
+    of the attacking unit’s attacks.
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Overrun
+  cp: 1
+  detachment:
+  - Invasion Fleet
+  type: strategic_ploy
+  when:
+  - phase: fight
+    step: consolidate
+    player: you
+  target: 1 unité TYRANIDS qui va consolider
+  effect: Until end of phase, add 3" to its Consolidate; if within Synapse and not
+    in Engagement Range, can make a Normal move up to 6" instead.
+  play_tips:
+  - Permet de voler un objo ou se recouvrir.
+  official_when: Fight phase, just before a TYRANIDS unit from your army Consolidates.
+  official_target: That TYRANIDS unit.
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Predatory Imperative
+  cp: 1
+  detachment:
+  - Invasion Fleet
+  type: strategic_ploy
+  when:
+  - phase: command
+    step: start
+    player: you
+  target: Jusqu’à 2 unités en Synapse (ou 1 autre)
+  effect: Select a Hyper-adaptation; it is active for the selected units until your
+    next Command phase (in addition to any other active).
+  play_tips:
+  - Synchronise avec ta cible prioritaire du tour.
+  official_when: Your Command phase.
+  official_target: Up to two TYRANIDS units within Synapse Range, or one other TYRANIDS
+    unit.
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Endless Swarm
+  cp: 1
+  detachment:
+  - Invasion Fleet
+  type: strategic_ploy
+  when:
+  - phase: command
+    step: start
+    player: you
+  target: Jusqu’à 2 unités ENDLESS MULTITUDE en Synapse (ou 1 autre)
+  effect: Return up to D3+3 destroyed models to each selected unit.
+  play_tips:
+  - Empile avec Unending Swarm du détachement ‘Unending Swarm’.
+  official_when: Your Command phase.
+  official_target: Up to two ENDLESS MULTITUDE units within Synapse Range, or one
+    other ENDLESS MULTITUDE unit.
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Rampaging Monstrosities
+  cp: 1
+  detachment:
+  - Crusher Stampede
+  type: battle_tactic
+  when:
+  - phase: fight
+    step: start
+    player: you
+  target: 1 MONSTER non encore sélectionné pour combattre
+  effect: Until end of phase, you can re-roll the Hit roll for attacks made by models
+    in that unit.
+  play_tips:
+  - À utiliser sur un gros monstre clef.
+  official_when: Fight phase.
+  official_target: One TYRANIDS MONSTER unit from your army that has not been selected
+    to fight this phase.
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Savage Roar
+  cp: 1
+  detachment:
+  - Crusher Stampede
+  type: battle_tactic
+  when:
+  - phase: fight
+    step: start
+    player: opponent
+    timing_note: just after enemy selects targets
+  target: 1 MONSTER ciblé par l’ennemi
+  effect: That enemy unit takes a Battle-shock test; until end of phase, it has -1
+    to Hit your unit (and -1 to Wound if test failed).
+  play_tips:
+  - Réduit les dégâts adverses à un moment critique.
+  official_when: Fight phase, just after an enemy unit has selected its targets.
+  official_target: One TYRANIDS MONSTER from your army that was selected as a target
+    of the attacking unit’s attacks.
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Untrammelled Ferocity
+  cp: 1
+  detachment:
+  - Crusher Stampede
+  type: strategic_ploy
+  when:
+  - phase: movement
+    step: normal
+    player: you
+  target: 1 MONSTER non encore déplacé
+  effect: Until end of phase, your unit can move through models (not TITANIC) and
+    terrain sections ≤4" high; on a 1 after moving through terrain, unit is Battle-shocked.
+  play_tips:
+  - Pour ignorer des écrans et menacer les arrières.
+  official_when: Your Movement phase.
+  official_target: One TYRANIDS MONSTER unit from your army that has not been selected
+    to move this phase.
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Swarm-guided Salvoes
+  cp: 1
+  detachment:
+  - Crusher Stampede
+  type: battle_tactic
+  when:
+  - phase: shooting
+    step: start
+    player: you
+  target: 1 MONSTER non encore sélectionné pour tirer
+  effect: Until end of phase, improve shooting reliability (ignore modifiers to BS/Hit
+    and/or cover) — see source for full wording.
+  play_tips:
+  - Pour déloger une cible en couvert dense.
+  official_when: Your Shooting phase.
+  official_target: One TYRANIDS MONSTER unit from your army that has not been selected
+    to shoot this phase.
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Massive Impact
+  cp: 1
+  detachment:
+  - Crusher Stampede
+  type: epic_deed
+  when:
+  - phase: charge
+    step: move
+    player: you
+  target: 1 MONSTER après sa charge
+  effect: Sélectionne une unité à portée, 6D6, MW sur 4+.
+  play_tips:
+  - Sang-froid avant la baston pour gratter des PV.
+- name: Synaptic Goading
+  cp: 1
+  detachment:
+  - Unending Swarm
+  type: strategic_ploy
+  when:
+  - phase: any
+    step: start
+    player: you
+  target: 1 ENDLESS MULTITUDE en Synapse avant sa Surge move
+  effect: Relance le D6 de Surge ; peut viser l’objo le plus proche à la place.
+  play_tips:
+  - Excellent pour bondir sur un objo juste après des pertes.
+- name: Unending Waves
+  cp: 2
+  detachment:
+  - Unending Swarm
+  type: strategic_ploy
+  when:
+  - phase: any
+    step: start
+    player: you
+  target: 1 ENDLESS MULTITUDE détruite (une fois/partie)
+  effect: Ajoute une nouvelle unité identique en Réserves stratégiques, à effectif
+    complet.
+  play_tips:
+  - Plan de redéploiement en milieu de partie.
+- name: Teeming Masses
+  cp: 1
+  detachment:
+  - Unending Swarm
+  type: battle_tactic
+  when:
+  - phase: shooting
+    step: start
+    player: you
+  - phase: fight
+    step: start
+    player: you
+  target: 1 ENDLESS MULTITUDE
+  effect: Until end of phase, weapons gain [SUSTAINED HITS 1]; if unit has 15+ models,
+    unmodified 5+ to hit scores a Critical Hit.
+  play_tips:
+  - Spike de volume quand tu as la masse.
+  official_when: Your Shooting or Fight phase.
+  official_target: One ENDLESS MULTITUDE unit from your army that has not been selected
+    to shoot or fight this phase.
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Swarming Masses
+  cp: 1
+  detachment:
+  - Unending Swarm
+  type: battle_tactic
+  when:
+  - phase: shooting
+    step: start
+    player: opponent
+  - phase: fight
+    step: start
+    player: opponent
+  target: 1 ENDLESS MULTITUDE ciblée
+  effect: 'Jusqu’à fin de phase : -1 pour toucher contre ton unité.'
+  play_tips:
+  - Défense réactive sur screens/objectifs.
+- name: Bounding Advance
+  cp: 1
+  detachment:
+  - Unending Swarm
+  type: battle_tactic
+  when:
+  - phase: movement
+    step: advance
+    player: you
+  target: 1 ENDLESS MULTITUDE
+  effect: Advance is a fixed +6" instead of rolling.
+  play_tips:
+  - Projecter des gaunts au bon endroit.
+  official_when: Your Movement phase.
+  official_target: One ENDLESS MULTITUDE unit from your army.
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Preservation Imperative
+  cp: 1
+  detachment:
+  - Unending Swarm
+  type: strategic_ploy
+  when:
+  - phase: shooting
+    step: start
+    player: opponent
+  target: 1 ENDLESS MULTITUDE ciblée
+  effect: Traités comme <5 modèles contre [BLAST] jusqu’à fin de phase.
+  play_tips:
+  - Utile contre artillerie & blasts.
+- name: Broodguard Impulse
+  cp: 1
+  detachment:
+  - Assimilation Swarm
+  type: epic_deed
+  when:
+  - phase: any
+    step: start
+    player: you
+  target: 1 HARVESTER détruite
+  effect: +1 pour blesser l’unité qui l’a détruite jusqu’à fin de bataille.
+  play_tips:
+  - Marque la cible prioritaire après une perte.
+- name: Reclaim Biomass
+  cp: 1
+  detachment:
+  - Assimilation Swarm
+  type: strategic_ploy
+  when:
+  - phase: any
+    step: start
+    player: you
+  target: 1 HARVESTER à 6" d’une unité détruite
+  effect: Déclenche une Regeneration (Feed the Swarm).
+  play_tips:
+  - Réaction immédiate pour remonter une unité clé.
+- name: Tyrannoformed
+  cp: 1
+  detachment:
+  - Assimilation Swarm
+  type: strategic_ploy
+  when:
+  - phase: command
+    step: start
+    player: you
+  target: 1 HARVESTER sur un objectif
+  effect: L’objectif reste à toi jusqu’à reprise ennemie au début/fin d’un tour.
+  play_tips:
+  - Verrou d’objo très fort.
+- name: Ablative Carapace
+  cp: 2
+  detachment:
+  - Assimilation Swarm
+  type: epic_deed
+  when:
+  - phase: shooting
+    step: start
+    player: opponent
+  - phase: fight
+    step: start
+    player: opponent
+  target: 1 HARVESTER ciblée
+  effect: FnP5+ (FnP4+ si sur objectif) pour la phase.
+  play_tips:
+  - Protège un point d’ancrage.
+- name: Secure Biomass
+  cp: 1
+  detachment:
+  - Assimilation Swarm
+  type: strategic_ploy
+  when:
+  - phase: fight
+    step: start
+    player: you
+  target: 1 unité non encore sélectionnée pour combattre
+  effect: '[LETHAL HITS], et si HARVESTER : Crit sur 5+ aussi.'
+  play_tips:
+  - Spike létal au bon moment.
+- name: Rapacious Hunger
+  cp: 1
+  detachment:
+  - Assimilation Swarm
+  type: battle_tactic
+  when:
+  - phase: fight
+    step: start
+    player: you
+  target: 1 unité qui vient de détruire une unité ennemie
+  effect: Regenerate immédiatement (mieux si HARVESTER).
+  play_tips:
+  - Chaîner les combats en se soignant.
+- name: Assassin Beasts
+  cp: 1
+  detachment:
+  - Vanguard Onslaught
+  type: battle_tactic
+  when:
+  - phase: fight
+    step: start
+    player: you
+  target: 1 VANGUARD INVADER INFANTRY non encore sélectionnée
+  effect: 'Au CàC : [PRECISION] jusqu’à fin de phase.'
+  play_tips:
+  - Chasser des persos dans des unités.
+- name: Seeded Broods
+  cp: 1
+  detachment:
+  - Vanguard Onslaught
+  type: strategic_ploy
+  when:
+  - phase: movement
+    step: end
+    player: opponent
+  target: Jusqu’à 2 VANGUARD INVADER (ou 1 autre INFANTRY) à 9" de l’ennemi qui vient
+    de bouger
+  effect: Each selected unit can make a Normal move up to 6" (not if within Engagement
+    Range).
+  play_tips:
+  - Reposition défensive/offensive réactive.
+  official_when: Opponent’s Movement phase, just after an enemy unit ends a Normal,
+    Advance or Fall Back move.
+  official_target: Up to two VANGUARD INVADER units within 9" of that enemy unit,
+    or one other TYRANIDS INFANTRY within 9".
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Unseen Lurkers
+  cp: 1
+  detachment:
+  - Vanguard Onslaught
+  type: strategic_ploy
+  when:
+  - phase: shooting
+    step: select_targets
+    player: opponent
+  target: 1 VANGUARD INVADER ciblée
+  effect: Until end of phase, your unit can only be targeted by ranged attacks within
+    18" (6" if Lone Operative). Attacker can select new targets.
+  play_tips:
+  - Super fort pour préserver une pièce clef.
+  official_when: Opponent’s Shooting phase, just after an enemy unit has selected
+    its targets.
+  official_target: One VANGUARD INVADER unit from your army that was selected as a
+    target of the attacking unit’s attacks.
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Invisible Hunter
+  cp: 1
+  detachment:
+  - Vanguard Onslaught
+  type: strategic_ploy
+  when:
+  - phase: fight
+    step: end
+    player: opponent
+  target: 1 VANGUARD INVADER
+  effect: Remove targeted units and place them into Strategic Reserves (must be >3"
+    from all enemy units).
+  play_tips:
+  - À combiner avec charges opportunistes.
+  official_when: End of your opponent’s Fight phase.
+  official_target: Up to two VANGUARD INVADER units, or one TYRANIDS INFANTRY unit
+    from your army.
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Hypersensory Scillia
+  cp: 2
+  detachment:
+  - Vanguard Onslaught
+  type: strategic_ploy
+  when:
+  - phase: movement
+    step: start
+    player: you
+  target: 1 VANGUARD INVADER
+  effect: Options de repérage/bonus sensibles (voir libellé).
+  play_tips:
+  - À réserver pour un swing turn.
+- name: Surprise Assault
+  cp: 1
+  detachment:
+  - Vanguard Onslaught
+  type: battle_tactic
+  when:
+  - phase: charge
+    step: start
+    player: you
+  target: 1 VANGUARD INVADER
+  effect: Améliore l’accès/fiabilisation des charges (voir libellé).
+  play_tips:
+  - Pour fiabiliser une charge clef.
+- name: Reinforced Hive Node
+  cp: 1
+  detachment:
+  - Synaptic Nexus
+  type: battle_tactic
+  when:
+  - phase: shooting
+    step: start
+    player: opponent
+  - phase: fight
+    step: start
+    player: opponent
+  target: 1 SYNAPSE ciblée
+  effect: Until end of attacks, reduce AP of enemy attacks against your unit by 1.
+  play_tips:
+  - Clé pour garder en vie tes SYNAPSE.
+  official_when: Opponent’s Shooting or Fight phase.
+  official_target: One SYNAPSE unit from your army that was selected as a target.
+  source: https://wahapedia.ru/wh40k10ed/factions/tyranids/
+- name: Imperative Dominance
+  cp: 1
+  detachment:
+  - Synaptic Nexus
+  type: strategic_ploy
+  when:
+  - phase: command
+    step: start
+    player: you
+  target: 1 SYNAPSE
+  effect: 'Choisis un impératif synaptique déjà utilisé : actif pour cette unité.'
+  play_tips:
+  - Moduler l’aura/la règle qu’il te faut maintenant.
+- name: Override Instincts
+  cp: 1
+  detachment:
+  - Synaptic Nexus
+  type: strategic_ploy
+  when:
+  - phase: any
+    step: start
+    player: you
+  target: 1 SYNAPSE
+  effect: Ajustement d’instincts (voir libellé).
+  play_tips:
+  - Polyvalent pour répondre aux imprévus.
+- name: Enfilading Emergence
+  cp: 1
+  detachment:
+  - Subterranean Assault
+  type: strategic_ploy
+  when:
+  - phase: movement
+    step: end
+    player: you
+  target: 1 unité arrivée des Renforts ce tour
+  effect: 'Jusqu’à fin de ta prochaine phase de CàC : [SUSTAINED HITS 1] & [IGNORES
+    COVER].'
+  play_tips:
+  - Parfait pour sniper une cible arrière en sortie de tunnel.
+- name: Tunnel Network
+  cp: 1
+  detachment:
+  - Subterranean Assault
+  type: strategic_ploy
+  when:
+  - phase: movement
+    step: end
+    player: you
+  target: 1 unité à 9" d’un Tunnel Marker (pas engagée)
+  effect: Retires-la et reposes-la à 9" d’un autre marqueur, >6" des ennemis.
+  play_tips:
+  - Téléport local pour repositionner une menace.
+- name: Swarming Assault
+  cp: 1
+  detachment:
+  - Subterranean Assault
+  type: strategic_ploy
+  when:
+  - phase: charge
+    step: start
+    player: you
+  target: 1 MONSTER arrivé des Renforts ce tour
+  effect: Les unités TYRANIDS à 6" relancent les charges.
+  play_tips:
+  - Crée une fenêtre de charges multiples.
+- name: Retreat Below
+  cp: 1
+  detachment:
+  - Subterranean Assault
+  type: strategic_ploy
+  when:
+  - phase: any
+    step: end
+    player: you
+  target: 1 unité éligible
+  effect: Retrait sous terre/reposition (voir libellé).
+  play_tips:
+  - Sauver une unité exposée ou pour rejouer un coup au tour suivant.
+- name: Synaptic Amplification
+  cp: 1
+  detachment:
+  - Warrior Bioform Onslaught
+  type: strategic_ploy
+  when:
+  - phase: command
+    step: start
+    player: you
+  target: 1 unité de WARRIORS/PRIME
+  effect: Buff synaptique contextuel (voir libellé).
+  play_tips:
+  - À utiliser selon objectif du tour.
+- name: Restorative Impulse
+  cp: 1
+  detachment:
+  - Warrior Bioform Onslaught
+  type: strategic_ploy
+  when:
+  - phase: command
+    step: start
+    player: you
+  target: 1 unité de WARRIORS en dessous de force de départ
+  effect: Ramène 1 guerrier détruit (hors CHARACTER).
+  play_tips:
+  - Remet une masse/OC sur un objo.
+- name: Synaptic Micronodes
+  cp: 1
+  detachment:
+  - Warrior Bioform Onslaught
+  type: strategic_ploy
+  when:
+  - phase: any
+    step: start
+    player: you
+  target: 1 unité de WARRIORS sur objectif
+  effect: L’objectif reste à toi tant que ton niveau de contrôle n’est pas dépassé.
+  play_tips:
+  - Verrou d’objo local.
+- name: Parasitic Payload
+  cp: 1
+  detachment:
+  - Warrior Bioform Onslaught
+  type: strategic_ploy
+  when:
+  - phase: shooting
+    step: start
+    player: you
+  target: 1 unité de WARRIORS
+  effect: Charge parasitique pour affaiblir la cible (voir libellé).
+  play_tips:
+  - Préparer un focus tir/CàC sur une ancre.
+- name: Spontaneous Hypercorrosion
+  cp: 1
+  detachment:
+  - Warrior Bioform Onslaught
+  type: wargear
+  when:
+  - phase: any
+    step: start
+    player: you
+  target: 1 unité de WARRIORS
+  effect: Option d’équipement corrosif (voir libellé).
+  play_tips:
+  - Utilitaire selon match-up.
+- name: Synaptic Shield
+  cp: 1
+  detachment:
+  - Warrior Bioform Onslaught
+  type: strategic_ploy
+  when:
+  - phase: shooting
+    step: start
+    player: opponent
+  - phase: fight
+    step: start
+    player: opponent
+  target: 1 unité de WARRIORS
+  effect: Défensif temporaire pour encaisser une phase.
+  play_tips:
+  - Protège le noyau de ta midboard.
