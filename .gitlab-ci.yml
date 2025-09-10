@@ -20,11 +20,10 @@ mirror_to_github:
     # récupère toutes les refs (branches, tags, notes)
     - git fetch --prune --tags origin '+refs/heads/*:refs/remotes/origin/*' '+refs/notes/*:refs/notes/*'
     # crée/force les branches locales depuis origin/* -> évite la suppression côté GitHub
-    - |
-      git for-each-ref --format='%(refname:strip=2)' refs/remotes/origin \
+    - git for-each-ref --format='%(refname:strip=3)' refs/remotes/origin \
       | while read -r b; do
-          git branch -f "$b" "origin/$b"
-        done
+        git branch -f "$b" "origin/$b"
+      done
   script:
     - git remote remove mirror 2>/dev/null || true
     - git remote add mirror "https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/${GITHUB_OWNER}/${GITHUB_REPO}.git"
