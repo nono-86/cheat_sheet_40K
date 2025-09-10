@@ -5,22 +5,28 @@ stages:
 variables:
   GIT_DEPTH: "0"            # on veut l'historique complet pour un push --mirror
 
-# (Optionnel) Lint/quick tests avant de déployer
 mirror_to_github:
   stage: mirror
   image: alpine:3.20
+  variables:
+    GIT_DEPTH: "0"           # récupère tout l’historique dans GitLab CI
+    GIT_STRATEGY: fetch
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
   before_script:
     - apk add --no-cache git
-    # configure l'identité git pour le push
     - git config --global user.email "${GITLAB_USER_EMAIL:-ci@gitlab}"
     - git config --global user.name  "${GITLAB_USER_NAME:-gitlab-ci}"
-    # s'assure d'avoir tous les refs (tags, branches)
-    - git fetch --prune --tags
+    # récupère toutes les refs (branches, tags, notes)
+    - git fetch --prune --tags origin '+refs/heads/*:refs/remotes/origin/*' '+refs/notes/*:refs/notes/*'
+    # crée/force les branches locales depuis origin/* -> évite la suppression côté GitHub
+    - |
+      git for-each-ref --format='%(refname:strip=2)' refs/remotes/origin \
+      | while read -r b; do
+          git branch -f "$b" "origin/$b"
+        done
   script:
-    # ajoute le remote GitHub authentifié via PAT
     - git remote remove mirror 2>/dev/null || true
     - git remote add mirror "https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/${GITHUB_OWNER}/${GITHUB_REPO}.git"
-    # push complet : branches + tags + notes
     - git push --mirror mirror
+
