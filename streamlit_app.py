@@ -287,6 +287,19 @@ def save_uploaded_file(uploaded_file, dir: str | None = None) -> str:
         return tmp.name  # chemin du fichier temp
 
 
+def save_text_to_file(text: str, dir: str | None = None, suffix: str = ".txt") -> str:
+    """Sauve une chaîne de caractères dans un fichier temporaire et renvoie son chemin absolu."""
+    if not suffix.startswith("."):
+        suffix = "." + suffix
+
+    with tempfile.NamedTemporaryFile(
+        delete=False, suffix=suffix, dir=dir, mode="w", encoding="utf-8"
+    ) as tmp:
+        tmp.write(text)
+        tmp.flush()
+        return tmp.name
+
+
 # ------------------------------ UI ----------------------------------
 
 st.set_page_config(page_title="40k Cheat Sheet", layout="wide")
@@ -371,18 +384,22 @@ with tab_input:
     with col1:
         export_text = st.text_area(
             "Colle ici l’export depuis l’app 40k",
+            key="export_text",
             height=240,
             placeholder="test (995 points)\n\nSpace Marines\nUltramarines\nIncursion (1000 points)\nGladius Task Force\n\nCHARACTERS\n\nCaptain with Jump Pack (75 points)\n  • ...",
         )
     with col2:
         txt_file = st.file_uploader("…ou uploade le .txt", type=["txt"])
-        if txt_file and not export_text.strip():
-            export_text = txt_file.read().decode("utf-8", errors="ignore")
+        if txt_file and not st.session_state.export_text.strip():
+            st.session_state.export_text = txt_file.read().decode(
+                "utf-8", errors="ignore"
+            )
             st.info("Texte rempli depuis le fichier uploadé.")
 
+    export_text = st.session_state.export_text
+
     if st.button("Générer la fiche"):
-        # Chemin local : on sauve dans un temp file
-        uploaded_path = save_uploaded_file(txt_file)  # <-- VOILÀ LE PATH
+        uploaded_path = save_text_to_file(export_text)
         st.session_state["uploaded_path"] = uploaded_path
 
         with tempfile.NamedTemporaryFile(delete=False, suffix=".html") as tmp_out:
