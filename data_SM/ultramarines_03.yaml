@@ -8,12 +8,12 @@ units:
   - Vehicle
   - Transport
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 12"
+    T: '9'
+    Sv: 3+
+    W: '11'
+    Ld: 6+
+    OC: '2'
     Inv: null
     FnP: null
   weapons:
@@ -83,12 +83,12 @@ units:
   - Vehicle
   - Transport
   base:
-    M: "12\""
-    T: "9"
-    Sv: "3+"
-    W: "10"
-    Ld: "6+"
-    OC: "2"
+    M: 12"
+    T: '9'
+    Sv: 3+
+    W: '10'
+    Ld: 6+
+    OC: '2'
     Inv: null
     FnP: null
   weapons:
@@ -604,12 +604,12 @@ units:
   - Infantry
   - Bladeguard
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 5"
+    T: '5'
+    Sv: 2+
+    W: '3'
+    Ld: 6+
+    OC: '1'
     Inv: null
     FnP: null
   weapons:

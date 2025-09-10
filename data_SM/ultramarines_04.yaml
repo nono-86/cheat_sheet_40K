@@ -237,12 +237,12 @@ units:
   - Tank
   - Land Raider
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 10"
+    T: '12'
+    Sv: 2+
+    W: '16'
+    Ld: 6+
+    OC: '5'
     Inv: null
     FnP: null
   weapons:
@@ -312,12 +312,12 @@ units:
   - Tank
   - Land Raider
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 12"
+    T: '12'
+    Sv: 2+
+    W: '16'
+    Ld: 6+
+    OC: '5'
     Inv: null
     FnP: null
   weapons:
@@ -387,12 +387,12 @@ units:
   - Tank
   - Land Raider
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 12"
+    T: '12'
+    Sv: 2+
+    W: '16'
+    Ld: 6+
+    OC: '5'
     Inv: null
     FnP: null
   weapons:
@@ -462,12 +462,12 @@ units:
   - Tank
   - Transport
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 10"
+    T: '12'
+    Sv: 3+
+    W: '16'
+    Ld: 6+
+    OC: '5'
     Inv: null
     FnP: null
   weapons:
@@ -537,12 +537,12 @@ units:
   - Tank
   - Transport
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 10"
+    T: '12'
+    Sv: 3+
+    W: '16'
+    Ld: 6+
+    OC: '5'
     Inv: null
     FnP: null
   weapons:
@@ -1043,12 +1043,12 @@ units:
   - Fly
   - Storm Speeder
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 14"
+    T: '9'
+    Sv: 3+
+    W: '11'
+    Ld: 6+
+    OC: '3'
     Inv: null
     FnP: null
   weapons:
@@ -1115,12 +1115,12 @@ units:
   - Fly
   - Storm Speeder
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 14"
+    T: '9'
+    Sv: 3+
+    W: '11'
+    Ld: 6+
+    OC: '3'
     Inv: null
     FnP: null
   weapons:
@@ -1186,12 +1186,12 @@ units:
   - Fly
   - Storm Speeder
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 14"
+    T: '9'
+    Sv: 3+
+    W: '11'
+    Ld: 6+
+    OC: '3'
     Inv: null
     FnP: null
   weapons:
@@ -1258,12 +1258,12 @@ units:
   - Vehicle?
   - Fortification?
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 3"
+    T: '6'
+    Sv: 2+
+    W: '6'
+    Ld: 6+
+    OC: '2'
     Inv: null
     FnP: null
   weapons:
