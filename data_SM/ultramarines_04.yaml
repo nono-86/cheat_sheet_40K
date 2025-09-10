@@ -9,12 +9,12 @@ units:
   - Walker
   - Dreadnought
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 8"
+    T: 10
+    Sv: 2+
+    W: 12
+    Ld: 6+
+    OC: 4
     Inv: null
     FnP: null
   weapons:

@@ -8,13 +8,13 @@ units:
   - Infantry
   - Terminator
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
-    Inv: null
+    M: 5"
+    T: 5
+    Sv: 2+
+    W: 3
+    Ld: 6+
+    OC: 1
+    Inv: 4+
     FnP: null
   weapons:
     ranged: []
@@ -446,12 +446,12 @@ units:
   - Jump Pack
   - Gravis
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 10"
+    T: 6
+    Sv: 3+
+    W: 3
+    Ld: 6+
+    OC: 1
     Inv: null
     FnP: null
   weapons:
