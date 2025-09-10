@@ -9,7 +9,6 @@ variables:
 mirror_to_github:
   stage: mirror
   image: alpine:3.20
-  needs: ["lint"]
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
   before_script:
