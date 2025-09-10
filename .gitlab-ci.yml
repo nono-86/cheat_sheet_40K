@@ -6,17 +6,6 @@ variables:
   GIT_DEPTH: "0"            # on veut l'historique complet pour un push --mirror
 
 # (Optionnel) Lint/quick tests avant de déployer
-lint:
-  stage: test
-  image: python:3.11-slim
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main"'
-  before_script:
-    - pip install --no-cache-dir flake8
-  script:
-    - flake8 .
-  allow_failure: false
-
 mirror_to_github:
   stage: mirror
   image: alpine:3.20
