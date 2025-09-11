@@ -391,12 +391,8 @@ with tab_input:
     with col2:
         txt_file = st.file_uploader("…ou uploade le .txt", type=["txt"])
         if txt_file and not st.session_state.export_text.strip():
-            st.session_state.export_text = txt_file.read().decode(
-                "utf-8", errors="ignore"
-            )
+            export_text = txt_file.read().decode("utf-8", errors="ignore")
             st.info("Texte rempli depuis le fichier uploadé.")
-
-    export_text = st.session_state.export_text
 
     if st.button("Générer la fiche"):
         uploaded_path = save_text_to_file(export_text)
