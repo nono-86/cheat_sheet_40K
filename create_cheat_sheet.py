@@ -303,6 +303,8 @@ CSS = """
   .phaseboard .colwrap { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
   .phaseboard .box { border:1px solid #eef2f7; border-radius:6px; padding:6px; }
   .phaseboard ul { margin:4px 0 2px 16px; }
+  .weapons li { margin: 2px 0; }
+  .weapons .small { color:#374151; }
 </style>
 """
 
@@ -337,22 +339,129 @@ def render_stats(u):
     return "  |  ".join(parts)
 
 
+def _fmt_weapon_keywords(d: dict) -> str:
+    """Return keywords/abilities in a compact '(…)' form if present."""
+    kws = d.get("keywords") or d.get("abilities") or d.get("ability")
+    if not kws:
+        return ""
+    if isinstance(kws, str):
+        txt = kws
+    elif isinstance(kws, (list, tuple)):
+        txt = ", ".join(str(x) for x in kws if x)
+    elif isinstance(kws, dict):
+        # Rare: dict of keywords -> True
+        txt = ", ".join(k for k, v in kws.items() if v)
+    else:
+        txt = str(kws)
+    txt = txt.strip()
+    return f" ({html.escape(txt)})" if txt else ""
+
+
+def _fmt_weapon_profile_row(d: dict, is_melee: bool) -> str:
+    """Build 'Range | A | BS/WS | S | AP | D (keywords)' from whatever keys exist."""
+    # Normalize fields
+    rng = d.get("Range") or d.get("range") or d.get("R") or d.get("rng")
+    A = d.get("A") or d.get("Attacks") or d.get("attacks")
+    BS = d.get("BS") or d.get("bs") or d.get("Skill") or d.get("skill")
+    WS = d.get("WS") or d.get("ws")
+    S = d.get("S") or d.get("Str") or d.get("strength")
+    AP = d.get("AP") or d.get("ap")
+    Dmg = d.get("D") or d.get("Damage") or d.get("damage")
+    # Some data encode separate 'to_hit' instead of BS/WS
+    to_hit = d.get("to_hit") or d.get("hit") or d.get("TH") or d.get("th")
+
+    parts = []
+    if not is_melee and rng:
+        parts.append(str(rng))
+    if A is not None:
+        parts.append(f"A {A}")
+    # Choose the most relevant "skill" field
+    if BS and not is_melee:
+        parts.append(f"BS {BS}")
+    elif WS and is_melee:
+        parts.append(f"WS {WS}")
+    elif to_hit:
+        parts.append(f"Hit {to_hit}")
+    if S is not None:
+        parts.append(f"S {S}")
+    if AP is not None:
+        parts.append(f"AP {AP}")
+    if Dmg is not None:
+        parts.append(f"D {Dmg}")
+
+    return " | ".join(parts) + _fmt_weapon_keywords(d)
+
+
+def _iter_weapon_profiles(w: dict) -> list[tuple[str, dict]]:
+    """
+    Yield (profile_name, profile_dict) pairs from either:
+      - flat weapon with stats on the weapon itself
+      - weapon with 'profiles': [{name, ...}, ...]
+    """
+    name = w.get("name", "—")
+    profs = w.get("profiles")
+    if isinstance(profs, list) and profs:
+        out = []
+        for p in profs:
+            if not isinstance(p, dict):
+                continue
+            pname = p.get("name") or p.get("mode") or name
+            out.append((str(pname), p))
+        return out
+    # flat profile case
+    return [(name, w)]
+
+
 def render_weapons(u, limit_each=2):
-    lines = []
+    """
+    Show weapon names + statlines.
+    - Supports both flat and nested 'profiles'.
+    - Truncates to `limit_each` per category (ranged/melee) for compactness.
+    """
     w = u.get("weapons") or {}
     ranged = w.get("ranged") or []
     melee = w.get("melee") or []
-    if ranged:
-        lines.append(
-            "<b>Tir</b> : "
-            + ", ".join(html.escape(x.get("name", "—")) for x in ranged[:limit_each])
-        )
-    if melee:
-        lines.append(
-            "<b>CaC</b> : "
-            + ", ".join(html.escape(x.get("name", "—")) for x in melee[:limit_each])
-        )
-    return "<br>".join(lines) if lines else "<span class='small'>—</span>"
+
+    def fmt_group(arr, is_melee: bool, label: str) -> str:
+        if not arr:
+            return ""
+        lines = []
+        count = 0
+        for wpn in arr:
+            if count >= limit_each:
+                break
+            profiles = _iter_weapon_profiles(wpn)
+            if len(profiles) == 1:
+                pname, pd = profiles[0]
+                row = _fmt_weapon_profile_row(pd, is_melee=is_melee)
+                lines.append(
+                    f"<li><b>{html.escape(str(pname))}</b> — {html.escape(row)}</li>"
+                )
+            else:
+                # multiple modes/profiles
+                sub = []
+                for pname, pd in profiles:
+                    row = _fmt_weapon_profile_row(pd, is_melee=is_melee)
+                    sub.append(
+                        f"<div class='small'>&bull; <b>{html.escape(str(pname))}</b> — {html.escape(row)}</div>"
+                    )
+                lines.append(
+                    f"<li><b>{html.escape(wpn.get('name','—'))}</b><br>{''.join(sub)}</li>"
+                )
+            count += 1
+        if not lines:
+            return ""
+        return f"<b>{label}</b><ul>" + "".join(lines) + "</ul>"
+
+    blocks = []
+    rg = fmt_group(ranged, is_melee=False, label="Tir")
+    if rg:
+        blocks.append(rg)
+    mg = fmt_group(melee, is_melee=True, label="CaC")
+    if mg:
+        blocks.append(mg)
+
+    return "<br>".join(blocks) if blocks else "<span class='small'>—</span>"
 
 
 def render_abilities(u, limit=3):
