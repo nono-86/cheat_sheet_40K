@@ -231,12 +231,12 @@ units:
   - Transport
   - Drop Pod
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 0"
+    T: '9'
+    Sv: 3+
+    W: '8'
+    Ld: 6+
+    OC: '0'
     Inv: null
     FnP: null
   weapons:
@@ -305,12 +305,12 @@ units:
   - Fortification
   - Vehicle
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 0"
+    T: '10'
+    Sv: 2+
+    W: '14'
+    Ld: 6+
+    OC: '0'
     Inv: null
     FnP: null
   weapons:
@@ -379,12 +379,12 @@ units:
   - Infantry
   - Gravis
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 5"
+    T: '5'
+    Sv: 3+
+    W: '3'
+    Ld: 6+
+    OC: '1'
     Inv: null
     FnP: null
   weapons:
@@ -457,12 +457,12 @@ units:
   - Infantry
   - Jump Pack
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 12"
+    T: '4'
+    Sv: 3+
+    W: '2'
+    Ld: 6+
+    OC: '1'
     Inv: null
     FnP: null
   weapons:
@@ -755,12 +755,12 @@ units:
   - Infantry
   - Centurion
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 5"
+    T: '6'
+    Sv: 2+
+    W: '4'
+    Ld: 6+
+    OC: '1'
     Inv: null
     FnP: null
   weapons:
@@ -828,12 +828,12 @@ units:
   - Infantry
   - Centurion
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 5"
+    T: '6'
+    Sv: 2+
+    W: '4'
+    Ld: 6+
+    OC: '1'
     Inv: null
     FnP: null
   weapons:
@@ -972,12 +972,12 @@ units:
   - Infantry
   - Desolation
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '2'
+    Ld: 6+
+    OC: '1'
     Inv: null
     FnP: null
   weapons:
@@ -1119,12 +1119,12 @@ units:
   - Walker
   - Dreadnought
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 6"
+    T: '10'
+    Sv: 2+
+    W: '8'
+    Ld: 6+
+    OC: '4'
     Inv: null
     FnP: null
   weapons:
@@ -1195,12 +1195,12 @@ units:
   - Infiltrators
   - Stealth
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '2'
+    Ld: 6+
+    OC: '1'
     Inv: null
     FnP: null
   weapons:
@@ -1268,12 +1268,12 @@ units:
   - Infantry
   - Gravis
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 5"
+    T: '5'
+    Sv: 3+
+    W: '3'
+    Ld: 6+
+    OC: '1'
     Inv: null
     FnP: null
   weapons:
@@ -1342,12 +1342,12 @@ units:
   - Artillery
   - Vehicle
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 0"
+    T: '7'
+    Sv: 3+
+    W: '5'
+    Ld: 6+
+    OC: '0'
     Inv: null
     FnP: null
   weapons:
@@ -1415,12 +1415,12 @@ units:
   - Tank
   - Gladiator
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 10"
+    T: '12'
+    Sv: 2+
+    W: '12'
+    Ld: 6+
+    OC: '3'
     Inv: null
     FnP: null
   weapons:
@@ -1487,12 +1487,12 @@ units:
   - Tank
   - Gladiator
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 10"
+    T: '12'
+    Sv: 2+
+    W: '12'
+    Ld: 6+
+    OC: '3'
     Inv: null
     FnP: null
   weapons:
@@ -1559,12 +1559,12 @@ units:
   - Tank
   - Gladiator
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 10"
+    T: '12'
+    Sv: 2+
+    W: '12'
+    Ld: 6+
+    OC: '3'
     Inv: null
     FnP: null
   weapons:
@@ -1630,12 +1630,12 @@ units:
   - Primaris
   - Infernus
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '2'
+    Ld: 6+
+    OC: '1'
     Inv: null
     FnP: null
   weapons:
@@ -1703,12 +1703,12 @@ units:
   - Phobos
   - Infiltrators
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '2'
+    Ld: 6+
+    OC: '1'
     Inv: null
     FnP: null
   weapons:
@@ -1776,12 +1776,12 @@ units:
   - Phobos
   - Infiltrators
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 6"
+    T: '4'
+    Sv: 3+
+    W: '2'
+    Ld: 6+
+    OC: '1'
     Inv: null
     FnP: null
   weapons:
@@ -1848,12 +1848,12 @@ units:
   - Mounted
   - Bikers
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 14"
+    T: '5'
+    Sv: 3+
+    W: '3'
+    Ld: 6+
+    OC: '2'
     Inv: null
     FnP: null
   weapons:
@@ -1919,12 +1919,12 @@ units:
   - Mounted
   - Vehicle
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: 12"
+    T: '6'
+    Sv: 3+
+    W: '8'
+    Ld: 6+
+    OC: '2'
     Inv: null
     FnP: null
   weapons:
