@@ -30,20 +30,6 @@ stratagems:
 - cp: 1
   detachment:
   - All
-  effect: Your unit is treated as having passed that test instead, and is not Battle-shocked
-    as a result.
-  name: Insane Bravery
-  play_tips: []
-  target: The unit from your army that Battle-shock test was just taken for (even
-    though your Battle-shocked units cannot normally be affected by your Stratagems).
-  type: 'Epic Deed '
-  when:
-  - phase: command
-    player: you
-    step: start
-- cp: 1
-  detachment:
-  - All
   effect: Select one of your Leader unit’s Leader abilities. Until the start of your
     next Command phase, that Bodyguard unit is treated as being led by that Leader
     unit for the purposes of that Leader ability.
