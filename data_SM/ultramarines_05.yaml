@@ -230,12 +230,12 @@ units:
   - Jump Pack
   - Veteran
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: "12\""
+    T: "4"
+    Sv: "3+"
+    W: "2"
+    Ld: "6+"
+    OC: "1"
     Inv: null
     FnP: null
   weapons:
@@ -304,12 +304,12 @@ units:
   - Infantry
   - Veteran
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: "6\""
+    T: "4"
+    Sv: "3+"
+    W: "4"
+    Ld: "6+"
+    OC: "1"
     Inv: null
     FnP: null
   weapons:
@@ -517,12 +517,13 @@ units:
   - Infantry
   - Jump Pack
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+  # Wahapedia
+    M: "12\""
+    T: "4"
+    Sv: "3+"
+    W: "2"
+    Ld: "6+"
+    OC: "1"
     Inv: null
     FnP: null
   weapons:
@@ -589,12 +590,12 @@ units:
   - Phobos
   - Terror Troops
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: "6\""
+    T: "4"
+    Sv: "3+"
+    W: "2"
+    Ld: "6+"
+    OC: "1"
     Inv: null
     FnP: null
   weapons:
@@ -661,12 +662,12 @@ units:
   - Infantry
   - Scout
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: "6\""
+    T: "4"
+    Sv: "4+"
+    W: "2"
+    Ld: "6+"
+    OC: "1"
     Inv: null
     FnP: null
   weapons:
@@ -734,12 +735,12 @@ units:
   - Scout
   - Sniper
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: "6\""
+    T: "4"
+    Sv: "4+"
+    W: "2"
+    Ld: "6+"
+    OC: "1"
     Inv: null
     FnP: null
   weapons:
@@ -806,12 +807,12 @@ units:
   - Fly
   - Aircraft
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: "20+\""
+    T: "8"
+    Sv: "3+"
+    W: "10"
+    Ld: "6+"
+    OC: "0"
     Inv: null
     FnP: null
   weapons:
@@ -878,12 +879,12 @@ units:
   - Fly
   - Aircraft
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: "20+\""
+    T: "9"
+    Sv: "3+"
+    W: "10"
+    Ld: "6+"
+    OC: "0"
     Inv: null
     FnP: null
   weapons:
@@ -950,12 +951,12 @@ units:
   - Aircraft
   - Transport
   base:
-    M: ??
-    T: ??
-    Sv: ??
-    W: ??
-    Ld: ??
-    OC: ??
+    M: "20+\""
+    T: "10"
+    Sv: "3+"
+    W: "14"
+    Ld: "6+"
+    OC: "0"
     Inv: null
     FnP: null
   weapons:
@@ -1015,4 +1016,4 @@ units:
     synergies: []
     targets:
     - transport aérien
-    - alpha coordonné
+    - alpha coordonné 7
