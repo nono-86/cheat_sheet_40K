@@ -235,31 +235,7 @@ stratagems:
   when:
   - phase: command
     player: you
-    step: start
-- cp: 1
-  detachment:
-  - All
-  effect: Discard it and draw one new Secondary Mission card.
-  name: New Orders
-  play_tips: []
-  target: One of your active Secondary Mission cards.
-  type: 'Strategic Ploy '
-  when:
-  - phase: command
-    player: you
-    step: start
-- cp: 1
-  detachment:
-  - All
-  effect: Discard it and draw one new Secondary Mission card.
-  name: New Orders
-  play_tips: []
-  target: One of your active Secondary Mission cards.
-  type: 'Strategic Ploy '
-  when:
-  - phase: command
-    player: you
-    step: start
+    step: started
 - cp: 1
   detachment:
   - Auric Champions
