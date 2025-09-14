@@ -412,11 +412,11 @@ def _iter_weapon_profiles(w: dict) -> list[tuple[str, dict]]:
     return [(name, w)]
 
 
-def render_weapons(u, limit_each=2):
+def render_weapons(u, limit_each: int | None = None):
     """
     Show weapon names + statlines.
     - Supports both flat and nested 'profiles'.
-    - Truncates to `limit_each` per category (ranged/melee) for compactness.
+    - If limit_each is None, show ALL weapons in each category.
     """
     w = u.get("weapons") or {}
     ranged = w.get("ranged") or []
@@ -426,9 +426,9 @@ def render_weapons(u, limit_each=2):
         if not arr:
             return ""
         lines = []
-        count = 0
+        shown = 0
         for wpn in arr:
-            if count >= limit_each:
+            if limit_each is not None and shown >= limit_each:
                 break
             profiles = _iter_weapon_profiles(wpn)
             if len(profiles) == 1:
@@ -438,7 +438,6 @@ def render_weapons(u, limit_each=2):
                     f"<li><b>{html.escape(str(pname))}</b> — {html.escape(row)}</li>"
                 )
             else:
-                # multiple modes/profiles
                 sub = []
                 for pname, pd in profiles:
                     row = _fmt_weapon_profile_row(pd, is_melee=is_melee)
@@ -448,7 +447,7 @@ def render_weapons(u, limit_each=2):
                 lines.append(
                     f"<li><b>{html.escape(wpn.get('name','—'))}</b><br>{''.join(sub)}</li>"
                 )
-            count += 1
+            shown += 1
         if not lines:
             return ""
         return f"<b>{label}</b><ul>" + "".join(lines) + "</ul>"
