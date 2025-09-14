@@ -466,8 +466,30 @@ units:
     Inv: null
     FnP: null
   weapons:
-    ranged: []
-    melee: []
+    ranged:
+      - name: "Plasma pistol – standard"
+        range: "12\""
+        A: "1"
+        BS: "3+"
+        S: "7"
+        AP: "-2"
+        D: "1"
+        keywords: ["Pistol"]
+      - name: "Plasma pistol – supercharge"
+        range: "12\""
+        A: "1"
+        BS: "3+"
+        S: "8"
+        AP: "-3"
+        D: "2"
+        keywords: ["Hazardous", "Pistol"]
+    melee:
+      - name: "Power fist"
+        A: "3"
+        WS: "3+"
+        S: "8"
+        AP: "-2"
+        D: "2"
   abilities:
     faction: Space Marines
     detachment: Gladius Task Force
@@ -540,8 +562,51 @@ units:
     Inv: null
     FnP: null
   weapons:
-    ranged: []
-    melee: []
+    ranged:
+      - name: "Ballistus missile launcher – frag"
+        range: "48\""
+        A: "2D6"
+        BS: "3+"
+        S: "5"
+        AP: "0"
+        D: "1"
+        keywords: ["Blast"]
+        mandatory: true
+      - name: "Ballistus missile launcher – krak"
+        range: "48\""
+        A: "2"
+        BS: "3+"
+        S: "10"
+        AP: "-2"
+        D: "D6"
+        keywords: []
+        mandatory: true
+      - name: "Ballistus lascannon"
+        range: "48\""
+        A: "2"
+        BS: "3+"
+        S: "12"
+        AP: "-3"
+        D: "D6+1"
+        keywords: []
+        mandatory: true
+      - name: "Twin storm bolter"
+        range: "24\""
+        A: "2"
+        BS: "3+"
+        S: "4"
+        AP: "0"
+        D: "1"
+        keywords: ["Rapid Fire 2","Twin-linked"]
+        mandatory: true
+    melee:
+      - name: "Armoured feet"
+        A: "5"
+        WS: "3+"
+        S: "7"
+        AP: "0"
+        D: "1"
+        mandatory: true
   abilities:
     faction: Space Marines
     detachment: Gladius Task Force

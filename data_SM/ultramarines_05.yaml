@@ -17,43 +17,43 @@ units:
     Inv: "4+"
     FnP: null
   weapons:
-  ranged:
-    - name: "Storm bolter"
-      range: "24\""
-      A: "2"
-      BS: "3+"
-      S: "4"
-      AP: "0"
-      D: "1"
-      keywords: ["Rapid Fire 2"]
-      mandatory: true
-    - name: "Cyclone missile launcher – frag"
-      range: "36\""
-      A: "2D6"
-      BS: "3+"
-      S: "4"
-      AP: "0"
-      D: "1"
-      keywords: ["Blast"]
-      mandatory: false
-    - name: "Cyclone missile launcher – krak"
-      range: "36\""
-      A: "2"
-      BS: "3+"
-      S: "9"
-      AP: "-2"
-      D: "D6"
-      keywords: []
-      mandatory: false
-  melee:
-    - name: "Power fist"
-      A: "3"
-      WS: "3+"
-      S: "8"
-      AP: "-2"
-      D: "2"
-      keywords: []
-      mandatory: true
+    ranged:
+      - name: "Storm bolter"
+        range: "24\""
+        A: "2"
+        BS: "3+"
+        S: "4"
+        AP: "0"
+        D: "1"
+        keywords: ["Rapid Fire 2"]
+        mandatory: true
+      - name: "Cyclone missile launcher – frag"
+        range: "36\""
+        A: "2D6"
+        BS: "3+"
+        S: "4"
+        AP: "0"
+        D: "1"
+        keywords: ["Blast"]
+        mandatory: false
+      - name: "Cyclone missile launcher – krak"
+        range: "36\""
+        A: "2"
+        BS: "3+"
+        S: "9"
+        AP: "-2"
+        D: "D6"
+        keywords: []
+        mandatory: false
+    melee:
+      - name: "Power fist"
+        A: "3"
+        WS: "3+"
+        S: "8"
+        AP: "-2"
+        D: "2"
+        keywords: []
+        mandatory: true
   abilities:
     faction: Space Marines
     detachment: Gladius Task Force
@@ -851,8 +851,57 @@ units:
     Inv: null
     FnP: null
   weapons:
-    ranged: []
-    melee: []
+    ranged:
+      - name: "Skyhammer missile launcher"
+        range: "48\""
+        A: "3"
+        BS: "3+"
+        S: "8"
+        AP: "-1"
+        D: "D3"
+        keywords: ["Anti-Fly 2+"]
+        mandatory: true
+      - name: "Twin assault cannon"
+        range: "24\""
+        A: "6"
+        BS: "3+"
+        S: "6"
+        AP: "0"
+        D: "1"
+        keywords: ["Devastating Wounds", "Twin-linked"]
+        mandatory: true
+      - name: "Twin heavy bolter"
+        range: "36\""
+        A: "3"
+        BS: "3+"
+        S: "5"
+        AP: "-1"
+        D: "2"
+        keywords: ["Sustained Hits 1", "Twin-linked"]
+      - name: "Typhoon missile launcher – frag"
+        range: "48\""
+        A: "2D6"
+        BS: "3+"
+        S: "4"
+        AP: "0"
+        D: "1"
+        keywords: ["Blast"]
+      - name: "Typhoon missile launcher – krak"
+        range: "48\""
+        A: "2"
+        BS: "3+"
+        S: "9"
+        AP: "-2"
+        D: "D6"
+    melee:
+      - name: "Armoured hull"
+        A: "3"
+        WS: "4+"
+        S: "6"
+        AP: "0"
+        D: "1"
+        mandatory: true
+
   abilities:
     faction: Space Marines
     detachment: Gladius Task Force
