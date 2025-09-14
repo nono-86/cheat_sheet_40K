@@ -1285,8 +1285,31 @@ units:
     Inv: null
     FnP: null
   weapons:
-    ranged: []
-    melee: []
+    ranged:
+      - name: "Bolt sniper rifle – Executioner round"
+        range: "36\""
+        A: "1"
+        BS: "3+"
+        S: "5"
+        AP: "-2"
+        D: "2"
+        keywords: ["Precision"]
+        mandatory: true
+      - name: "Instigator bolt carbine"
+        range: "24\""
+        A: "2"
+        BS: "3+"
+        S: "4"
+        AP: "-1"
+        D: "1"
+    melee:
+      - name: "Close combat weapon"
+        A: "3"
+        WS: "3+"
+        S: "4"
+        AP: "0"
+        D: "1"
+        mandatory: true
   abilities:
     faction: Space Marines
     detachment: Gladius Task Force
@@ -1358,8 +1381,40 @@ units:
     Inv: null
     FnP: null
   weapons:
-    ranged: []
-    melee: []
+    ranged:
+      - name: "Melta rifle"
+        range: "18\""
+        A: "1"
+        BS: "3+"
+        S: "9"
+        AP: "-4"
+        D: "D6+2"
+        keywords: ["Melta 2"]
+        mandatory: true
+      - name: "Heavy melta rifle"
+        range: "24\""
+        A: "1"
+        BS: "3+"
+        S: "9"
+        AP: "-4"
+        D: "D6+2"
+        keywords: ["Melta 2", "Heavy"]
+      - name: "Multi-melta"
+        range: "24\""
+        A: "2"
+        BS: "3+"
+        S: "9"
+        AP: "-4"
+        D: "D6+2"
+        keywords: ["Melta 2"]
+    melee:
+      - name: "Close combat weapon"
+        A: "3"
+        WS: "3+"
+        S: "4"
+        AP: "0"
+        D: "1"
+        mandatory: true
   abilities:
     faction: Space Marines
     detachment: Gladius Task Force
@@ -1720,8 +1775,24 @@ units:
     Inv: null
     FnP: null
   weapons:
-    ranged: []
-    melee: []
+    ranged:
+      - name: "Pyreblaster"
+        range: "12\""
+        A: "D6"
+        BS: "—"
+        S: "4"
+        AP: "-1"
+        D: "1"
+        keywords: ["Assault", "Ignores Cover", "Torrent"]
+        mandatory: true
+    melee:
+      - name: "Close combat weapon"
+        A: "3"
+        WS: "3+"
+        S: "4"
+        AP: "0"
+        D: "1"
+        mandatory: true
   abilities:
     faction: Space Marines
     detachment: Gladius Task Force
