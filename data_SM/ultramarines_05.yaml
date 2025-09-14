@@ -17,8 +17,43 @@ units:
     Inv: "4+"
     FnP: null
   weapons:
-    ranged: []
-    melee: []
+  ranged:
+    - name: "Storm bolter"
+      range: "24\""
+      A: "2"
+      BS: "3+"
+      S: "4"
+      AP: "0"
+      D: "1"
+      keywords: ["Rapid Fire 2"]
+      mandatory: true
+    - name: "Cyclone missile launcher – frag"
+      range: "36\""
+      A: "2D6"
+      BS: "3+"
+      S: "4"
+      AP: "0"
+      D: "1"
+      keywords: ["Blast"]
+      mandatory: false
+    - name: "Cyclone missile launcher – krak"
+      range: "36\""
+      A: "2"
+      BS: "3+"
+      S: "9"
+      AP: "-2"
+      D: "D6"
+      keywords: []
+      mandatory: false
+  melee:
+    - name: "Power fist"
+      A: "3"
+      WS: "3+"
+      S: "8"
+      AP: "-2"
+      D: "2"
+      keywords: []
+      mandatory: true
   abilities:
     faction: Space Marines
     detachment: Gladius Task Force

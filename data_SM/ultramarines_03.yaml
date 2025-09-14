@@ -613,8 +613,24 @@ units:
     Inv: null
     FnP: null
   weapons:
-    ranged: []
-    melee: []
+    ranged:
+      - name: "Heavy bolt pistol"
+        range: "18\""
+        A: "1"
+        BS: "3+"
+        S: "4"
+        AP: "-1"
+        D: "1"
+        keywords: ["Pistol"]
+        mandatory: true
+    melee:
+      - name: "Master-crafted power weapon"
+        A: "4"
+        WS: "3+"
+        S: "5"
+        AP: "-2"
+        D: "2"
+        mandatory: true
   abilities:
     faction: Space Marines
     detachment: Gladius Task Force

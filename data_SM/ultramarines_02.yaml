@@ -612,23 +612,29 @@ units:
     base: { M: "6\"", T: "4", Sv: "3+", W: "4", Ld: "6+", OC: "1", Inv: null }
     weapons:
       ranged:
-        - name: "Scoped bolt carbine"
-          range: "24\""
-          A: "2"
-          BS: "2+"
-          S: "4"
-          AP: "-1"
+        - name: "Plasma pistol (standard)"
+          range: "12\""
+          A: "1"
+          BS: "3+"
+          S: "7"
+          AP: "-2"
           D: "1"
-          keywords: ["Precision"]
-          mandatory: true
+          keywords: ["PISTOL"]
+        - name: "Plasma pistol (supercharge)"
+          range: "12\""
+          A: "1"
+          BS: "3+"
+          S: "8"
+          AP: "-3"
+          D: "2"
+          keywords: ["HAZARDOUS","PISTOL"]
       melee:
-        - name: "Paired combat blades"
-          A: "6"
-          WS: "2+"
-          S: "4"
-          AP: "-1"
+        - name: "Power weapon"
+          A: "4"
+          WS: "3+"
+          S: "5"
+          AP: "-2"
           D: "1"
-          mandatory: true
     abilities:
       unit:
         - name: "Infiltrators, Scouts 6\""
